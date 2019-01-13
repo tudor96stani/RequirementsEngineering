@@ -1,0 +1,92 @@
+﻿﻿@using Web.Models
+@model Web.Models.VolunteerHomepageViewModel
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Homepage";
+}
+
+<div class="panel panel-default text-left" style="margin-top:-2%; height:50px;">
+    <div class="panel-body">
+        <h2 class="text-center">@ViewBag.Title</h2>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<style>
+    .checked {
+        color: orange;
+    }
+    hr{
+        display:none;
+    }
+</style>
+<body style="overflow:hidden;">
+    <div class="col-md-4" style="height:5px;margin-top:3%;">
+        <div class="well" id="topOrganizations" style="overflow-y:scroll; height:450px;" >
+            <h2 style="margin-left:20%;">Top Organizations</h2>
+            <table class="table">
+                <tbody>
+                    @foreach (var organization in Model.topOrganizations)
+                    {
+                        <tr>
+                            <h5>@Html.ActionLink(@organization.OrganizationName, "Profile", "Organization", new { id = organization.OrganizationId }, null)</h5>
+                            <p>
+                                @if (@organization.OrganizationRating >= 1)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                                @if (@organization.OrganizationRating >= 2)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                                @if (@organization.OrganizationRating >= 3)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                                @if (@organization.OrganizationRating >= 4)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                                @if (@organization.OrganizationRating >= 5)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                            </p>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="col-md-8 sidebar-offcanvas" id="newsfeed" role="navigation" >
+
+        <div class="panel-body">
+            <h3 style="margin-top:-2%;float:left; margin-left:40%;margin-bottom:1%;"> Events in: </h3>
+                <select style="margin-top:-2%;float:right; margin-right:33%;margin-bottom:1%;" id="locationSelect">
+                    @foreach (var loc in Model.Locations)
+                    {
+                        if (loc.CityName == "Cluj")
+                        {
+                            <option class="cityButton" value="@loc.CityName" selected>@loc.CityName</option>
+                         }else{
+                            <option class="cityButton" value="@loc.CityName">@loc.CityName</option>
+                         }
+                     }
+                </select>
+
+            <div class="well" id="events" style="height:450px;overflow-y:scroll"></div>
+        </div>
+    </div>
+</body>
+@section Scripts{
+    <script>
+        //URLS to be used in the JS file
+        var refreshCities = '@Url.Action("GetEventsByLocation","Volunteer",null, Request.Url.Scheme)' + '?location=';
+        var eventProfile = '@Url.Action("Index", "Event",null, Request.Url.Scheme)' + '/Index/';
+        var ownerProfile = '@Url.Action("Profile", "Organization", null, Request.Url.Scheme)' + '/';
+    </script>
+    <script src="~/Scripts/Script/VolunteerProfile.js"></script>    
+}

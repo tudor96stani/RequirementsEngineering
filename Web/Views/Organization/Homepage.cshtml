@@ -1,0 +1,95 @@
+﻿@using Web.Models
+@model Web.Models.OrganizationHomepageViewModel
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Homepage";
+}
+
+<div class="panel panel-default text-center">
+    <div class="panel-body" id="title">
+        <h2><b>@ViewBag.Title</b></h2>
+    </div>
+</div>
+
+<style>
+    hr{
+        display:none;
+    }
+    .footer1{
+        display:none;
+    }
+    .icon{
+        display:none;
+    }
+</style>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<body style="overflow-y:hidden; overflow-x:hidden;">
+    <div class="col-md-4 ">
+        <div class="well" id="topVolunteers" style="height: 490px;">
+            <h2>Top Volunteers</h2>
+            <table class="table">
+                <tbody>
+                    @foreach (var volunteer in Model.topVolunteers)
+                    {
+                        <tr>
+
+                            <h5>@Html.ActionLink(@volunteer.VolunteerName, "Profile", "Volunteer", new { id = volunteer.VolunteerId }, null)</h5>
+                            <p>
+                                @if (@volunteer.VolunteerRating >= 1)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                                @if (@volunteer.VolunteerRating >= 2)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                                @if (@volunteer.VolunteerRating >= 3)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                                @if (@volunteer.VolunteerRating >= 4)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                                @if (@volunteer.VolunteerRating >= 5)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                            </p>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="col-md-8 ">
+        <div class="well" id="events" style="height: 490px;">
+
+            <ul class="nav">
+                @foreach (var ev in Model.orderedEvents)
+                {
+
+                    <li>
+                        <div class="thumbnail" id="event">
+                            <div class="row">
+                                <div class="col-md-offset-5">
+                                    <h3>&emsp;@Html.ActionLink(@ev.Name, "Index", "Event", new { id = ev.Id }, null)</h3>
+                                </div>
+                            </div>
+                            <p>&emsp; <b>By: </b> @Html.ActionLink(@ev.Owner, "Profile", "Organization", new { id = ev.OwnerId }, null)</p>
+                            <p>&emsp; <b>Location: </b> @ev.Location</p>
+                            <p>&emsp; <b>Time: </b> @ev.DateTimeUTC</p>
+                        </div>
+                    </li>
+                    <br />
+                }
+            </ul>
+
+        </div>
+    </div>
+</body>
+

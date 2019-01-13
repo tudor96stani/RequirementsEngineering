@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNet.Identity
+@model Web.Models.VolunteersListViewModel
+
+@{
+    ViewBag.Title = "Volunteers: ";
+}
+
+    <div class="panel-body well" style="height:150px;overflow-y:scroll; overflow-x:hidden;background-color:#f8eee7;">
+        @foreach (var participant in Model.Participants)
+        {
+            <div class="row">
+                <div class="col-sm-1">
+                    <img src="https://dl2.macupdate.com/images/icons256/59084.png?d=1505474933" class="img-circle" height="45" width="45" alt="Avatar">
+                </div>
+                <div class="col-sm-11">
+                    <div class="thumbnail" style="height:40px;background-color:#f8eee7;">
+                        <p>Name: &emsp; <a href="#">@Html.ActionLink(@participant.FullName, "Profile", "Volunteer", new { id = participant.Id }, null)</a></p>
+                    </div>
+                </div>
+@*=======
+<h2>@ViewBag.Title</h2>
+
+@foreach (var participant in Model.Participants)
+{
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="well"  style = "background-color:#f8eee7;">
+                <p><a href="#">@Html.ActionLink(@participant.FullName, "Profile", "Volunteer", new { id = participant.Id }, null)</a></p>
+                <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+            </div>
+        </div>
+        <div class="col-sm-9" >
+            <div class="well"  style = "background-color:#f8eee7;">
+                <p>Rating for organization</p>
+>>>>>>> New colors*@
+            </div>
+        }
+    </div>

@@ -1,0 +1,424 @@
+﻿@using Web.Models
+@model Web.Models.OrganizationProfileViewModel
+@using System.Security.Claims
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Profile";
+}
+
+
+@*<html>*@
+<head>
+    <style>
+        .past {
+            background-color: darkgrey;
+            color: antiquewhite;
+        }
+
+        p.event:hover {
+            text-decoration: underline;
+        }
+
+        a.current {
+            text-decoration-color: black;
+        }
+        .footer1{
+            width:98.7%;
+ 
+            margin-left:0.5%;
+            /*margin-top:5%;*/
+        }
+        #footer1{
+            margin-top: 10px;
+        }
+        hr{
+            display:none;
+        }
+        /*.footerSocialContainer.item1{
+            margin-top:3%;
+            position:relative;
+        }
+        .footerBottomContainer{
+            margin-top:3%;
+            position:relative;
+        }*/
+
+    </style>
+</head>
+@*<body style="overflow:hidden;">*@ 
+
+<div class="panel panel-default text-left">
+    <div class="panel-body " style = "background-color:#f8eee7;">
+        <h2 class="text-center">@ViewBag.Title</h2>
+    </div>
+</div>
+    
+        <div class="row-sm-8">
+            <div class="col-sm-12" style="width: 100%;">
+                <div class="panel-body well" style="height:150px; background-color:#94618e;">
+                    <div class="thumbnail" style="height:110px; margin-bottom:10px; background-color:#f8eee7;">
+                        <br/>
+                        <h2 class="text-center" style="margin-top:-2%;"><b>Details</b> <br/></h2>
+                        
+                        
+
+                        @*<p contenteditable="true">Name: &emsp; @Model.OrganizationName</p>
+                        <p contenteditable="true">E-mail: &emsp; @Model.OrganizationEmail</p>
+                        <div style="@(User.IsInRole("Volunteer")? "display:block": "display:none")" id="rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            @Html.TextBoxFor(m => m.OrganizationId, new { @class = "hidden", @id = "organizationIdTextBox" })
+                        </div>*@
+
+                       
+
+                        <div class="row">
+                            <div class="col-md-1 col-md-offset-4">
+                                <img src="http://web.whoi.edu/development/wp-content/uploads/sites/41/2015/08/icon-fundraise.png" alt="event_icon" height="70" width="70" style="margin-left: 10px">
+                            </div>
+                            <div class="col-md-6 col-md-offset-1">
+                                <br />
+                                <p contenteditable="true"><b>Name:</b>&emsp; @Model.OrganizationName</p>
+                                <p contenteditable="true"><b>E-mail: </b> &emsp; @Model.OrganizationEmail</p>
+                                <div style="@(User.IsInRole("Volunteer") ? "display:block" : "display:none"); float:left; margin-left:-105%; margin-top:-15%;" id="rating">
+                                    <b> Rate: </b>
+                                    &emsp;
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    @Html.TextBoxFor(m => m.OrganizationId, new {@class = "hidden", @id = "organizationIdTextBox"})
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                        
+
+                        <br/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container text-center" style="width:105%;margin-left:-1.2%;">
+                <div class="col-sm-12" style="width: 110%; margin-top:-10px; ">
+                    <div>
+                        <h2 style="margin-left: 0%; margin-bottom: 10px;margin-top:-5px; margin-bottom:5px;">Events</h2>
+                        @if (User.Identity.GetUserId().ToString().Equals(Model.OrganizationId.ToString()))
+                        {
+                            <button style="float: right; border-radius:20px; background-color:#49274A ;border-color:#49274A" class="btn-primary" id="showModalButton"><h3 style="margin-bottom:5%;">+</h3></button>
+                        }
+                    </div>
+                    <div class="panel-body well" id="eventsList" style="overflow-y:scroll;height:240px; width:100%; background-color:#f8eee7;">
+
+                    </div>
+                </div>
+            </div>
+            <br/><br/>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="CreateModal" role="dialog"style="overflow:hidden;">
+            <div class="modal-dialog"  style="margin-top:-75px;  background-color:#f8eee7">
+
+                <!-- Modal content-->
+                <div class="modal-content"  style="height:500px;overflow-y:scroll;margin-right:20%;margin-left:-30%;background-color:#f8eee7;">
+                    <div class="modal-header" style="margin-bottom:5%; height:50%;background-color:#f8eee7;">
+                
+                        <h4  style="text-align:center; margin-bottom:10px;" class="modal-title">Fill all the blank spaces in order to create an event!</h4>
+                        @*<button type="button" class="close" data-dismiss="modal" style="float:right;height:7px; width:7px;">&times;</button>*@
+                    </div>
+                    <div class="modal-body" style="margin-top:-2%;">
+                        Name: <input type="text" style="margin-left:58px;width:75%;" id="nameTextBox">
+                    </div>
+                    <div class="modal-body">
+                        Country: <input type="text" style="margin-left:47px;width:75%;" id="countryTextBox">
+                    </div>
+                    <div class="modal-body">
+                        City: <input type="text"  style="margin-left:70px;width:75%;" id="cityTextBox">
+                    </div>
+                    <div class="modal-body">
+                        Street: <input type="text" style="margin-left:59px;width:75%;" id="streetTextBox">
+                    </div>
+                    <div class="modal-body">
+                        Number: <input type="number" style="margin-left:46px;width:75%;" id="numberTextBox" step="1" min="0">
+                    </div>
+                    <div class="modal-body">
+                        <p style="float:left">Date and time:</p>
+                        <div>
+                            <div >
+                                <input style="float:right; margin-top:0; margin-right:24%;width:75%;" type='text' id='datetimepicker4'/>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        Volunteers Goal: <input type="number" style="width:75%;" id="volGoalTextBox" step="1" min="0">
+                    </div>
+                    <div class="modal-body">
+                        Donations Goal: <input type="number" style="margin-left:5px;width:75%;" id="donGoalTextBox" step="1" min="0">
+                    </div>
+                    <div class="modal-body">
+                        Description: <textarea style="margin-left:6%;width:75%;" id="descTextArea"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="createButton" class="btn" data-dismiss="modal">Submit</button>
+                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+@*</body>
+</html>*@
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+<style>
+    .datepicker {
+        z-index: 1151 !important;
+    }
+    .modal-content {
+        position: relative;
+        font-family: Arial, Helvetica, sans-serif;
+        top: 200px;
+        right: 0;
+        bottom: 0;
+        left: 150px;
+        opacity:100;
+        height:100%;
+        z-index: 9999 !important;
+        transition: opacity 400ms ease-in;
+        }
+    .footer1{
+        display:block;
+        height:66px;
+        margin-top:-70px;
+    }
+    .item1{
+        display:none;
+    }
+</style>
+
+
+@section Scripts {
+    
+    
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/Login")
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/master/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+
+
+        function StarRating() {
+            this.init();
+        };
+ 
+/**
+ * Initialize
+ */
+        StarRating.prototype.init = function() {
+            this.stars = document.querySelectorAll('#rating span');
+            for (var i = 0; i < this.stars.length; i++) {
+                this.stars[i].setAttribute('data-count', i);
+                this.stars[i].addEventListener('mouseenter', this.enterStarListener.bind(this));
+            }
+            document.querySelector('#rating').addEventListener('mouseleave', this.leaveStarListener.bind(this));
+        };
+ 
+/**
+ * This method is fired when a user hovers over a single star
+ 
+ */
+        StarRating.prototype.enterStarListener = function(e) {
+            this.fillStarsUpToElement(e.target);
+        };
+ 
+/**
+ * This method is fired when the user leaves the #rating element, effectively removing all hover states.
+ */
+        StarRating.prototype.leaveStarListener = function() {
+            this.fillStarsUpToElement(null);
+        };
+ 
+/**
+ * Fill the star ratings up to a specific position.
+ */
+        StarRating.prototype.fillStarsUpToElement = function(el) {
+            // Remove all hover states:
+            for (var i = 0; i < this.stars.length; i++) {
+                if (el == null || this.stars[i].getAttribute('data-count') > el.getAttribute('data-count')) {
+                    this.stars[i].classList.remove('hover');
+                } else {
+                    this.stars[i].classList.add('hover');
+                }
+            }
+        };
+ 
+// Run:
+        new StarRating();
+        
+
+        $(document).ready(function () {
+
+            $('#rating span').click(function() {
+                var rating = $(this).data("count") + 1;
+                var organizationId = $("#organizationIdTextBox").val();
+            
+                $.ajax({
+                    type: "POST",
+                    url: "/Organization/Rate",
+                    data: JSON.stringify({ 'organizationId': organizationId, 'rating': rating }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        alert(response.Message);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+
+
+            });
+
+
+            $('#datetimepicker4').datetimepicker();
+
+            reloadEvents();
+            $("#showModalButton").click(function () {
+                $('#CreateModal').modal('show');
+                $('#datetimepicker4').datetimepicker();
+            });
+
+            $('#createButton').click(function () {
+                var params = JSON.stringify({
+                    'Name': $('#nameTextBox').val(),
+                    'Country': $('#countryTextBox').val(),
+                    'City': $('#cityTextBox').val(),
+                    'Street': $('#cityTextBox').val(),
+                    'Number': $('#numberTextBox').val(),
+                    'Date': $('#datetimepicker4').val(),
+                    'OwnerId': '@Model.OrganizationId',
+                    'VolunteersGoals': $('#volGoalTextBox').val(),
+                    'DonationsGoal': $('#donGoalTextBox').val(),
+                    'Description': $('#descTextArea').val()
+                });
+                var fullUrl = '@Url.Action("CreateEvent", "Organization", null, Request.Url.Scheme)';
+                $.ajax({
+                    url: fullUrl,
+                    type: 'POST',
+                    data: params,
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data.Ok == true) {
+                            $('#CreateModal').modal('hide');
+                            alert("Event created!");
+                            reloadEvents();
+                        } else {
+                            alert(data.Message);
+                        }
+                    },
+                    error: function () {
+                        alert("Something went wrong!");
+                    }
+                });
+            });
+        });
+
+        function deleteEvent(id) {
+            event.cancelBubble = true;
+            if (event.stopPropagation) event.stopPropagation();
+            var url = '@Url.Action("DeleteEvent", "Organization", null, Request.Url.Scheme)';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: JSON.stringify({ 'id': id }),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.Ok == true) {
+                        reloadEvents();
+                        alert("Event deleted!");
+                    } else {
+                        alert(data.Message);
+                    }
+                },
+                error: function () {
+                    alert("Could not delete event!");
+                }
+            });
+        }
+
+        function reloadEvents() {
+            $('#eventsList').html('<h2>Loading events...<h2>');
+            var fullUrl = '@Url.Action("GetEvents", "Organization", new { id=Model.OrganizationId}, Request.Url.Scheme)';
+            console.log(fullUrl);
+            var output = "";
+            $.ajax({
+                url: fullUrl,
+                success: function (result) {
+                    $('#eventsList').html('');
+                    output = result;
+                    output.sort(
+                        function (a, b) {
+                            return b.DateTimeV.localeCompare(a.DateTimeV);
+                        });
+                    console.log(output);
+                    var currentDate = new Date();
+                    var day = currentDate.getDay();
+                    var month = currentDate.getMonth();
+                    var year = currentDate.getYear() + 1900;
+                    //result nu e html, e JSON (o lista de obiecte json mai exact), trebuie sa il parsezi ceva de genul
+                    $.each(result, function (index, item) {
+                        var li = "<div class=" + "thumbnail" + ">"
+
+                        if (day < 9) {
+                            var curr = year + "-" + month + "-0" + day;
+                        }
+                        else {
+                            var curr = year + "-" + month + "-" + day;
+                        }
+                        if ((curr.localeCompare(item.DateTimeV)) <= 0) {
+                            console.log("if");
+                            var li = "<div class=" + "\"thumbnail current events\"" + "style=" + "\"height: 30%;margin-bottom:8px;\"" +">"
+
+                            //$('#eventsList').append(li + "<a href=/Event/Index/" + item.Id + " style=\"margin-left:0px; color:black;font-size: 1em; \"><b>" + item.Name + "<b></a><button onclick=\"deleteEvent('" + item.Id + "')\" style=\"float:right;margin-top:0;margin-bottom:2px;\" class=\"btn btn-xs\">x</button>" +
+                            //    "<img align='middle' src='http://www.piicomm.com/wp-content/uploads/2014/07/mobile-helpdesk-03.png' alt='event_icon' height='35' width='35' style='margin-left: 48%'>" +
+                            //   "</div>");
+                            $('#eventsList').append(li + "<a href=/Event/Index/" + item.Id + " style=\"margin-left:0px; color: grey;\"><b>" + item.Name + "</b></href>" +
+                                "<img align='middle' src='https://cdn0.iconfinder.com/data/icons/life-concepts-lifestyles/128/diversity2-256.png' alt='event_icon' height='35' width='35' style='margin-left: 48%'>" +
+
+                                "</div>");
+                            console.log(item.Name);
+                        }
+                        else {
+
+                            var li = "<div class=" + "\"thumbnail past events\"" + "style=" + "\"height: 30%;margin-bottom:8px;\"" + ">"
+                            console.log(li);
+
+                            $('#eventsList').append(li + "<a href=/Event/Index/" + item.Id + " style=\"margin-left:0px; color: white;\"><b>" + item.Name + "</b></href>" +
+                                "<img align='middle' src='http://www.piicomm.com/wp-content/uploads/2014/07/mobile-helpdesk-03.png' alt='event_icon' height='35' width='35' style='margin-left: 48%'>" +
+
+                                "</div>");
+                        }
+                    });
+                    $('myDiv').html(result);
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("An error occurred while processing your request. Please try again.");
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,259 @@
+﻿@using Web.Models
+@model Web.Models.EventProfileViewModel
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Event Profile";
+}
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<style>
+    .checked {
+        color: orange;
+    }
+    hr{
+        display:none;
+    }
+    .footer1{
+            height:57px;
+            margin-bottom:-6px;
+            margin-top:2px;
+            width: 98.7%;
+            margin-left:0.5%;
+  }
+    .bg-sand{
+        height:523px;
+
+    }
+    #footer1{
+        height:70px;
+    }
+</style>
+
+<body>
+        <div class="panel panel-default text-left" style = "background-color:#f8eee7;" >
+            <div class="panel-body" style="height:50px;">
+                <h2 class="text-center">@ViewBag.Title</h2>
+                @if (@Model.Owner.Id.ToString().Equals(@User.Identity.GetUserId()))
+                {
+                    using (Html.BeginForm("EditPage", "Event", new { @eventId = Model.Id }))
+                    {
+                        <div class="panel-body text-right" style="float:right; height:-20px;margin-top:-45px;">
+                            <input class="btn btn-primary" type="submit" value="EDIT" />
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="row-sm-8">
+            <div class="container">
+                <div class="col-sm-6">
+                    <div class="panel-body well" style="height: 150px; background-color: #94618e;">
+                        
+                        <div class="thumbnail" style="height: 105px; background-color: #f8eee7;">
+                            <br/>
+                            
+                            <div class="row" >
+                                
+                                
+                                
+                                <div class="col-md-2">
+                                    <img src="https://isobm2016congress.com/wp-content/uploads/2016/01/volunteer_icon_b2.png" alt="event_icon" height="50" width="50" style="margin-left: 10px">
+
+                                </div>
+                                <div class="col-md-10"  >
+                                    <p contenteditable="true"> <b> Event Name: </b>&emsp; @Model.Name</p>
+                                    <p contenteditable="true"><b>Owned By: </b> &emsp; @Model.Owner.FullName</p>
+                                    <!-- <p contenteditable="true">&emsp; @Model.Owner.Rating</p> -->
+                                    <p ><b>Organization's Rating:</b>
+                                        &emsp;
+                                        @if (@Model.Owner.Rating >= 1)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fa fa-star"></span>
+                                        }
+                                        @if (@Model.Owner.Rating >= 2)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fa fa-star"></span>
+                                        }
+                                        @if (@Model.Owner.Rating >= 3)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fa fa-star"></span>
+                                        }
+                                        @if (@Model.Owner.Rating >= 4)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fa fa-star"></span>
+                                        }
+                                        @if (@Model.Owner.Rating >= 5)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fa fa-star"></span>
+                                        }
+                                   
+                                    </p>
+                                   
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel-body well" style="height:150px; background-color: #94618e;">
+                        <div class="thumbnail text-center" style="height:105px;background-color: #f8eee7;">
+                            <br />
+                            <p style="margin-top:-3px;"><b>Date and Time:</b></p>
+                            <p>@Model.DateTimeUtc</p>
+                            <button id="joinButton" class="btn btn-primary">Join</button> &emsp;
+                            <button id="donateButton" class="btn btn-primary" >Donate</button>
+                            <br /><br />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+    
+            <div class="container">
+                <div class="col-sm-12">
+                    <div class="panel-body well"  style="margin-top:-1%;">
+                        <h2 class="text-center"><b>Description </b></h2>
+                        <h3>@Model.Description</h3>
+                        
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+        <div class="row-sm-8" style="height:70px;">
+            <div class="container" style="height:70px;">
+                <div id="partialVolunteers" style="width:97.1%; margin-left:1.5%; height:20px;margin-bottom:5%;">
+                    <h2 class="text-center" style=" margin-top:-1%;"><b>Volunteers</b></h2>
+                    @Html.Partial("VolunteersPartial", new VolunteersListViewModel(Model.Id, Model.Participants))
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!--HIDDEN TEXTBOX TO GET THE EVENTID FROM -->
+        @Html.TextBoxFor(m => m.Id, new { @class = "hidden", @id = "eventIdTextBox" })
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Donation</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        Amount:&emsp; <input type="number" id="amountTextBox" step="0.1" min="0">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="addDonationButton" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+</body>
+        @section Scripts {
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+
+
+                    $("#donateButton").click(function () {
+                        $('#myModal').modal('show');
+                    });
+
+
+                    $("#joinButton").click(function () {
+
+                        var eventId = $("#eventIdTextBox").val();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/Event/AddParticipant",
+                            data: JSON.stringify({ 'eventId': eventId }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: 'html',
+                            success: function (response) {
+                                $('#partialVolunteers').html(response);
+                            },
+                            failure: function (response) {
+
+                                alert(response.responseText);
+                            },
+                            error: function (response) {
+
+                                alert(response.responseText);
+                            }
+                            //error: function(xhr, status, error) {
+                            //    var err = eval("(" + xhr.responseText + ")");
+                            //    alert(erorr.Message);
+                            //}
+                        });
+                    });
+
+
+
+                    $("#addDonationButton").click(function () {
+
+                        var amount = $("#amountTextBox").val();
+                        var eventId = $("#eventIdTextBox").val();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/Event/AddDonation",
+                            data: JSON.stringify({ 'eventId': eventId, 'amount': amount }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                alert(response.Message);
+                            },
+                            failure: function (response) {
+                                alert(response.responseText);
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            }
+                        });
+                    });
+
+
+                });
+
+
+
+            </script>
+        }
+
+
+

@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNet.Identity
+<head>
+    <style>
+        a.nav>hover{
+            text-decoration:none;
+        }
+    </style>
+</head>
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+        <div class="logContainer" >
+            <h3 class="rightMenu">
+                @Html.ActionLink("My account", "Index", "Manage", routeValues: null, htmlAttributes: new { @style = "color:white ; float:right; " })
+            </h3>
+            <h4 class="rightMenu"><a href="javascript:document.getElementById('logoutForm').submit()"><img src="~/Scripts/photos/white-logout-512 (1).png" style="height:20px; width:20px; float:right; margin-right:-20px;" /></a></h4>
+        </div>
+    }
+}
+else
+{
+    <div class="logContainer">
+        <h4 class="rightMenu">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @style = "color:white;" })</h4>
+        <h4 class="rightMenu">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @style = "color:white;" })</h4>
+    </div>
+}
+
+<style>
+    .logContainer {
+        float: right;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+
+        background-color: transparent;
+        color: white;
+    }
+
+    .rightMenu {
+        margin-right: 15px;
+        color:white;
+    }
+
+</style>

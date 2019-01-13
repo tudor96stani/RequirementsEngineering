@@ -1,0 +1,98 @@
+﻿﻿@using Web.Models
+@model Web.Models.VolunteerHomepageViewModel
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Homepage";
+}
+
+@*<div class="panel panel-default text-center">
+    <div class="panel-body" id="title">
+        <h2><b>@ViewBag.Title</b></h2>
+    </div>
+</div>*@
+<style>
+    hr{
+        display:none;
+    }
+    .footer1{
+        display:none;
+    }
+    .icon1{
+        display:none;
+    }
+</style>
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<body style="overflow:hidden;">
+    <div class="panel panel-default text-left" style="margin-top:-3%;  background-color:#F8EEE7">
+        <div class="panel-body" style="height:25%;">
+            <h2 class="text-center">@ViewBag.Title</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="well" id="topOrganizations" style="height:490px;">
+            <h2 style="margin-left:25%;">Top Organizations</h2>
+            <table class="table">
+                <tbody>
+                    @foreach (var organization in Model.topOrganizations)
+                    {
+                        <tr>
+                            <h5>@Html.ActionLink(@organization.OrganizationName, "Profile", "Organization", new { id = organization.OrganizationId }, null)</h5>
+                            <p>
+                                @if (@organization.OrganizationRating >= 1)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                                @if (@organization.OrganizationRating >= 2)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                                @if (@organization.OrganizationRating >= 3)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                                @if (@organization.OrganizationRating >= 4)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                                @if (@organization.OrganizationRating >= 5)
+                                { <span class="fa fa-star checked"></span> }
+                                else
+                                { <span class="fa fa-star"></span> }
+                            </p>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+
+        <div class="well" id="events" style="height:490px;">
+            <ul class="nav">
+                @foreach (var ev in Model.orderedEvents)
+                {
+                    <li>
+                        <div class="thumbnail" id="event">
+                            <img src="https://isobm2016congress.com/wp-content/uploads/2016/01/volunteer_icon_b2.png" alt="event_icon" height="42" width="42">
+                            <div class="row">
+                                <div class="col-md-offset-5">
+                                    <h3>@Html.ActionLink(@ev.Name, "Index", "Event", new {id = ev.Id}, null)</h3>
+                                </div>
+                            </div>
+                            <p>&emsp; <b>By: </b> @Html.ActionLink(@ev.Owner, "Profile", "Organization", new {id = ev.OwnerId}, null)</p>
+                            <p>&emsp; <b>Location: </b> @ev.Location</p>
+                            <p>&emsp; <b>Time: </b> @ev.DateTimeUTC</p>
+                        </div>
+                    </li>
+
+                }
+            </ul>
+            <br />
+        </div>
+    </div>
+</body>
+
