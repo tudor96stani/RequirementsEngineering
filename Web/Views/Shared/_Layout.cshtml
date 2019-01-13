@@ -48,7 +48,7 @@
                
 
 
-                @Html.ActionLink("Vocial", "Index", "Home", new { area = "" }, new { @class = "imageclass" })
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "imageclass" })
                 @if (User.Identity.IsAuthenticated)
                 {
                     if (User.IsInRole("Organization"))

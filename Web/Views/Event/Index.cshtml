@@ -3,7 +3,7 @@
 @using Microsoft.AspNet.Identity;
 
 @{
-    ViewBag.Title = "Event Profile";
+    ViewBag.Title = "Internship Details";
 }
 
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -63,7 +63,7 @@
 
                                 </div>
                                 <div class="col-md-10"  >
-                                    <p contenteditable="true"> <b> Event Name: </b>&emsp; @Model.Name</p>
+                                    <p contenteditable="true"> <b> Offer Name: </b>&emsp; @Model.Name</p>
                                     <p contenteditable="true"><b>Owned By: </b> &emsp; @Model.Owner.FullName</p>
                                     <!-- <p contenteditable="true">&emsp; @Model.Owner.Rating</p> -->
                                     <p ><b>Organization's Rating:</b>
@@ -123,8 +123,8 @@
                             <br />
                             <p style="margin-top:-3px;"><b>Date and Time:</b></p>
                             <p>@Model.DateTimeUtc</p>
-                            <button id="joinButton" class="btn btn-primary">Join</button> &emsp;
-                            <button id="donateButton" class="btn btn-primary" >Donate</button>
+                            @*<button id="joinButton" class="btn btn-primary">Join</button> &emsp;*@
+                            @*<button id="donateButton" class="btn btn-primary" >Donate</button>*@
                             <br /><br />
                         </div>
                     </div>
@@ -148,7 +148,7 @@
         <div class="row-sm-8" style="height:70px;">
             <div class="container" style="height:70px;">
                 <div id="partialVolunteers" style="width:97.1%; margin-left:1.5%; height:20px;margin-bottom:5%;">
-                    <h2 class="text-center" style=" margin-top:-1%;"><b>Volunteers</b></h2>
+                    <h2 class="text-center" style=" margin-top:-1%;"><b>Participants</b></h2>
                     @Html.Partial("VolunteersPartial", new VolunteersListViewModel(Model.Id, Model.Participants))
                 </div>
             </div>

@@ -22,14 +22,14 @@
                     $('#events').append(htmlEl);
                 });
             } else {
-                $('#events').html('No events from ' + cityName + ' could be found!');
+                $('#events').html('No offers from ' + cityName + ' could be found!');
             }
         });
 
         $('#locationSelect').change(function () {
         var btn = $(this);
         var cityName = $('#locationSelect').val();
-        $('#events').html('Loading events from ' + cityName + '...');
+        $('#events').html('Loading offers from ' + cityName + '...');
         $('.btn').removeClass('btn-primary');
         $(btn).addClass('btn-primary');
         var url = refreshCities + cityName
@@ -55,7 +55,7 @@
                     $('#events').append(htmlEl);
                 });
             } else {
-                $('#events').html('No events from ' + cityName + ' could be found!');
+                $('#events').html('No offers from ' + cityName + ' could be found!');
             }
         });
     });
