@@ -48,7 +48,7 @@
                
 
 
-                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "imageclass" })
+                @Html.ActionLink("Home", "Index", "Home")
                 @if (User.Identity.IsAuthenticated)
                 {
                     if (User.IsInRole("Organization"))
@@ -84,14 +84,7 @@
     <!-- Footer -->
     <footer id="footer1" style="margin-bottom:-20px;display: block" class="bg-dark footer1">
 
-        <div class="footerSocialContainer footer1">
-            <a href="https://www.facebook.com/vocial.app.31" class="fa fa-facebook icon1"></a>
-            <a href="https://www.linkedin.com/in/vocial-app-8a8797157/" class="fa fa-linkedin icon1"></a>
-            <a href="https://www.instagram.com/uniteam2000/" class="fa fa-instagram icon1"></a>
-        </div>
-        <div class="footerBottomContainer textFooter footer1">
-            <p style="text-align:center;margin-bottom:5%;" class="m-0 text-center text-white">Copyright &copy; Vocial 2017</p>
-        </div>
+       
     </footer>
  
 </body>
