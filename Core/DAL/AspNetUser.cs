@@ -11,7 +11,6 @@ namespace Core.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AspNetUser()
         {
-            Donations = new HashSet<Donation>();
             OwnedOffers = new HashSet<Offer>();
             Files = new HashSet<File>();
             Ratings = new HashSet<Rating>();
@@ -48,8 +47,6 @@ namespace Core.DAL
 
         public string FullName { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Donation> Donations { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Offer> OwnedOffers { get; set; }

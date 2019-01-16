@@ -13,7 +13,6 @@ namespace Web.Models
         public string Name { get; set; }
         public string Location { get; set; }
         public string Owner { get; set; }
-        public List<string> Donations { get; set; }
         public string DateTimeUTC { get; set; }
 
         public OfferQuickDetailsViewModel(OfferQuickInfoDTO dto)
@@ -23,7 +22,6 @@ namespace Web.Models
             Name = dto.Name;
             Location = $"{dto.Location.Street} no. {dto.Location.Number},{dto.Location.City},{dto.Location.Country}";
             Owner = dto.Owner.FullName;
-            Donations = dto.Donations.Select(x => x.Donor.FullName + " - $" + x.Amount).ToList();
             DateTimeUTC = dto.DateTimeUTC.ToString();
         }
     }

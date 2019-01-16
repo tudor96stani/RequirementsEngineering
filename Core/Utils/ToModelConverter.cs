@@ -38,7 +38,6 @@ namespace Core.Utils
                 Owner = ev.Owner.ToModel(),
                 OwnerId=ev.Owner.Id.ToString(),
                 Participants = ev.Participants.Select(x => x.ToModel()).ToList(),
-                Donations = ev.Donations.Select(x => x.ToModel()).ToList(),
                 Location=ev.Location.ToModel(),
                 LocationId=ev.Location.Id,
                 DateTimeUTC = ev.DateTimeUtc,
@@ -46,16 +45,6 @@ namespace Core.Utils
             };
         }
 
-        public static Donation ToModel(this DonationDTO donation)
-        {
-            return donation == null ? null : new Donation()
-            {
-                Id = donation.Id,
-                AspNetUser = donation.User.ToModel(),
-                OfferId = donation.OfferId.ToString(),
-                Amount = donation.Amount
-            };
-        }
 
         public static Location ToModel(this LocationDTO loc)
         {

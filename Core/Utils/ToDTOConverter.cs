@@ -41,24 +41,13 @@ namespace Core.Utils
                 Name = ev.Name,
                 Owner = ev.Owner.ToDTO(),
                 Participants = ev.Participants.Select(x => x.ToDTO()).ToList(),
-                Donations = ev.Donations.Select(x => x.ToDTO()).ToList(),
                 Location = ev.Location.ToDTO(),
                 DateTimeUtc= (DateTime)ev.DateTimeUTC,
                 Description = ev.Description
             };
         }
 
-        public static DonationDTO ToDTO(this Donation donation)
-        {
-            return donation == null ? null : new DonationDTO()
-            {
-                Id = donation.Id,
-                User= donation.AspNetUser.ToDTO(),
-                OfferId = new Guid(donation.OfferId),
-                Amount = donation.Amount==null? 0: (double)donation.Amount
-            };
-        }
-
+ 
         public static LocationDTO ToDTO(this Location loc)
         {
             return loc == null ? null : new LocationDTO()

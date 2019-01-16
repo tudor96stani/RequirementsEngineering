@@ -11,7 +11,6 @@ namespace Core.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Offer()
         {
-            Donations = new HashSet<Donation>();
             Participants = new HashSet<AspNetUser>();
         }
 
@@ -25,8 +24,6 @@ namespace Core.DAL
 
         public DateTime? DateTimeUTC { get; set; }
 
-        public double? DonationsGoal { get; set; }
-
         public int? CandidatesGoal { get; set; }
 
         [StringLength(128)]
@@ -35,7 +32,6 @@ namespace Core.DAL
         public virtual AspNetUser Owner { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Donation> Donations { get; set; }
 
         public virtual Location Location { get; set; }
 

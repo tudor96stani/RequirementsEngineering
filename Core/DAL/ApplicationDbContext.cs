@@ -15,7 +15,6 @@ namespace Core.DAL
         //DbSets
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<Donation> Donations { get; set; }
         public virtual DbSet<Offer> Offers { get; set; }
         public virtual DbSet<File> Files { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
@@ -26,11 +25,6 @@ namespace Core.DAL
                 .HasMany(e => e.AspNetUsers)
                 .WithMany(e => e.AspNetRoles)
                 .Map(m => m.ToTable("AspNetUserRoles").MapLeftKey("RoleId").MapRightKey("UserId"));
-
-            modelBuilder.Entity<AspNetUser>()
-                .HasMany(e => e.Donations)
-                .WithOptional(e => e.AspNetUser)
-                .HasForeignKey(e => e.UserId);
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.OwnedOffers)

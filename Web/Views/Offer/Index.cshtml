@@ -160,28 +160,6 @@
         <!--HIDDEN TEXTBOX TO GET THE EVENTID FROM -->
         @Html.TextBoxFor(m => m.Id, new { @class = "hidden", @id = "offerIdTextBox" })
 
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Add Donation</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        Amount:&emsp; <input type="number" id="amountTextBox" step="0.1" min="0">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="addDonationButton" class="btn btn-primary" data-dismiss="modal">Submit</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
 </body>
         @section Scripts {
             <script type="text/javascript">
@@ -219,31 +197,6 @@
                             //    var err = eval("(" + xhr.responseText + ")");
                             //    alert(erorr.Message);
                             //}
-                        });
-                    });
-
-
-
-                    $("#addDonationButton").click(function () {
-
-                        var amount = $("#amountTextBox").val();
-                        var offerId = $("#offerIdTextBox").val();
-
-                        $.ajax({
-                            type: "POST",
-                            url: "/Offer/AddDonation",
-                            data: JSON.stringify({ 'offerId': offerId, 'amount': amount }),
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (response) {
-                                alert(response.Message);
-                            },
-                            failure: function (response) {
-                                alert(response.responseText);
-                            },
-                            error: function (response) {
-                                alert(response.responseText);
-                            }
                         });
                     });
 

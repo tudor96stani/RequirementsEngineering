@@ -14,7 +14,7 @@ namespace Common.Interfaces.Services
         List<OfferDTO> GetAllDtos();
         OfferDTO GetDto(Guid offerId);
         void AddParticipant(string offerId, string userId);
-        bool Create(Guid organizationId,string name, string country, string city, string street, int number, DateTime date,string description,int volGoal, int donGoal);
+        bool Create(Guid organizationId,string name, string country, string city, string street, int number, DateTime date,string description,int volGoal);
         void Delete(Guid id);
         void UpdateOffer(string name, DateTime dateTimeUtc, string description, string locationId, Guid offerId);
     }

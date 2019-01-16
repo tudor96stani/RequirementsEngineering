@@ -12,7 +12,6 @@ namespace Common.DTO
         public string Name { get; set; }
         public UserDTO Owner { get; set; }
         public List<UserDTO> Participants { get; set; }
-        public List<DonationDTO> Donations { get; set; }
         public LocationDTO Location { get; set; }
         public DateTime DateTimeUtc { get; set; }
         public string Description { get; set; }

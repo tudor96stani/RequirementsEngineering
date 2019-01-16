@@ -16,6 +16,5 @@ namespace Web.Models
         public Guid OwnerId { get; set; }
         public string Description { get; set; }
         public int CandidatesGoals { get; set; }
-        public int DonationsGoal { get; set; }
     }
 }

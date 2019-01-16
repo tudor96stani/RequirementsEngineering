@@ -12,7 +12,6 @@ namespace Common.DTO
         public string Name { get; set; }
         public LocationDTO Location { get; set; }
         public UserDTO Owner { get; set; }
-        public List<DonationDetailDTO> Donations { get; set; }
         public DateTime DateTimeUTC { get; set; }
 
         public OfferQuickInfoDTO()
@@ -27,7 +26,6 @@ namespace Common.DTO
             Location = offerdto.Location;
             Owner = offerdto.Owner;
             DateTimeUTC = offerdto.DateTimeUtc;
-            Donations = offerdto.Donations.Select(x => new DonationDetailDTO(x.User, x.Amount)).ToList();
         }
     }
 }

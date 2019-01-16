@@ -19,7 +19,7 @@ namespace Core.Services
             using (var dbContext = new ApplicationDbContext())
             {
                 
-                var offers = dbContext.Offers.Include(x => x.Owner).Include(x => x.Donations).Include(x => x.Location).ToList().Select(x => x.ToDTO());
+                var offers = dbContext.Offers.Include(x => x.Owner).Include(x => x.Location).ToList().Select(x => x.ToDTO());
                 var result = new List<OfferQuickInfoDTO>();
                 foreach(var offerObj in offers)
                 {
@@ -34,7 +34,7 @@ namespace Core.Services
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                var offers = dbContext.Offers.Include(x => x.Owner).Include(x => x.Donations).Include(x => x.Location).ToList().Select(x => x.ToDTO()).ToList();
+                var offers = dbContext.Offers.Include(x => x.Owner).Include(x => x.Location).ToList().Select(x => x.ToDTO()).ToList();
                 return offers;
 
 
@@ -45,7 +45,7 @@ namespace Core.Services
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                var offerDto = dbContext.Offers.Include(x => x.Owner).Include(x => x.Donations).Include(x => x.Location).ToList().Select(x => x.ToDTO()).FirstOrDefault(x=>x.Id==offerId);
+                var offerDto = dbContext.Offers.Include(x => x.Owner).Include(x => x.Location).ToList().Select(x => x.ToDTO()).FirstOrDefault(x=>x.Id==offerId);
                 return offerDto;
 
 
@@ -63,7 +63,7 @@ namespace Core.Services
             }
 
         }
-        public bool Create(Guid organizationId,string name, string country, string city, string street, int number, DateTime date,string description,int volGoal,int donGoal)
+        public bool Create(Guid organizationId,string name, string country, string city, string street, int number, DateTime date,string description,int volGoal)
         {
             using (var dbContext = new ApplicationDbContext())
             {
@@ -83,8 +83,7 @@ namespace Core.Services
                     OwnerId=owner.Id,
                     Owner = owner,
                     Description=description,
-                    CandidatesGoal=volGoal,
-                    DonationsGoal=donGoal
+                    CandidatesGoal=volGoal
                 };
                 var result = dbContext.Offers.Add(ev);
                 
@@ -99,7 +98,7 @@ namespace Core.Services
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                var offerObj = dbContext.Offers.Include(x=>x.Participants).Include(x=>x.Donations).Include(x=>x.Location).Include(x=>x.Owner).FirstOrDefault(x => x.Id == id.ToString());
+                var offerObj = dbContext.Offers.Include(x=>x.Participants).Include(x=>x.Location).Include(x=>x.Owner).FirstOrDefault(x => x.Id == id.ToString());
                 if (offerObj == null)
                     throw new Exception("Object could not be found!");
                 

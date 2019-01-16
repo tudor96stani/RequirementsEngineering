@@ -159,9 +159,6 @@
                         Candidates Goal: <input type="number" style="width:75%;" id="volGoalTextBox" step="1" min="0">
                     </div>
                     <div class="modal-body">
-                        Donations Goal: <input type="number" style="margin-left:5px;width:75%;" id="donGoalTextBox" step="1" min="0">
-                    </div>
-                    <div class="modal-body">
                         Description: <textarea style="margin-left:6%;width:75%;" id="descTextArea"></textarea>
                     </div>
                     <div class="modal-footer">
@@ -311,7 +308,6 @@
                     'Date': $('#datetimepicker4').val(),
                     'OwnerId': '@Model.OrganizationId',
                     'CandidatesGoals': $('#volGoalTextBox').val(),
-                    'DonationsGoal': $('#donGoalTextBox').val(),
                     'Description': $('#descTextArea').val()
                 });
                 var fullUrl = '@Url.Action("CreateOffer", "Organization", null, Request.Url.Scheme)';

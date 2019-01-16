@@ -22,12 +22,7 @@ namespace DependencyResolver
             return OfferService.Value;
         }
 
-        private static Lazy<IDonationService> DonationService = new Lazy<IDonationService>(() => new DonationService());
-        public static IDonationService GetDonationService()
-        {
-            return DonationService.Value;
-        }
-
+       
         private static Lazy<IOrganizationService> OrganizationService = new Lazy<IOrganizationService>(() => new OrganizationService());
         public static IOrganizationService GetOrganizationService()
         {

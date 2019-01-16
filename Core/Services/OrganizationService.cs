@@ -63,7 +63,7 @@ namespace Core.Services
         {
             using(var db = new ApplicationDbContext())
             {
-                var offers = db.Offers.Include(x => x.Owner).Include(x => x.Location).Include(x => x.Donations).OrderByDescending(x => x.DateTimeUTC).ToList().Select(x=>x.ToDTO()).Select(x => new OfferQuickInfoDTO(x)).ToList();
+                var offers = db.Offers.Include(x => x.Owner).Include(x => x.Location).OrderByDescending(x => x.DateTimeUTC).ToList().Select(x=>x.ToDTO()).Select(x => new OfferQuickInfoDTO(x)).ToList();
                 return offers;
             }
         }

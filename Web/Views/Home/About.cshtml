@@ -8,12 +8,6 @@
     @foreach (var ev in Model)
     {
         <li>@ev.Name - @ev.Location - @ev.Owner - @ev.DateTimeUTC
-            <ul>
-                @foreach (var donation in ev.Donations)
-                {
-                    <li>@donation</li>
-                }
-            </ul>
         </li>
     }
 </ul>*@

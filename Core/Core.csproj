@@ -54,13 +54,11 @@
     <Compile Include="DAL\ApplicationDbContext.cs" />
     <Compile Include="DAL\AspNetRole.cs" />
     <Compile Include="DAL\AspNetUser.cs" />
-    <Compile Include="DAL\Donation.cs" />
     <Compile Include="DAL\Offer.cs" />
     <Compile Include="DAL\File.cs" />
     <Compile Include="DAL\Location.cs" />
     <Compile Include="DAL\Rating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DonationService.cs" />
     <Compile Include="Services\OfferService.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\OrganizationService.cs" />

@@ -89,7 +89,7 @@ namespace Web.Controllers
             {
                 try
                 {
-                    if (_offerService.Create(model.OwnerId, model.Name, model.Country, model.City, model.Street, model.Number, model.Date, model.Description, model.CandidatesGoals, model.DonationsGoal))
+                    if (_offerService.Create(model.OwnerId, model.Name, model.Country, model.City, model.Street, model.Number, model.Date, model.Description, model.CandidatesGoals))
                     {
                         return Json(new { Ok = true, Message = "Ok" }, JsonRequestBehavior.AllowGet);
                     }

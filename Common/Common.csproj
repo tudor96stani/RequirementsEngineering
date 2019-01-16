@@ -40,8 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\DonationDetailDTO.cs" />
-    <Compile Include="DTO\DonationDTO.cs" />
     <Compile Include="DTO\OfferDTO.cs" />
     <Compile Include="DTO\OfferQuickInfoDTO.cs" />
     <Compile Include="DTO\FileDTO.cs" />
@@ -50,7 +48,6 @@
     <Compile Include="DTO\RatingDTO.cs" />
     <Compile Include="DTO\RoleDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
-    <Compile Include="Interfaces\Services\IDonationService.cs" />
     <Compile Include="DTO\CandidateDTO.cs" />
     <Compile Include="Interfaces\Services\IOfferService.cs" />
     <Compile Include="Interfaces\Services\ILocationService.cs" />
