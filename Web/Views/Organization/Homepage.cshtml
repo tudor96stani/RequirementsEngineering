@@ -27,33 +27,33 @@
 
 <body style="overflow-y:hidden; overflow-x:hidden;">
     <div class="col-md-4 ">
-        <div class="well" id="topVolunteers" style="height: 490px;">
+        <div class="well" id="topCandidates" style="height: 490px;">
             <h2>Top Candidates</h2>
             <table class="table">
                 <tbody>
-                    @foreach (var volunteer in Model.topVolunteers)
+                    @foreach (var candidate in Model.topCandidates)
                     {
                         <tr>
 
-                            <h5>@Html.ActionLink(@volunteer.VolunteerName, "Profile", "Volunteer", new { id = volunteer.VolunteerId }, null)</h5>
+                            <h5>@Html.ActionLink(@candidate.CandidateName, "Profile", "Candidate", new { id = candidate.CandidateId }, null)</h5>
                             <p>
-                                @if (@volunteer.VolunteerRating >= 1)
+                                @if (@candidate.CandidateRating >= 1)
                                 { <span class="fa fa-star checked"></span> }
                                 else
                                 { <span class="fa fa-star"></span> }
-                                @if (@volunteer.VolunteerRating >= 2)
+                                @if (@candidate.CandidateRating >= 2)
                                 { <span class="fa fa-star checked"></span> }
                                 else
                                 { <span class="fa fa-star"></span> }
-                                @if (@volunteer.VolunteerRating >= 3)
+                                @if (@candidate.CandidateRating >= 3)
                                 { <span class="fa fa-star checked"></span> }
                                 else
                                 { <span class="fa fa-star"></span> }
-                                @if (@volunteer.VolunteerRating >= 4)
+                                @if (@candidate.CandidateRating >= 4)
                                 { <span class="fa fa-star checked"></span> }
                                 else
                                 { <span class="fa fa-star"></span> }
-                                @if (@volunteer.VolunteerRating >= 5)
+                                @if (@candidate.CandidateRating >= 5)
                                 { <span class="fa fa-star checked"></span> }
                                 else
                                 { <span class="fa fa-star"></span> }
@@ -67,17 +67,17 @@
 
 
     <div class="col-md-8 ">
-        <div class="well" id="events" style="height: 490px;">
+        <div class="well" id="offers" style="height: 490px;">
 
             <ul class="nav">
-                @foreach (var ev in Model.orderedEvents)
+                @foreach (var ev in Model.orderedOffers)
                 {
 
                     <li>
-                        <div class="thumbnail" id="event">
+                        <div class="thumbnail" id="offer">
                             <div class="row">
                                 <div class="col-md-offset-5">
-                                    <h3>&emsp;@Html.ActionLink(@ev.Name, "Index", "Event", new { id = ev.Id }, null)</h3>
+                                    <h3>&emsp;@Html.ActionLink(@ev.Name, "Index", "Offer", new { id = ev.Id }, null)</h3>
                                 </div>
                             </div>
                             <p>&emsp; <b>By: </b> @Html.ActionLink(@ev.Owner, "Profile", "Organization", new { id = ev.OwnerId }, null)</p>

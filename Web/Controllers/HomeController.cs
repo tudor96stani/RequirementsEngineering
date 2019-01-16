@@ -12,12 +12,12 @@ namespace Web.Controllers
     public class HomeController : Controller
     {
         private readonly IUserService _userService;
-        private readonly IEventService _eventService;
+        private readonly IOfferService _offerService;
 
         public HomeController()
         {
             _userService = ServiceDependencyResolver.GetUserService();
-            _eventService = ServiceDependencyResolver.GetEventService();
+            _offerService = ServiceDependencyResolver.GetOfferService();
         }
 
         public ActionResult Index()
@@ -29,9 +29,9 @@ namespace Web.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
-            var events = _eventService.GetAll();
+            var offers = _offerService.GetAll();
             
-            return View(events.Select(x=>new EventQuickDetailsViewModel(x)));
+            return View(offers.Select(x=>new OfferQuickDetailsViewModel(x)));
         }
 
         public ActionResult Contact()

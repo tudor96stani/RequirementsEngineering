@@ -42,8 +42,8 @@
   <ItemGroup>
     <Compile Include="DTO\DonationDetailDTO.cs" />
     <Compile Include="DTO\DonationDTO.cs" />
-    <Compile Include="DTO\EventDTO.cs" />
-    <Compile Include="DTO\EventQuickInfoDTO.cs" />
+    <Compile Include="DTO\OfferDTO.cs" />
+    <Compile Include="DTO\OfferQuickInfoDTO.cs" />
     <Compile Include="DTO\FileDTO.cs" />
     <Compile Include="DTO\LocationDTO.cs" />
     <Compile Include="DTO\OrganizationDTO.cs" />
@@ -51,13 +51,13 @@
     <Compile Include="DTO\RoleDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Interfaces\Services\IDonationService.cs" />
-    <Compile Include="DTO\VolunteerDTO.cs" />
-    <Compile Include="Interfaces\Services\IEventService.cs" />
+    <Compile Include="DTO\CandidateDTO.cs" />
+    <Compile Include="Interfaces\Services\IOfferService.cs" />
     <Compile Include="Interfaces\Services\ILocationService.cs" />
     <Compile Include="Interfaces\Services\IOrganizationService.cs" />
     <Compile Include="Interfaces\Services\IRatingService.cs" />
     <Compile Include="Interfaces\Services\IUserService.cs" />
-    <Compile Include="Interfaces\Services\IVolunteerService.cs" />
+    <Compile Include="Interfaces\Services\ICandidateService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

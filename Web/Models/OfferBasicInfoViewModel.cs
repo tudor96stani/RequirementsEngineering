@@ -6,7 +6,7 @@ using Common.DTO;
 
 namespace Web.Models
 {
-    public class EventBasicInfoViewModel
+    public class OfferBasicInfoViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -18,7 +18,7 @@ namespace Web.Models
             return date;
         }
 
-        public EventBasicInfoViewModel(EventDTO dto)
+        public OfferBasicInfoViewModel(OfferDTO dto)
         {
             Id = dto.Id;
             Name = dto.Name;

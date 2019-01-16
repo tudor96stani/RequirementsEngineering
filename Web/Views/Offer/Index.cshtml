@@ -1,5 +1,5 @@
 ﻿@using Web.Models
-@model Web.Models.EventProfileViewModel
+@model Web.Models.OfferProfileViewModel
 @using Microsoft.AspNet.Identity;
 
 @{
@@ -36,7 +36,7 @@
                 <h2 class="text-center">@ViewBag.Title</h2>
                 @if (@Model.Owner.Id.ToString().Equals(@User.Identity.GetUserId()))
                 {
-                    using (Html.BeginForm("EditPage", "Event", new { @eventId = Model.Id }))
+                    using (Html.BeginForm("EditPage", "Offer", new { @offerId = Model.Id }))
                     {
                         <div class="panel-body text-right" style="float:right; height:-20px;margin-top:-45px;">
                             <input class="btn btn-primary" type="submit" value="EDIT" />
@@ -59,7 +59,7 @@
                                 
                                 
                                 <div class="col-md-2">
-                                    <img src="https://isobm2016congress.com/wp-content/uploads/2016/01/volunteer_icon_b2.png" alt="event_icon" height="50" width="50" style="margin-left: 10px">
+                                    <img src="https://isobm2016congress.com/wp-content/uploads/2016/01/candidate_icon_b2.png" alt="offer_icon" height="50" width="50" style="margin-left: 10px">
 
                                 </div>
                                 <div class="col-md-10"  >
@@ -147,9 +147,9 @@
 
         <div class="row-sm-8" style="height:70px;">
             <div class="container" style="height:70px;">
-                <div id="partialVolunteers" style="width:97.1%; margin-left:1.5%; height:20px;margin-bottom:5%;">
+                <div id="partialCandidates" style="width:97.1%; margin-left:1.5%; height:20px;margin-bottom:5%;">
                     <h2 class="text-center" style=" margin-top:-1%;"><b>Participants</b></h2>
-                    @Html.Partial("VolunteersPartial", new VolunteersListViewModel(Model.Id, Model.Participants))
+                    @Html.Partial("CandidatesPartial", new CandidatesListViewModel(Model.Id, Model.Participants))
                 </div>
             </div>
         </div>
@@ -158,7 +158,7 @@
 
 
         <!--HIDDEN TEXTBOX TO GET THE EVENTID FROM -->
-        @Html.TextBoxFor(m => m.Id, new { @class = "hidden", @id = "eventIdTextBox" })
+        @Html.TextBoxFor(m => m.Id, new { @class = "hidden", @id = "offerIdTextBox" })
 
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
@@ -196,16 +196,16 @@
 
                     $("#joinButton").click(function () {
 
-                        var eventId = $("#eventIdTextBox").val();
+                        var offerId = $("#offerIdTextBox").val();
 
                         $.ajax({
                             type: "POST",
-                            url: "/Event/AddParticipant",
-                            data: JSON.stringify({ 'eventId': eventId }),
+                            url: "/Offer/AddParticipant",
+                            data: JSON.stringify({ 'offerId': offerId }),
                             contentType: "application/json; charset=utf-8",
                             dataType: 'html',
                             success: function (response) {
-                                $('#partialVolunteers').html(response);
+                                $('#partialCandidates').html(response);
                             },
                             failure: function (response) {
 
@@ -227,12 +227,12 @@
                     $("#addDonationButton").click(function () {
 
                         var amount = $("#amountTextBox").val();
-                        var eventId = $("#eventIdTextBox").val();
+                        var offerId = $("#offerIdTextBox").val();
 
                         $.ajax({
                             type: "POST",
-                            url: "/Event/AddDonation",
-                            data: JSON.stringify({ 'eventId': eventId, 'amount': amount }),
+                            url: "/Offer/AddDonation",
+                            data: JSON.stringify({ 'offerId': offerId, 'amount': amount }),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (response) {

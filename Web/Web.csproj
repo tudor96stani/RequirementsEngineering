@@ -221,11 +221,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\OfferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
-    <Compile Include="Controllers\VolunteerController.cs" />
+    <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -243,21 +243,21 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CreateEventViewModel.cs" />
-    <Compile Include="Models\EventEditViewModel.cs" />
-    <Compile Include="Models\EventProfileViewModel.cs" />
-    <Compile Include="Models\EventQuickDetailsViewModel.cs" />
+    <Compile Include="Models\CreateOfferViewModel.cs" />
+    <Compile Include="Models\OfferEditViewModel.cs" />
+    <Compile Include="Models\OfferProfileViewModel.cs" />
+    <Compile Include="Models\OfferQuickDetailsViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\VolunteerProfileViewModel.cs" />
+    <Compile Include="Models\CandidateProfileViewModel.cs" />
     <Compile Include="Models\LocationSelectorViewModel.cs" />
-    <Compile Include="Models\VolunteerHomepageViewModel.cs" />
+    <Compile Include="Models\CandidateHomepageViewModel.cs" />
     <Compile Include="Models\TopOrganizationViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserBasicViewModel.cs" />
-    <Compile Include="Models\VolunteersListViewModel.cs" />
+    <Compile Include="Models\CandidateListViewModel.cs" />
     <Compile Include="Models\OrganizationHomepageViewModel.cs" />
-    <Compile Include="Models\TopVolunteerViewModel.cs" />
-    <Compile Include="Models\EventBasicInfoViewModel.cs" />
+    <Compile Include="Models\TopCandidateViewModel.cs" />
+    <Compile Include="Models\OfferBasicInfoViewModel.cs" />
     <Compile Include="Models\OrganizationProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -366,7 +366,6 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
-    <Content Include="App_Data\ClassDiagram.cd" />
     <None Include="Properties\PublishProfiles\ServerFinalProfile.pubxml" />
     <None Include="Properties\PublishProfiles\ServerWebsite.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
@@ -428,10 +427,10 @@
     <Content Include="Scripts\vendor\jquery\jquery.min.js" />
     <Content Include="Scripts\Script\VolunteerProfile.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Offer\Index.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
-    <Content Include="Views\Event\EditPage.cshtml" />
+    <Content Include="Views\Offer\EditPage.cshtml" />
     <Content Include="Scripts\vendor\bootstrap\css\bootstrap.min.css" />
     <None Include="Views\Organization\Homepage.cshtml" />
     <Content Include="Views\Organization\Profile.cshtml" />
@@ -469,16 +468,17 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Event\VolunteersPartial.cshtml" />
+    <Content Include="Views\Offer\CandidatePartial.cshtml" />
     <Content Include="Views\Organization\Profile.cshtml">
       <BrowseToURL>~/Organization/Profile/{id}</BrowseToURL>
     </Content>
-    <Content Include="Views\Volunteer\Homepage.cshtml" />
-    <Content Include="Views\Volunteer\Profile.cshtml" />
-    <Content Include="Views\Volunteer\Index.cshtml" />
+    <Content Include="Views\Candidate\Homepage.cshtml" />
+    <Content Include="Views\Candidate\Profile.cshtml" />
+    <Content Include="Views\Candidate\Index.cshtml" />
     <Content Include="Views\Organization\Homepage.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Scripts\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>

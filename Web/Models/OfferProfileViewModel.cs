@@ -7,7 +7,7 @@ using Common.DTO;
 
 namespace Web.Models
 {
-    public class EventProfileViewModel
+    public class OfferProfileViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -19,7 +19,7 @@ namespace Web.Models
         public string Description { get; set; }
 
 
-        public EventProfileViewModel(EventDTO dto)
+        public OfferProfileViewModel(OfferDTO dto)
         {
             Id = dto.Id;
             Name = dto.Name;

@@ -1,5 +1,5 @@
 ﻿﻿@using Web.Models
-@model Web.Models.VolunteerHomepageViewModel
+@model Web.Models.CandidateHomepageViewModel
 @using Microsoft.AspNet.Identity
 
 @{
@@ -77,16 +77,16 @@
                      }
                 </select>
 
-            <div class="well" id="events" style="height:450px;overflow-y:scroll"></div>
+            <div class="well" id="offers" style="height:450px;overflow-y:scroll"></div>
         </div>
     </div>
 </body>
 @section Scripts{
     <script>
         //URLS to be used in the JS file
-        var refreshCities = '@Url.Action("GetEventsByLocation","Volunteer",null, Request.Url.Scheme)' + '?location=';
-        var eventProfile = '@Url.Action("Index", "Event",null, Request.Url.Scheme)' + '/Index/';
+        var refreshCities = '@Url.Action("GetOffersByLocation","Candidate",null, Request.Url.Scheme)' + '?location=';
+        var offerProfile = '@Url.Action("Index", "Offer",null, Request.Url.Scheme)' + '/Index/';
         var ownerProfile = '@Url.Action("Profile", "Organization", null, Request.Url.Scheme)' + '/';
     </script>
-    <script src="~/Scripts/Script/VolunteerProfile.js"></script>    
+    <script src="~/Scripts/Script/CandidateProfile.js"></script>    
 }

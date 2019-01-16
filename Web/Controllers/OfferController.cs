@@ -12,36 +12,36 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    public class EventController : Controller
+    public class OfferController : Controller
     {
-        private static IEventService _eventService;
+        private static IOfferService _offerService;
         private static IUserService _userService;
         private static IDonationService _donationService;
         private static ILocationService _locationService;
 
-        public EventController()
+        public OfferController()
         {
-            _eventService = ServiceDependencyResolver.GetEventService();
+            _offerService = ServiceDependencyResolver.GetOfferService();
             _userService = ServiceDependencyResolver.GetUserService();
             _donationService = ServiceDependencyResolver.GetDonationService();
             _locationService = ServiceDependencyResolver.GetLocationService();
         }
 
-        // GET: Event
+        // GET: Offer
         public ActionResult Index(Guid id)
         {
             
-            EventProfileViewModel eventViewModel = new EventProfileViewModel(_eventService.GetDto(id));
-            return View(eventViewModel);
+            OfferProfileViewModel offerViewModel = new OfferProfileViewModel(_offerService.GetDto(id));
+            return View(offerViewModel);
         }
 
-        public ActionResult EditPage(Guid eventId)
+        public ActionResult EditPage(Guid offerId)
         {
             var locationList = getLocations();
 
-            EventEditViewModel eventViewModel = new EventEditViewModel(_eventService.GetDto(eventId),locationList);
+            OfferEditViewModel offerViewModel = new OfferEditViewModel(_offerService.GetDto(offerId),locationList);
             
-            return View(eventViewModel);
+            return View(offerViewModel);
         }
 
 
@@ -66,12 +66,12 @@ namespace Web.Controllers
 
 
         [HttpPost]
-        public ActionResult Edit(EventEditViewModel model)
+        public ActionResult Edit(OfferEditViewModel model)
         {
             if (ModelState.IsValid)
             {
                 Guid id = model.Id;
-                _eventService.UpdateEvent(model.Name, model.DateTimeUtc, model.Description, model.LocationId, model.Id);
+                _offerService.UpdateOffer(model.Name, model.DateTimeUtc, model.Description, model.LocationId, model.Id);
 
                 return RedirectToAction("Index", new { id });
             }
@@ -81,7 +81,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddDonation(string eventId, string amount)
+        public JsonResult AddDonation(string offerId, string amount)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace Web.Controllers
                 {
                   return Json(new { Success = "True", Message = "Donation could not be added" }, JsonRequestBehavior.AllowGet);
                 }
-                _donationService.Add(User.Identity.GetUserId(), eventId,Double.Parse(amount));
+                _donationService.Add(User.Identity.GetUserId(), offerId,Double.Parse(amount));
                 return Json(new { Success = "True", Message="Donation added with success" }, JsonRequestBehavior.AllowGet);
             }
             catch(Exception e)
@@ -100,14 +100,14 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddParticipant(string eventId)
+        public ActionResult AddParticipant(string offerId)
         {
-                _eventService.AddParticipant(eventId, User.Identity.GetUserId());
-                List<UserBasicViewModel> basicUsers = _eventService.GetDto(Guid.Parse(eventId))
+                _offerService.AddParticipant(offerId, User.Identity.GetUserId());
+                List<UserBasicViewModel> basicUsers = _offerService.GetDto(Guid.Parse(offerId))
                     .Participants.Select(x => new UserBasicViewModel(x)).ToList();
-                VolunteersListViewModel volunteersListViewModel = new VolunteersListViewModel( Guid.Parse(eventId),
+                CandidateListViewModel candidatesListViewModel = new CandidateListViewModel( Guid.Parse(offerId),
                     basicUsers);
-                return PartialView("VolunteersPartial", volunteersListViewModel);
+                return PartialView("CandidatesPartial", candidatesListViewModel);
         }
     }
 }

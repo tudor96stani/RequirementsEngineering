@@ -15,7 +15,7 @@
             color: antiquewhite;
         }
 
-        p.event:hover {
+        p.offer:hover {
             text-decoration: underline;
         }
 
@@ -64,7 +64,7 @@
 
                         @*<p contenteditable="true">Name: &emsp; @Model.OrganizationName</p>
                         <p contenteditable="true">E-mail: &emsp; @Model.OrganizationEmail</p>
-                        <div style="@(User.IsInRole("Volunteer")? "display:block": "display:none")" id="rating">
+                        <div style="@(User.IsInRole("Candidate")? "display:block": "display:none")" id="rating">
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
@@ -77,13 +77,13 @@
 
                         <div class="row">
                             <div class="col-md-1 col-md-offset-4">
-                                <img src="http://web.whoi.edu/development/wp-content/uploads/sites/41/2015/08/icon-fundraise.png" alt="event_icon" height="70" width="70" style="margin-left: 10px">
+                                <img src="http://web.whoi.edu/development/wp-content/uploads/sites/41/2015/08/icon-fundraise.png" alt="offer_icon" height="70" width="70" style="margin-left: 10px">
                             </div>
                             <div class="col-md-6 col-md-offset-1">
                                 <br />
                                 <p contenteditable="true"><b>Name:</b>&emsp; @Model.OrganizationName</p>
                                 <p contenteditable="true"><b>E-mail: </b> &emsp; @Model.OrganizationEmail</p>
-                                <div style="@(User.IsInRole("Volunteer") ? "display:block" : "display:none"); float:left; margin-left:-105%; margin-top:-15%;" id="rating">
+                                <div style="@(User.IsInRole("Candidate") ? "display:block" : "display:none"); float:left; margin-left:-105%; margin-top:-15%;" id="rating">
                                     <b> Rate: </b>
                                     &emsp;
                                     <span class="fa fa-star checked"></span>
@@ -113,7 +113,7 @@
                             <button style="float: right; border-radius:20px; background-color:#49274A ;border-color:#49274A" class="btn-primary" id="showModalButton"><h3 style="margin-bottom:5%;">+</h3></button>
                         }
                     </div>
-                    <div class="panel-body well" id="eventsList" style="overflow-y:scroll;height:240px; width:100%; background-color:#f8eee7;">
+                    <div class="panel-body well" id="offersList" style="overflow-y:scroll;height:240px; width:100%; background-color:#f8eee7;">
 
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                 <div class="modal-content"  style="height:500px;overflow-y:scroll;margin-right:20%;margin-left:-30%;background-color:#f8eee7;">
                     <div class="modal-header" style="margin-bottom:5%; height:50%;background-color:#f8eee7;">
                 
-                        <h4  style="text-align:center; margin-bottom:10px;" class="modal-title">Fill all the blank spaces in order to create an event!</h4>
+                        <h4  style="text-align:center; margin-bottom:10px;" class="modal-title">Fill all the blank spaces in order to create an offer!</h4>
                         @*<button type="button" class="close" data-dismiss="modal" style="float:right;height:7px; width:7px;">&times;</button>*@
                     </div>
                     <div class="modal-body" style="margin-top:-2%;">
@@ -156,7 +156,7 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        Volunteers Goal: <input type="number" style="width:75%;" id="volGoalTextBox" step="1" min="0">
+                        Candidates Goal: <input type="number" style="width:75%;" id="volGoalTextBox" step="1" min="0">
                     </div>
                     <div class="modal-body">
                         Donations Goal: <input type="number" style="margin-left:5px;width:75%;" id="donGoalTextBox" step="1" min="0">
@@ -228,9 +228,9 @@
             this.stars = document.querySelectorAll('#rating span');
             for (var i = 0; i < this.stars.length; i++) {
                 this.stars[i].setAttribute('data-count', i);
-                this.stars[i].addEventListener('mouseenter', this.enterStarListener.bind(this));
+                this.stars[i].addOfferListener('mouseenter', this.enterStarListener.bind(this));
             }
-            document.querySelector('#rating').addEventListener('mouseleave', this.leaveStarListener.bind(this));
+            document.querySelector('#rating').addOfferListener('mouseleave', this.leaveStarListener.bind(this));
         };
  
 /**
@@ -295,7 +295,7 @@
 
             $('#datetimepicker4').datetimepicker();
 
-            reloadEvents();
+            reloadOffers();
             $("#showModalButton").click(function () {
                 $('#CreateModal').modal('show');
                 $('#datetimepicker4').datetimepicker();
@@ -310,11 +310,11 @@
                     'Number': $('#numberTextBox').val(),
                     'Date': $('#datetimepicker4').val(),
                     'OwnerId': '@Model.OrganizationId',
-                    'VolunteersGoals': $('#volGoalTextBox').val(),
+                    'CandidatesGoals': $('#volGoalTextBox').val(),
                     'DonationsGoal': $('#donGoalTextBox').val(),
                     'Description': $('#descTextArea').val()
                 });
-                var fullUrl = '@Url.Action("CreateEvent", "Organization", null, Request.Url.Scheme)';
+                var fullUrl = '@Url.Action("CreateOffer", "Organization", null, Request.Url.Scheme)';
                 $.ajax({
                     url: fullUrl,
                     type: 'POST',
@@ -323,8 +323,8 @@
                     success: function (data) {
                         if (data.Ok == true) {
                             $('#CreateModal').modal('hide');
-                            alert("Event created!");
-                            reloadEvents();
+                            alert("Offer created!");
+                            reloadOffers();
                         } else {
                             alert(data.Message);
                         }
@@ -336,10 +336,10 @@
             });
         });
 
-        function deleteEvent(id) {
-            event.cancelBubble = true;
-            if (event.stopPropagation) event.stopPropagation();
-            var url = '@Url.Action("DeleteEvent", "Organization", null, Request.Url.Scheme)';
+        function deleteOffer(id) {
+            offer.cancelBubble = true;
+            if (offer.stopPropagation) offer.stopPropagation();
+            var url = '@Url.Action("DeleteOffer", "Organization", null, Request.Url.Scheme)';
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -347,27 +347,27 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     if (data.Ok == true) {
-                        reloadEvents();
-                        alert("Event deleted!");
+                        reloadOffers();
+                        alert("Offer deleted!");
                     } else {
                         alert(data.Message);
                     }
                 },
                 error: function () {
-                    alert("Could not delete event!");
+                    alert("Could not delete offer!");
                 }
             });
         }
 
-        function reloadEvents() {
-            $('#eventsList').html('<h2>Loading events...<h2>');
-            var fullUrl = '@Url.Action("GetEvents", "Organization", new { id=Model.OrganizationId}, Request.Url.Scheme)';
+        function reloadOffers() {
+            $('#offersList').html('<h2>Loading offers...<h2>');
+            var fullUrl = '@Url.Action("GetOffers", "Organization", new { id=Model.OrganizationId}, Request.Url.Scheme)';
             console.log(fullUrl);
             var output = "";
             $.ajax({
                 url: fullUrl,
                 success: function (result) {
-                    $('#eventsList').html('');
+                    $('#offersList').html('');
                     output = result;
                     output.sort(
                         function (a, b) {
@@ -390,24 +390,24 @@
                         }
                         if ((curr.localeCompare(item.DateTimeV)) <= 0) {
                             console.log("if");
-                            var li = "<div class=" + "\"thumbnail current events\"" + "style=" + "\"height: 30%;margin-bottom:8px;\"" +">"
+                            var li = "<div class=" + "\"thumbnail current offers\"" + "style=" + "\"height: 30%;margin-bottom:8px;\"" +">"
 
-                            //$('#eventsList').append(li + "<a href=/Event/Index/" + item.Id + " style=\"margin-left:0px; color:black;font-size: 1em; \"><b>" + item.Name + "<b></a><button onclick=\"deleteEvent('" + item.Id + "')\" style=\"float:right;margin-top:0;margin-bottom:2px;\" class=\"btn btn-xs\">x</button>" +
-                            //    "<img align='middle' src='http://www.piicomm.com/wp-content/uploads/2014/07/mobile-helpdesk-03.png' alt='event_icon' height='35' width='35' style='margin-left: 48%'>" +
+                            //$('#offersList').append(li + "<a href=/Offer/Index/" + item.Id + " style=\"margin-left:0px; color:black;font-size: 1em; \"><b>" + item.Name + "<b></a><button onclick=\"deleteOffer('" + item.Id + "')\" style=\"float:right;margin-top:0;margin-bottom:2px;\" class=\"btn btn-xs\">x</button>" +
+                            //    "<img align='middle' src='http://www.piicomm.com/wp-content/uploads/2014/07/mobile-helpdesk-03.png' alt='offer_icon' height='35' width='35' style='margin-left: 48%'>" +
                             //   "</div>");
-                            $('#eventsList').append(li + "<a href=/Event/Index/" + item.Id + " style=\"margin-left:0px; color: grey;\"><b>" + item.Name + "</b></href>" +
-                                "<img align='middle' src='https://cdn0.iconfinder.com/data/icons/life-concepts-lifestyles/128/diversity2-256.png' alt='event_icon' height='35' width='35' style='margin-left: 48%'>" +
+                            $('#offersList').append(li + "<a href=/Offer/Index/" + item.Id + " style=\"margin-left:0px; color: grey;\"><b>" + item.Name + "</b></href>" +
+                                "<img align='middle' src='https://cdn0.iconfinder.com/data/icons/life-concepts-lifestyles/128/diversity2-256.png' alt='offer_icon' height='35' width='35' style='margin-left: 48%'>" +
 
                                 "</div>");
                             console.log(item.Name);
                         }
                         else {
 
-                            var li = "<div class=" + "\"thumbnail past events\"" + "style=" + "\"height: 30%;margin-bottom:8px;\"" + ">"
+                            var li = "<div class=" + "\"thumbnail past offers\"" + "style=" + "\"height: 30%;margin-bottom:8px;\"" + ">"
                             console.log(li);
 
-                            $('#eventsList').append(li + "<a href=/Event/Index/" + item.Id + " style=\"margin-left:0px; color: white;\"><b>" + item.Name + "</b></href>" +
-                                "<img align='middle' src='http://www.piicomm.com/wp-content/uploads/2014/07/mobile-helpdesk-03.png' alt='event_icon' height='35' width='35' style='margin-left: 48%'>" +
+                            $('#offersList').append(li + "<a href=/Offer/Index/" + item.Id + " style=\"margin-left:0px; color: white;\"><b>" + item.Name + "</b></href>" +
+                                "<img align='middle' src='http://www.piicomm.com/wp-content/uploads/2014/07/mobile-helpdesk-03.png' alt='offer_icon' height='35' width='35' style='margin-left: 48%'>" +
 
                                 "</div>");
                         }

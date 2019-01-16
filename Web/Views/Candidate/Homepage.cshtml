@@ -1,5 +1,5 @@
 ﻿﻿@using Web.Models
-@model Web.Models.VolunteerHomepageViewModel
+@model Web.Models.CandidateHomepageViewModel
 @using Microsoft.AspNet.Identity
 
 @{
@@ -71,16 +71,16 @@
 
     <div class="col-md-8">
 
-        <div class="well" id="events" style="height:490px;">
+        <div class="well" id="offers" style="height:490px;">
             <ul class="nav">
-                @foreach (var ev in Model.orderedEvents)
+                @foreach (var ev in Model.orderedOffers)
                 {
                     <li>
-                        <div class="thumbnail" id="event">
-                            <img src="https://isobm2016congress.com/wp-content/uploads/2016/01/volunteer_icon_b2.png" alt="event_icon" height="42" width="42">
+                        <div class="thumbnail" id="offer">
+                            <img src="https://isobm2016congress.com/wp-content/uploads/2016/01/candidate_icon_b2.png" alt="offer_icon" height="42" width="42">
                             <div class="row">
                                 <div class="col-md-offset-5">
-                                    <h3>@Html.ActionLink(@ev.Name, "Index", "Event", new {id = ev.Id}, null)</h3>
+                                    <h3>@Html.ActionLink(@ev.Name, "Index", "Offer", new {id = ev.Id}, null)</h3>
                                 </div>
                             </div>
                             <p>&emsp; <b>By: </b> @Html.ActionLink(@ev.Owner, "Profile", "Organization", new {id = ev.OwnerId}, null)</p>

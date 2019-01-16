@@ -6,10 +6,10 @@ namespace Core.DAL
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Event
+    public partial class Offer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Event()
+        public Offer()
         {
             Donations = new HashSet<Donation>();
             Participants = new HashSet<AspNetUser>();
@@ -27,7 +27,7 @@ namespace Core.DAL
 
         public double? DonationsGoal { get; set; }
 
-        public int? VolunteersGoal { get; set; }
+        public int? CandidatesGoal { get; set; }
 
         [StringLength(128)]
         public string OwnerId { get; set; }

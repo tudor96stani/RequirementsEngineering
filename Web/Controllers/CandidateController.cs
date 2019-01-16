@@ -9,68 +9,68 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    public class VolunteerController : Controller
+    public class CandidateController : Controller
     {
-        private readonly IVolunteerService _volService;
-        private readonly IEventService _eventService;
+        private readonly ICandidateService _volService;
+        private readonly IOfferService _offerService;
         private readonly ILocationService _locationService;
         private readonly IRatingService _ratingService;
 
-        public VolunteerController()
+        public CandidateController()
         {
-            _volService = ServiceDependencyResolver.GetVolunteerService();
-            _eventService = ServiceDependencyResolver.GetEventService();
+            _volService = ServiceDependencyResolver.GetCandidateService();
+            _offerService = ServiceDependencyResolver.GetOfferService();
             _locationService = ServiceDependencyResolver.GetLocationService();
             _ratingService = ServiceDependencyResolver.GetRatingService();
         }
 
-        //GET /Volunteer/Profile/123456
+        //GET /Candidate/Profile/123456
         public ActionResult Profile(Guid id)
         {
             if (!id.Equals(Guid.Empty))
             {
-                var dto = _volService.GetVolunteerProfileDetails(id);
+                var dto = _volService.GetCandidateProfileDetails(id);
                 if (dto != null)
                 {
-                    var viewModel = new VolunteerProfileViewModel(dto);
+                    var viewModel = new CandidateProfileViewModel(dto);
                     return View(viewModel);
                 }
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult GetEvents(Guid id)
+        public ActionResult GetOffers(Guid id)
         {
-            var events = _volService.GetAllEventsForVolunteer(id);
-            var viewModels = events.Select(x => new EventBasicInfoViewModel(x));
+            var offers = _volService.GetAllOffersForCandidate(id);
+            var viewModels = offers.Select(x => new OfferBasicInfoViewModel(x));
             return Json(viewModels, JsonRequestBehavior.AllowGet);
 		}
 
 
         public ActionResult Index()
         {
-            var viewModel = new VolunteerHomepageViewModel();
+            var viewModel = new CandidateHomepageViewModel();
             viewModel.topOrganizations = GetTopOrganizations();
-            viewModel.orderedEvents = GetEvents();
+            viewModel.orderedOffers = GetOffers();
             viewModel.Locations = _locationService.GetAllCities().Select(x => new LocationSelectorViewModel(x)).ToList();
             return View(viewModel);
         }
 
         public ActionResult Homepage()
         {
-            var viewmodel = new VolunteerHomepageViewModel();
+            var viewmodel = new CandidateHomepageViewModel();
             viewmodel.topOrganizations = GetTopOrganizations();
-            viewmodel.orderedEvents = GetEvents();
+            viewmodel.orderedOffers = GetOffers();
 
             return View(viewmodel);
         }
 
-        public ActionResult GetEventsByLocation(string location)
+        public ActionResult GetOffersByLocation(string location)
         {
 
-            var events = _eventService.GetEventsWithLocation(location);
-            var viewModelEvents = events.Select(x => new EventQuickDetailsViewModel(x)).ToList();
-            return Json(viewModelEvents, JsonRequestBehavior.AllowGet);
+            var offers = _offerService.GetOffersWithLocation(location);
+            var viewModelOffers = offers.Select(x => new OfferQuickDetailsViewModel(x)).ToList();
+            return Json(viewModelOffers, JsonRequestBehavior.AllowGet);
         }
         private List<TopOrganizationViewModel> GetTopOrganizations()
         {
@@ -84,18 +84,18 @@ namespace Web.Controllers
         }
 
 
-        private List<EventQuickDetailsViewModel> GetEvents()
+        private List<OfferQuickDetailsViewModel> GetOffers()
         {
-            var orderedEvents = _volService.GetAllEvents();
-            if (orderedEvents != null)
+            var orderedOffers = _volService.GetAllOffers();
+            if (orderedOffers != null)
             {
-                var eventsViewModel = orderedEvents.Select(x => new EventQuickDetailsViewModel(x)).ToList();
-                return eventsViewModel;
+                var offersViewModel = orderedOffers.Select(x => new OfferQuickDetailsViewModel(x)).ToList();
+                return offersViewModel;
             }
-            return new List<EventQuickDetailsViewModel>();
+            return new List<OfferQuickDetailsViewModel>();
         }
 
-        public JsonResult Rate(string volunteerId, string rating)
+        public JsonResult Rate(string candidateId, string rating)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace Web.Controllers
                 {
                     return Json(new { Success = "True", Message = "Organization could not be rated" }, JsonRequestBehavior.AllowGet);
                 }
-                _ratingService.Add(volunteerId, Int32.Parse(rating));
+                _ratingService.Add(candidateId, Int32.Parse(rating));
                 return Json(new { Success = "True", Message = "Organization successfully rated" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)

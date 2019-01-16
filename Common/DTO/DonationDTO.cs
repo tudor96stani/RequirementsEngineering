@@ -10,7 +10,7 @@ namespace Common.DTO
     {
         public int Id { get; set; }
         public UserDTO User { get; set; }
-        public Guid EventId { get; set; }
+        public Guid OfferId { get; set; }
         public double Amount { get; set; }
     }
 }

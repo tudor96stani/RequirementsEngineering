@@ -27,7 +27,7 @@ $.extend($.fn, {
 	// http://docs.jquery.com/Plugins/Validation/validate
 	validate: function( options ) {
 		/// <summary>
-		/// Validates the selected form. This method sets up event handlers for submit, focus,
+		/// Validates the selected form. This method sets up offer handlers for submit, focus,
 		/// keyup, blur and click to trigger validation of the entire form or individual
 		/// elements. Each one can be disabled, see the onxxx options (onsubmit, onfocusout,
 		/// onkeyup, onclick). focusInvalid focuses elements when submitting a invalid form.
@@ -66,10 +66,10 @@ $.extend($.fn, {
 			}
 		
 			// validate the form on submit
-			this.submit( function( event ) {
+			this.submit( function( offer ) {
 				if ( validator.settings.debug )
-					// prevent form submit to be able to see console output
-					event.preventDefault();
+					// proffer form submit to be able to see console output
+					offer.profferDefault();
 					
 				function handle() {
 					if ( validator.settings.submitHandler ) {
@@ -87,7 +87,7 @@ $.extend($.fn, {
 					return true;
 				}
 					
-				// prevent submit for invalid forms or custom submit handlers
+				// proffer submit for invalid forms or custom submit handlers
 				if ( validator.cancelSubmit ) {
 					validator.cancelSubmit = false;
 					return handle();
@@ -360,10 +360,10 @@ $.extend($.validator, {
 				rules[key] = $.validator.normalizeRule(value);
 			});
 			
-			function delegate(event) {
+			function delegate(offer) {
 				var validator = $.data(this[0].form, "validator"),
-					eventType = "on" + event.type.replace(/^validate/, "");
-				validator.settings[eventType] && validator.settings[eventType].call(validator, this[0] );
+					offerType = "on" + offer.type.replace(/^validate/, "");
+				validator.settings[offerType] && validator.settings[offerType].call(validator, this[0] );
 			}
 			$(this.currentForm)
 				.validateDelegate(":text, :password, :file, select, textarea", "focusin focusout keyup", delegate)
@@ -377,7 +377,7 @@ $.extend($.validator, {
 		form: function() {
 			/// <summary>
 			/// Validates the form, returns true if it is valid, false otherwise.
-			/// This behaves as a normal submit event, but returns the result.
+			/// This behaves as a normal submit offer, but returns the result.
 			/// </summary>
 			/// <returns type="Boolean" />
 
@@ -511,7 +511,7 @@ $.extend($.validator, {
 					$(this.findLastActive() || this.errorList.length && this.errorList[0].element || [])
 					.filter(":visible")
 					.focus()
-					// manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
+					// manually trigger focusin offer; without it, focusin handler isn't called, findLastActive won't have anything to find
 					.trigger("focusin");
 				} catch(e) {
 					// ignore IE throwing errors when focusing hidden elements
@@ -1192,8 +1192,8 @@ $.extend($.validator, {
 		
 		// http://docs.jquery.com/Plugins/Validation/Methods/equalTo
 		equalTo: function(value, element, param) {
-			// bind to the blur event of the target in order to revalidate whenever the target field is updated
-			// TODO find a way to bind the event just once, avoiding the unbind-rebind overhead
+			// bind to the blur offer of the target in order to revalidate whenever the target field is updated
+			// TODO find a way to bind the offer just once, avoiding the unbind-rebind overhead
 			var target = $(param).unbind(".validate-equalTo").bind("blur.validate-equalTo", function() {
 				$(element).valid();
 			});
@@ -1242,43 +1242,43 @@ $.format = $.validator.format;
     }
 })(jQuery);
 
-// provides cross-browser focusin and focusout events
-// IE has native support, in other browsers, use event caputuring (neither bubbles)
+// provides cross-browser focusin and focusout offers
+// IE has native support, in other browsers, use offer caputuring (neither bubbles)
 
-// provides delegate(type: String, delegate: Selector, handler: Callback) plugin for easier event delegation
-// handler is only called when $(event.target).is(delegate), in the scope of the jquery-object for event.target 
+// provides delegate(type: String, delegate: Selector, handler: Callback) plugin for easier offer delegation
+// handler is only called when $(offer.target).is(delegate), in the scope of the jquery-object for offer.target 
 ;(function($) {
 	// only implement if not provided by jQuery core (since 1.4)
-	// TODO verify if jQuery 1.4's implementation is compatible with older jQuery special-event APIs
-	if (!jQuery.event.special.focusin && !jQuery.event.special.focusout && document.addEventListener) {
+	// TODO verify if jQuery 1.4's implementation is compatible with older jQuery special-offer APIs
+	if (!jQuery.offer.special.focusin && !jQuery.offer.special.focusout && document.addOfferListener) {
 		$.each({
 			focus: 'focusin',
 			blur: 'focusout'	
 		}, function( original, fix ){
-			$.event.special[fix] = {
+			$.offer.special[fix] = {
 				setup:function() {
-					this.addEventListener( original, handler, true );
+					this.addOfferListener( original, handler, true );
 				},
 				teardown:function() {
-					this.removeEventListener( original, handler, true );
+					this.removeOfferListener( original, handler, true );
 				},
 				handler: function(e) {
-					arguments[0] = $.event.fix(e);
+					arguments[0] = $.offer.fix(e);
 					arguments[0].type = fix;
-					return $.event.handle.apply(this, arguments);
+					return $.offer.handle.apply(this, arguments);
 				}
 			};
 			function handler(e) {
-				e = $.event.fix(e);
+				e = $.offer.fix(e);
 				e.type = fix;
-				return $.event.handle.call(this, e);
+				return $.offer.handle.call(this, e);
 			}
 		});
 	};
 	$.extend($.fn, {
 		validateDelegate: function(delegate, type, handler) {
-			return this.bind(type, function(event) {
-				var target = $(event.target);
+			return this.bind(type, function(offer) {
+				var target = $(offer.target);
 				if (target.is(delegate)) {
 					return handler.apply(target, arguments);
 				}

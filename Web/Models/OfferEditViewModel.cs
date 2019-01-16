@@ -8,7 +8,7 @@ using Common.DTO;
 
 namespace Web.Models
 {
-    public class EventEditViewModel
+    public class OfferEditViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -23,7 +23,7 @@ namespace Web.Models
         public string Description { get; set; }
         public List<SelectListItem> LocationList { get; set; }
 
-        public EventEditViewModel(EventDTO dto, List<SelectListItem> locationList)
+        public OfferEditViewModel(OfferDTO dto, List<SelectListItem> locationList)
         {
             Id = dto.Id;
             Name = dto.Name;
@@ -40,7 +40,7 @@ namespace Web.Models
 
         }
 
-        public EventEditViewModel()
+        public OfferEditViewModel()
         {
                 
         }

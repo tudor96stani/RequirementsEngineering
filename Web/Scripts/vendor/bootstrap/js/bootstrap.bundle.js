@@ -23,7 +23,7 @@ var Util = function () {
    */
   var transition = false;
   var MAX_UID = 1000000;
-  var TransitionEndEvent = {
+  var TransitionEndOffer = {
     WebkitTransition: 'webkitTransitionEnd',
     MozTransition: 'transitionend',
     OTransition: 'oTransitionEnd otransitionend',
@@ -35,13 +35,13 @@ var Util = function () {
     return {}.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
   }
 
-  function getSpecialTransitionEndEvent() {
+  function getSpecialTransitionEndOffer() {
     return {
       bindType: transition.end,
       delegateType: transition.end,
-      handle: function handle(event) {
-        if ($(event.target).is(this)) {
-          return event.handleObj.handler.apply(this, arguments); // eslint-disable-line prefer-rest-params
+      handle: function handle(offer) {
+        if ($(offer.target).is(this)) {
+          return offer.handleObj.handler.apply(this, arguments); // eslint-disable-line prefer-rest-params
         }
 
         return undefined; // eslint-disable-line no-undefined
@@ -56,10 +56,10 @@ var Util = function () {
 
     var el = document.createElement('bootstrap');
 
-    for (var name in TransitionEndEvent) {
+    for (var name in TransitionEndOffer) {
       if (typeof el.style[name] !== 'undefined') {
         return {
-          end: TransitionEndEvent[name]
+          end: TransitionEndOffer[name]
         };
       }
     }
@@ -87,7 +87,7 @@ var Util = function () {
     $.fn.emulateTransitionEnd = transitionEndEmulator;
 
     if (Util.supportsTransitionEnd()) {
-      $.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
+      $.offer.special[Util.TRANSITION_END] = getSpecialTransitionEndOffer();
     }
   }
   /**
@@ -200,7 +200,7 @@ var Alert = function () {
   var Selector = {
     DISMISS: '[data-dismiss="alert"]'
   };
-  var Event = {
+  var Offer = {
     CLOSE: "close" + EVENT_KEY,
     CLOSED: "closed" + EVENT_KEY,
     CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY
@@ -233,9 +233,9 @@ var Alert = function () {
 
       var rootElement = this._getRootElement(element);
 
-      var customEvent = this._triggerCloseEvent(rootElement);
+      var customOffer = this._triggerCloseOffer(rootElement);
 
-      if (customEvent.isDefaultPrevented()) {
+      if (customOffer.isDefaultProffered()) {
         return;
       }
 
@@ -263,10 +263,10 @@ var Alert = function () {
       return parent;
     };
 
-    _proto._triggerCloseEvent = function _triggerCloseEvent(element) {
-      var closeEvent = $.Event(Event.CLOSE);
-      $(element).trigger(closeEvent);
-      return closeEvent;
+    _proto._triggerCloseOffer = function _triggerCloseOffer(element) {
+      var closeOffer = $.Offer(Offer.CLOSE);
+      $(element).trigger(closeOffer);
+      return closeOffer;
     };
 
     _proto._removeElement = function _removeElement(element) {
@@ -280,13 +280,13 @@ var Alert = function () {
         return;
       }
 
-      $(element).one(Util.TRANSITION_END, function (event) {
-        return _this._destroyElement(element, event);
+      $(element).one(Util.TRANSITION_END, function (offer) {
+        return _this._destroyElement(element, offer);
       }).emulateTransitionEnd(TRANSITION_DURATION);
     };
 
     _proto._destroyElement = function _destroyElement(element) {
-      $(element).detach().trigger(Event.CLOSED).remove();
+      $(element).detach().trigger(Offer.CLOSED).remove();
     }; // static
 
 
@@ -307,9 +307,9 @@ var Alert = function () {
     };
 
     Alert._handleDismiss = function _handleDismiss(alertInstance) {
-      return function (event) {
-        if (event) {
-          event.preventDefault();
+      return function (offer) {
+        if (offer) {
+          offer.profferDefault();
         }
 
         alertInstance.close(this);
@@ -331,7 +331,7 @@ var Alert = function () {
    */
 
 
-  $(document).on(Event.CLICK_DATA_API, Selector.DISMISS, Alert._handleDismiss(new Alert()));
+  $(document).on(Offer.CLICK_DATA_API, Selector.DISMISS, Alert._handleDismiss(new Alert()));
   /**
    * ------------------------------------------------------------------------
    * jQuery
@@ -380,7 +380,7 @@ var Button = function () {
     ACTIVE: '.active',
     BUTTON: '.btn'
   };
-  var Event = {
+  var Offer = {
     CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY,
     FOCUS_BLUR_DATA_API: "focus" + EVENT_KEY + DATA_API_KEY + " " + ("blur" + EVENT_KEY + DATA_API_KEY)
     /**
@@ -403,7 +403,7 @@ var Button = function () {
 
     // public
     _proto.toggle = function toggle() {
-      var triggerChangeEvent = true;
+      var triggerChangeOffer = true;
       var addAriaPressed = true;
       var rootElement = $(this._element).closest(Selector.DATA_TOGGLE)[0];
 
@@ -413,7 +413,7 @@ var Button = function () {
         if (input) {
           if (input.type === 'radio') {
             if (input.checked && $(this._element).hasClass(ClassName.ACTIVE)) {
-              triggerChangeEvent = false;
+              triggerChangeOffer = false;
             } else {
               var activeElement = $(rootElement).find(Selector.ACTIVE)[0];
 
@@ -423,7 +423,7 @@ var Button = function () {
             }
           }
 
-          if (triggerChangeEvent) {
+          if (triggerChangeOffer) {
             if (input.hasAttribute('disabled') || rootElement.hasAttribute('disabled') || input.classList.contains('disabled') || rootElement.classList.contains('disabled')) {
               return;
             }
@@ -441,7 +441,7 @@ var Button = function () {
         this._element.setAttribute('aria-pressed', !$(this._element).hasClass(ClassName.ACTIVE));
       }
 
-      if (triggerChangeEvent) {
+      if (triggerChangeOffer) {
         $(this._element).toggleClass(ClassName.ACTIVE);
       }
     };
@@ -482,18 +482,18 @@ var Button = function () {
    */
 
 
-  $(document).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE_CARROT, function (event) {
-    event.preventDefault();
-    var button = event.target;
+  $(document).on(Offer.CLICK_DATA_API, Selector.DATA_TOGGLE_CARROT, function (offer) {
+    offer.profferDefault();
+    var button = offer.target;
 
     if (!$(button).hasClass(ClassName.BUTTON)) {
       button = $(button).closest(Selector.BUTTON);
     }
 
     Button._jQueryInterface.call($(button), 'toggle');
-  }).on(Event.FOCUS_BLUR_DATA_API, Selector.DATA_TOGGLE_CARROT, function (event) {
-    var button = $(event.target).closest(Selector.BUTTON)[0];
-    $(button).toggleClass(ClassName.FOCUS, /^focus(in)?$/.test(event.type));
+  }).on(Offer.FOCUS_BLUR_DATA_API, Selector.DATA_TOGGLE_CARROT, function (offer) {
+    var button = $(offer.target).closest(Selector.BUTTON)[0];
+    $(button).toggleClass(ClassName.FOCUS, /^focus(in)?$/.test(offer.type));
   });
   /**
    * ------------------------------------------------------------------------
@@ -532,11 +532,11 @@ var Carousel = function () {
   var DATA_API_KEY = '.data-api';
   var JQUERY_NO_CONFLICT = $.fn[NAME];
   var TRANSITION_DURATION = 600;
-  var ARROW_LEFT_KEYCODE = 37; // KeyboardEvent.which value for left arrow key
+  var ARROW_LEFT_KEYCODE = 37; // KeyboardOffer.which value for left arrow key
 
-  var ARROW_RIGHT_KEYCODE = 39; // KeyboardEvent.which value for right arrow key
+  var ARROW_RIGHT_KEYCODE = 39; // KeyboardOffer.which value for right arrow key
 
-  var TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat events to fire after touch
+  var TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat offers to fire after touch
 
   var Default = {
     interval: 5000,
@@ -558,7 +558,7 @@ var Carousel = function () {
     LEFT: 'left',
     RIGHT: 'right'
   };
-  var Event = {
+  var Offer = {
     SLIDE: "slide" + EVENT_KEY,
     SLID: "slid" + EVENT_KEY,
     KEYDOWN: "keydown" + EVENT_KEY,
@@ -608,7 +608,7 @@ var Carousel = function () {
       this._element = $(element)[0];
       this._indicatorsElement = $(this._element).find(Selector.INDICATORS)[0];
 
-      this._addEventListeners();
+      this._addOfferListeners();
     } // getters
 
 
@@ -635,8 +635,8 @@ var Carousel = function () {
       }
     };
 
-    _proto.pause = function pause(event) {
-      if (!event) {
+    _proto.pause = function pause(offer) {
+      if (!offer) {
         this._isPaused = true;
       }
 
@@ -649,8 +649,8 @@ var Carousel = function () {
       this._interval = null;
     };
 
-    _proto.cycle = function cycle(event) {
-      if (!event) {
+    _proto.cycle = function cycle(offer) {
+      if (!offer) {
         this._isPaused = false;
       }
 
@@ -676,7 +676,7 @@ var Carousel = function () {
       }
 
       if (this._isSliding) {
-        $(this._element).one(Event.SLID, function () {
+        $(this._element).one(Offer.SLID, function () {
           return _this.to(index);
         });
         return;
@@ -713,58 +713,58 @@ var Carousel = function () {
       return config;
     };
 
-    _proto._addEventListeners = function _addEventListeners() {
+    _proto._addOfferListeners = function _addOfferListeners() {
       var _this2 = this;
 
       if (this._config.keyboard) {
-        $(this._element).on(Event.KEYDOWN, function (event) {
-          return _this2._keydown(event);
+        $(this._element).on(Offer.KEYDOWN, function (offer) {
+          return _this2._keydown(offer);
         });
       }
 
       if (this._config.pause === 'hover') {
-        $(this._element).on(Event.MOUSEENTER, function (event) {
-          return _this2.pause(event);
-        }).on(Event.MOUSELEAVE, function (event) {
-          return _this2.cycle(event);
+        $(this._element).on(Offer.MOUSEENTER, function (offer) {
+          return _this2.pause(offer);
+        }).on(Offer.MOUSELEAVE, function (offer) {
+          return _this2.cycle(offer);
         });
 
         if ('ontouchstart' in document.documentElement) {
           // if it's a touch-enabled device, mouseenter/leave are fired as
-          // part of the mouse compatibility events on first tap - the carousel
+          // part of the mouse compatibility offers on first tap - the carousel
           // would stop cycling until user tapped out of it;
           // here, we listen for touchend, explicitly pause the carousel
-          // (as if it's the second time we tap on it, mouseenter compat event
+          // (as if it's the second time we tap on it, mouseenter compat offer
           // is NOT fired) and after a timeout (to allow for mouse compatibility
-          // events to fire) we explicitly restart cycling
-          $(this._element).on(Event.TOUCHEND, function () {
+          // offers to fire) we explicitly restart cycling
+          $(this._element).on(Offer.TOUCHEND, function () {
             _this2.pause();
 
             if (_this2.touchTimeout) {
               clearTimeout(_this2.touchTimeout);
             }
 
-            _this2.touchTimeout = setTimeout(function (event) {
-              return _this2.cycle(event);
+            _this2.touchTimeout = setTimeout(function (offer) {
+              return _this2.cycle(offer);
             }, TOUCHEVENT_COMPAT_WAIT + _this2._config.interval);
           });
         }
       }
     };
 
-    _proto._keydown = function _keydown(event) {
-      if (/input|textarea/i.test(event.target.tagName)) {
+    _proto._keydown = function _keydown(offer) {
+      if (/input|textarea/i.test(offer.target.tagName)) {
         return;
       }
 
-      switch (event.which) {
+      switch (offer.which) {
         case ARROW_LEFT_KEYCODE:
-          event.preventDefault();
+          offer.profferDefault();
           this.prev();
           break;
 
         case ARROW_RIGHT_KEYCODE:
-          event.preventDefault();
+          offer.profferDefault();
           this.next();
           break;
 
@@ -796,19 +796,19 @@ var Carousel = function () {
       return itemIndex === -1 ? this._items[this._items.length - 1] : this._items[itemIndex];
     };
 
-    _proto._triggerSlideEvent = function _triggerSlideEvent(relatedTarget, eventDirectionName) {
+    _proto._triggerSlideOffer = function _triggerSlideOffer(relatedTarget, offerDirectionName) {
       var targetIndex = this._getItemIndex(relatedTarget);
 
       var fromIndex = this._getItemIndex($(this._element).find(Selector.ACTIVE_ITEM)[0]);
 
-      var slideEvent = $.Event(Event.SLIDE, {
+      var slideOffer = $.Offer(Offer.SLIDE, {
         relatedTarget: relatedTarget,
-        direction: eventDirectionName,
+        direction: offerDirectionName,
         from: fromIndex,
         to: targetIndex
       });
-      $(this._element).trigger(slideEvent);
-      return slideEvent;
+      $(this._element).trigger(slideOffer);
+      return slideOffer;
     };
 
     _proto._setActiveIndicatorElement = function _setActiveIndicatorElement(element) {
@@ -837,16 +837,16 @@ var Carousel = function () {
       var isCycling = Boolean(this._interval);
       var directionalClassName;
       var orderClassName;
-      var eventDirectionName;
+      var offerDirectionName;
 
       if (direction === Direction.NEXT) {
         directionalClassName = ClassName.LEFT;
         orderClassName = ClassName.NEXT;
-        eventDirectionName = Direction.LEFT;
+        offerDirectionName = Direction.LEFT;
       } else {
         directionalClassName = ClassName.RIGHT;
         orderClassName = ClassName.PREV;
-        eventDirectionName = Direction.RIGHT;
+        offerDirectionName = Direction.RIGHT;
       }
 
       if (nextElement && $(nextElement).hasClass(ClassName.ACTIVE)) {
@@ -854,9 +854,9 @@ var Carousel = function () {
         return;
       }
 
-      var slideEvent = this._triggerSlideEvent(nextElement, eventDirectionName);
+      var slideOffer = this._triggerSlideOffer(nextElement, offerDirectionName);
 
-      if (slideEvent.isDefaultPrevented()) {
+      if (slideOffer.isDefaultProffered()) {
         return;
       }
 
@@ -873,9 +873,9 @@ var Carousel = function () {
 
       this._setActiveIndicatorElement(nextElement);
 
-      var slidEvent = $.Event(Event.SLID, {
+      var slidOffer = $.Offer(Offer.SLID, {
         relatedTarget: nextElement,
-        direction: eventDirectionName,
+        direction: offerDirectionName,
         from: activeElementIndex,
         to: nextElementIndex
       });
@@ -890,14 +890,14 @@ var Carousel = function () {
           $(activeElement).removeClass(ClassName.ACTIVE + " " + orderClassName + " " + directionalClassName);
           _this3._isSliding = false;
           setTimeout(function () {
-            return $(_this3._element).trigger(slidEvent);
+            return $(_this3._element).trigger(slidOffer);
           }, 0);
         }).emulateTransitionEnd(TRANSITION_DURATION);
       } else {
         $(activeElement).removeClass(ClassName.ACTIVE);
         $(nextElement).addClass(ClassName.ACTIVE);
         this._isSliding = false;
-        $(this._element).trigger(slidEvent);
+        $(this._element).trigger(slidOffer);
       }
 
       if (isCycling) {
@@ -938,7 +938,7 @@ var Carousel = function () {
       });
     };
 
-    Carousel._dataApiClickHandler = function _dataApiClickHandler(event) {
+    Carousel._dataApiClickHandler = function _dataApiClickHandler(offer) {
       var selector = Util.getSelectorFromElement(this);
 
       if (!selector) {
@@ -964,7 +964,7 @@ var Carousel = function () {
         $(target).data(DATA_KEY).to(slideIndex);
       }
 
-      event.preventDefault();
+      offer.profferDefault();
     };
 
     createClass(Carousel, null, [{
@@ -987,8 +987,8 @@ var Carousel = function () {
    */
 
 
-  $(document).on(Event.CLICK_DATA_API, Selector.DATA_SLIDE, Carousel._dataApiClickHandler);
-  $(window).on(Event.LOAD_DATA_API, function () {
+  $(document).on(Offer.CLICK_DATA_API, Selector.DATA_SLIDE, Carousel._dataApiClickHandler);
+  $(window).on(Offer.LOAD_DATA_API, function () {
     $(Selector.DATA_RIDE).each(function () {
       var $carousel = $(this);
 
@@ -1040,7 +1040,7 @@ var Collapse = function () {
     toggle: 'boolean',
     parent: '(string|element)'
   };
-  var Event = {
+  var Offer = {
     SHOW: "show" + EVENT_KEY,
     SHOWN: "shown" + EVENT_KEY,
     HIDE: "hide" + EVENT_KEY,
@@ -1136,10 +1136,10 @@ var Collapse = function () {
         }
       }
 
-      var startEvent = $.Event(Event.SHOW);
-      $(this._element).trigger(startEvent);
+      var startOffer = $.Offer(Offer.SHOW);
+      $(this._element).trigger(startOffer);
 
-      if (startEvent.isDefaultPrevented()) {
+      if (startOffer.isDefaultProffered()) {
         return;
       }
 
@@ -1168,7 +1168,7 @@ var Collapse = function () {
 
         _this.setTransitioning(false);
 
-        $(_this._element).trigger(Event.SHOWN);
+        $(_this._element).trigger(Offer.SHOWN);
       };
 
       if (!Util.supportsTransitionEnd()) {
@@ -1189,10 +1189,10 @@ var Collapse = function () {
         return;
       }
 
-      var startEvent = $.Event(Event.HIDE);
-      $(this._element).trigger(startEvent);
+      var startOffer = $.Offer(Offer.HIDE);
+      $(this._element).trigger(startOffer);
 
-      if (startEvent.isDefaultPrevented()) {
+      if (startOffer.isDefaultProffered()) {
         return;
       }
 
@@ -1222,7 +1222,7 @@ var Collapse = function () {
       var complete = function complete() {
         _this2.setTransitioning(false);
 
-        $(_this2._element).removeClass(ClassName.COLLAPSING).addClass(ClassName.COLLAPSE).trigger(Event.HIDDEN);
+        $(_this2._element).removeClass(ClassName.COLLAPSING).addClass(ClassName.COLLAPSE).trigger(Offer.HIDDEN);
       };
 
       this._element.style[dimension] = '';
@@ -1346,10 +1346,10 @@ var Collapse = function () {
    */
 
 
-  $(document).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
-    // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
-    if (event.currentTarget.tagName === 'A') {
-      event.preventDefault();
+  $(document).on(Offer.CLICK_DATA_API, Selector.DATA_TOGGLE, function (offer) {
+    // profferDefault only for <a> elements (which change the URL) not inside the collapsible element
+    if (offer.currentTarget.tagName === 'A') {
+      offer.profferDefault();
     }
 
     var $trigger = $(this);
@@ -1466,7 +1466,7 @@ function taskDebounce(fn) {
 }
 
 // It's common for MutationObserver polyfills to be seen in the wild, however
-// these rely on Mutation Events which only occur when an element is connected
+// these rely on Mutation Offers which only occur when an element is connected
 // to the DOM. The algorithm used in this module does not use a connected element,
 // and so we must ensure that a *native* MutationObserver is available.
 var supportsNativeMutationObserver = isBrowser && isNative(window.MutationObserver);
@@ -2334,7 +2334,7 @@ function destroy() {
     this.popper.style[getSupportedPropertyName('transform')] = '';
   }
 
-  this.disableEventListeners();
+  this.disableOfferListeners();
 
   // remove the popper if user explicity asked for the deletion on destroy
   // do not use `remove` because IE11 doesn't support it
@@ -2344,83 +2344,83 @@ function destroy() {
   return this;
 }
 
-function attachToScrollParents(scrollParent, event, callback, scrollParents) {
+function attachToScrollParents(scrollParent, offer, callback, scrollParents) {
   var isBody = scrollParent.nodeName === 'BODY';
   var target = isBody ? window : scrollParent;
-  target.addEventListener(event, callback, { passive: true });
+  target.addOfferListener(offer, callback, { passive: true });
 
   if (!isBody) {
-    attachToScrollParents(getScrollParent(target.parentNode), event, callback, scrollParents);
+    attachToScrollParents(getScrollParent(target.parentNode), offer, callback, scrollParents);
   }
   scrollParents.push(target);
 }
 
 /**
- * Setup needed event listeners used to update the popper position
+ * Setup needed offer listeners used to update the popper position
  * @method
  * @memberof Popper.Utils
  * @private
  */
-function setupEventListeners(reference, options, state, updateBound) {
-  // Resize event listener on window
+function setupOfferListeners(reference, options, state, updateBound) {
+  // Resize offer listener on window
   state.updateBound = updateBound;
-  window.addEventListener('resize', state.updateBound, { passive: true });
+  window.addOfferListener('resize', state.updateBound, { passive: true });
 
-  // Scroll event listener on scroll parents
+  // Scroll offer listener on scroll parents
   var scrollElement = getScrollParent(reference);
   attachToScrollParents(scrollElement, 'scroll', state.updateBound, state.scrollParents);
   state.scrollElement = scrollElement;
-  state.eventsEnabled = true;
+  state.offersEnabled = true;
 
   return state;
 }
 
 /**
- * It will add resize/scroll events and start recalculating
+ * It will add resize/scroll offers and start recalculating
  * position of the popper element when they are triggered.
  * @method
  * @memberof Popper
  */
-function enableEventListeners() {
-  if (!this.state.eventsEnabled) {
-    this.state = setupEventListeners(this.reference, this.options, this.state, this.scheduleUpdate);
+function enableOfferListeners() {
+  if (!this.state.offersEnabled) {
+    this.state = setupOfferListeners(this.reference, this.options, this.state, this.scheduleUpdate);
   }
 }
 
 /**
- * Remove event listeners used to update the popper position
+ * Remove offer listeners used to update the popper position
  * @method
  * @memberof Popper.Utils
  * @private
  */
-function removeEventListeners(reference, state) {
-  // Remove resize event listener on window
-  window.removeEventListener('resize', state.updateBound);
+function removeOfferListeners(reference, state) {
+  // Remove resize offer listener on window
+  window.removeOfferListener('resize', state.updateBound);
 
-  // Remove scroll event listener on scroll parents
+  // Remove scroll offer listener on scroll parents
   state.scrollParents.forEach(function (target) {
-    target.removeEventListener('scroll', state.updateBound);
+    target.removeOfferListener('scroll', state.updateBound);
   });
 
   // Reset state
   state.updateBound = null;
   state.scrollParents = [];
   state.scrollElement = null;
-  state.eventsEnabled = false;
+  state.offersEnabled = false;
   return state;
 }
 
 /**
- * It will remove resize/scroll events and won't recalculate popper position
+ * It will remove resize/scroll offers and won't recalculate popper position
  * when they are triggered. It also won't trigger onUpdate callback anymore,
  * unless you call `update` method manually.
  * @method
  * @memberof Popper
  */
-function disableEventListeners() {
-  if (this.state.eventsEnabled) {
+function disableOfferListeners() {
+  if (this.state.offersEnabled) {
     window.cancelAnimationFrame(this.scheduleUpdate);
-    this.state = removeEventListeners(this.reference, this.state);
+    this.state = removeOfferListeners(this.reference, this.state);
   }
 }
 
@@ -2719,13 +2719,13 @@ function arrow(data, options) {
   var popperMarginSide = getStyleComputedProperty(data.instance.popper, 'margin' + sideCapitalized).replace('px', '');
   var sideValue = center - getClientRect(data.offsets.popper)[side] - popperMarginSide;
 
-  // prevent arrowElement from being placed not contiguously to its popper
+  // proffer arrowElement from being placed not contiguously to its popper
   sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);
 
   data.arrowElement = arrowElement;
   data.offsets.arrow = {};
   data.offsets.arrow[side] = Math.round(sideValue);
-  data.offsets.arrow[altSide] = ''; // make sure to unset any eventual altSide value from the DOM node
+  data.offsets.arrow[altSide] = ''; // make sure to unset any offerual altSide value from the DOM node
 
   return data;
 }
@@ -3106,7 +3106,7 @@ function offset(data, _ref) {
  * @argument {Object} options - Modifiers configuration and options
  * @returns {Object} The data object, properly modified
  */
-function preventOverflow(data, options) {
+function profferOverflow(data, options) {
   var boundariesElement = options.boundariesElement || getOffsetParent(data.instance.popper);
 
   // If offsetParent is the reference element, we really want to
@@ -3191,13 +3191,13 @@ function shift(data) {
  * @returns {Object} The data object, properly modified
  */
 function hide(data) {
-  if (!isModifierRequired(data.instance.modifiers, 'hide', 'preventOverflow')) {
+  if (!isModifierRequired(data.instance.modifiers, 'hide', 'profferOverflow')) {
     return data;
   }
 
   var refRect = data.offsets.reference;
   var bound = find(data.instance.modifiers, function (modifier) {
-    return modifier.name === 'preventOverflow';
+    return modifier.name === 'profferOverflow';
   }).boundaries;
 
   if (refRect.bottom < bound.top || refRect.left > bound.right || refRect.top > bound.bottom || refRect.right < bound.left) {
@@ -3338,7 +3338,7 @@ var modifiers = {
   },
 
   /**
-   * Modifier used to prevent the popper from being positioned outside the boundary.
+   * Modifier used to proffer the popper from being positioned outside the boundary.
    *
    * An scenario exists where the reference itself is not within the boundaries.<br />
    * We can say it has "escaped the boundaries" — or just "escaped".<br />
@@ -3354,16 +3354,16 @@ var modifiers = {
    * @memberof modifiers
    * @inner
    */
-  preventOverflow: {
+  profferOverflow: {
     /** @prop {number} order=300 - Index used to define the order of execution */
     order: 300,
     /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
     enabled: true,
     /** @prop {ModifierFn} */
-    fn: preventOverflow,
+    fn: profferOverflow,
     /**
      * @prop {Array} [priority=['left','right','top','bottom']]
-     * Popper will try to prevent overflow following these priorities by default,
+     * Popper will try to proffer overflow following these priorities by default,
      * then, it could overflow on the left and on top of the `boundariesElement`
      */
     priority: ['left', 'right', 'top', 'bottom'],
@@ -3425,7 +3425,7 @@ var modifiers = {
    * Modifier used to flip the popper's placement when it starts to overlap its
    * reference element.
    *
-   * Requires the `preventOverflow` modifier before it in order to work.
+   * Requires the `profferOverflow` modifier before it in order to work.
    *
    * **NOTE:** this modifier will interrupt the current update cycle and will
    * restart it if it detects the need to flip the placement.
@@ -3482,7 +3482,7 @@ var modifiers = {
    * be used to hide with a CSS selector the popper when its reference is
    * out of boundaries.
    *
-   * Requires the `preventOverflow` modifier before it in order to work.
+   * Requires the `profferOverflow` modifier before it in order to work.
    * @memberof modifiers
    * @inner
    */
@@ -3598,7 +3598,7 @@ var modifiers = {
  * ```
  * new Popper(ref, pop, {
  *   modifiers: {
- *     preventOverflow: { enabled: false }
+ *     profferOverflow: { enabled: false }
  *   }
  * })
  * ```
@@ -3614,10 +3614,10 @@ var Defaults = {
   placement: 'bottom',
 
   /**
-   * Whether events (resize, scroll) are initially enabled
-   * @prop {Boolean} eventsEnabled=true
+   * Whether offers (resize, scroll) are initially enabled
+   * @prop {Boolean} offersEnabled=true
    */
-  eventsEnabled: true,
+  offersEnabled: true,
 
   /**
    * Set to true if you want to automatically remove the popper when
@@ -3730,13 +3730,13 @@ var Popper = function () {
     // fire the first update to position the popper in the right place
     this.update();
 
-    var eventsEnabled = this.options.eventsEnabled;
-    if (eventsEnabled) {
-      // setup event listeners, they will take care of update the position in specific situations
-      this.enableEventListeners();
+    var offersEnabled = this.options.offersEnabled;
+    if (offersEnabled) {
+      // setup offer listeners, they will take care of update the position in specific situations
+      this.enableOfferListeners();
     }
 
-    this.state.eventsEnabled = eventsEnabled;
+    this.state.offersEnabled = offersEnabled;
   }
 
   // We can't use class properties because they don't get listed in the
@@ -3754,14 +3754,14 @@ var Popper = function () {
       return destroy.call(this);
     }
   }, {
-    key: 'enableEventListeners',
-    value: function enableEventListeners$$1() {
-      return enableEventListeners.call(this);
+    key: 'enableOfferListeners',
+    value: function enableOfferListeners$$1() {
+      return enableOfferListeners.call(this);
     }
   }, {
-    key: 'disableEventListeners',
-    value: function disableEventListeners$$1() {
-      return disableEventListeners.call(this);
+    key: 'disableOfferListeners',
+    value: function disableOfferListeners$$1() {
+      return disableOfferListeners.call(this);
     }
 
     /**
@@ -3845,20 +3845,20 @@ var Dropdown = function () {
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
   var JQUERY_NO_CONFLICT = $.fn[NAME];
-  var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
+  var ESCAPE_KEYCODE = 27; // KeyboardOffer.which value for Escape (Esc) key
 
-  var SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
+  var SPACE_KEYCODE = 32; // KeyboardOffer.which value for space key
 
-  var TAB_KEYCODE = 9; // KeyboardEvent.which value for tab key
+  var TAB_KEYCODE = 9; // KeyboardOffer.which value for tab key
 
-  var ARROW_UP_KEYCODE = 38; // KeyboardEvent.which value for up arrow key
+  var ARROW_UP_KEYCODE = 38; // KeyboardOffer.which value for up arrow key
 
-  var ARROW_DOWN_KEYCODE = 40; // KeyboardEvent.which value for down arrow key
+  var ARROW_DOWN_KEYCODE = 40; // KeyboardOffer.which value for down arrow key
 
-  var RIGHT_MOUSE_BUTTON_WHICH = 3; // MouseEvent.which value for the right button (assuming a right-handed mouse)
+  var RIGHT_MOUSE_BUTTON_WHICH = 3; // MouseOffer.which value for the right button (assuming a right-handed mouse)
 
   var REGEXP_KEYDOWN = new RegExp(ARROW_UP_KEYCODE + "|" + ARROW_DOWN_KEYCODE + "|" + ESCAPE_KEYCODE);
-  var Event = {
+  var Offer = {
     HIDE: "hide" + EVENT_KEY,
     HIDDEN: "hidden" + EVENT_KEY,
     SHOW: "show" + EVENT_KEY,
@@ -3913,7 +3913,7 @@ var Dropdown = function () {
       this._menu = this._getMenuElement();
       this._inNavbar = this._detectNavbar();
 
-      this._addEventListeners();
+      this._addOfferListeners();
     } // getters
 
 
@@ -3938,10 +3938,10 @@ var Dropdown = function () {
       var relatedTarget = {
         relatedTarget: this._element
       };
-      var showEvent = $.Event(Event.SHOW, relatedTarget);
-      $(parent).trigger(showEvent);
+      var showOffer = $.Offer(Offer.SHOW, relatedTarget);
+      $(parent).trigger(showOffer);
 
-      if (showEvent.isDefaultPrevented()) {
+      if (showOffer.isDefaultProffered()) {
         return;
       }
 
@@ -3955,8 +3955,8 @@ var Dropdown = function () {
 
       this._popper = new Popper(element, this._menu, this._getPopperConfig()); // if this is a touch-enabled device we add extra
       // empty mouseover listeners to the body's immediate children;
-      // only needed because of broken event delegation on iOS
-      // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+      // only needed because of broken offer delegation on iOS
+      // https://www.quirksmode.org/blog/archives/2014/02/mouse_offer_bub.html
 
       if ('ontouchstart' in document.documentElement && !$(parent).closest(Selector.NAVBAR_NAV).length) {
         $('body').children().on('mouseover', null, $.noop);
@@ -3967,7 +3967,7 @@ var Dropdown = function () {
       this._element.setAttribute('aria-expanded', true);
 
       $(this._menu).toggleClass(ClassName.SHOW);
-      $(parent).toggleClass(ClassName.SHOW).trigger($.Event(Event.SHOWN, relatedTarget));
+      $(parent).toggleClass(ClassName.SHOW).trigger($.Offer(Offer.SHOWN, relatedTarget));
     };
 
     _proto.dispose = function dispose() {
@@ -3992,12 +3992,12 @@ var Dropdown = function () {
     }; // private
 
 
-    _proto._addEventListeners = function _addEventListeners() {
+    _proto._addOfferListeners = function _addOfferListeners() {
       var _this = this;
 
-      $(this._element).on(Event.CLICK, function (event) {
-        event.preventDefault();
-        event.stopPropagation();
+      $(this._element).on(Offer.CLICK, function (offer) {
+        offer.profferDefault();
+        offer.stopPropagation();
 
         _this.toggle();
       });
@@ -4096,8 +4096,8 @@ var Dropdown = function () {
       });
     };
 
-    Dropdown._clearMenus = function _clearMenus(event) {
-      if (event && (event.which === RIGHT_MOUSE_BUTTON_WHICH || event.type === 'keyup' && event.which !== TAB_KEYCODE)) {
+    Dropdown._clearMenus = function _clearMenus(offer) {
+      if (offer && (offer.which === RIGHT_MOUSE_BUTTON_WHICH || offer.type === 'keyup' && offer.which !== TAB_KEYCODE)) {
         return;
       }
 
@@ -4121,14 +4121,14 @@ var Dropdown = function () {
           continue;
         }
 
-        if (event && (event.type === 'click' && /input|textarea/i.test(event.target.tagName) || event.type === 'keyup' && event.which === TAB_KEYCODE) && $.contains(parent, event.target)) {
+        if (offer && (offer.type === 'click' && /input|textarea/i.test(offer.target.tagName) || offer.type === 'keyup' && offer.which === TAB_KEYCODE) && $.contains(parent, offer.target)) {
           continue;
         }
 
-        var hideEvent = $.Event(Event.HIDE, relatedTarget);
-        $(parent).trigger(hideEvent);
+        var hideOffer = $.Offer(Offer.HIDE, relatedTarget);
+        $(parent).trigger(hideOffer);
 
-        if (hideEvent.isDefaultPrevented()) {
+        if (hideOffer.isDefaultProffered()) {
           continue;
         } // if this is a touch-enabled device we remove the extra
         // empty mouseover listeners we added for iOS support
@@ -4140,7 +4140,7 @@ var Dropdown = function () {
 
         toggles[i].setAttribute('aria-expanded', 'false');
         $(dropdownMenu).removeClass(ClassName.SHOW);
-        $(parent).removeClass(ClassName.SHOW).trigger($.Event(Event.HIDDEN, relatedTarget));
+        $(parent).removeClass(ClassName.SHOW).trigger($.Offer(Offer.HIDDEN, relatedTarget));
       }
     };
 
@@ -4155,13 +4155,13 @@ var Dropdown = function () {
       return parent || element.parentNode;
     };
 
-    Dropdown._dataApiKeydownHandler = function _dataApiKeydownHandler(event) {
-      if (!REGEXP_KEYDOWN.test(event.which) || /button/i.test(event.target.tagName) && event.which === SPACE_KEYCODE || /input|textarea/i.test(event.target.tagName)) {
+    Dropdown._dataApiKeydownHandler = function _dataApiKeydownHandler(offer) {
+      if (!REGEXP_KEYDOWN.test(offer.which) || /button/i.test(offer.target.tagName) && offer.which === SPACE_KEYCODE || /input|textarea/i.test(offer.target.tagName)) {
         return;
       }
 
-      event.preventDefault();
-      event.stopPropagation();
+      offer.profferDefault();
+      offer.stopPropagation();
 
       if (this.disabled || $(this).hasClass(ClassName.DISABLED)) {
         return;
@@ -4171,8 +4171,8 @@ var Dropdown = function () {
 
       var isActive = $(parent).hasClass(ClassName.SHOW);
 
-      if (!isActive && (event.which !== ESCAPE_KEYCODE || event.which !== SPACE_KEYCODE) || isActive && (event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE)) {
-        if (event.which === ESCAPE_KEYCODE) {
+      if (!isActive && (offer.which !== ESCAPE_KEYCODE || offer.which !== SPACE_KEYCODE) || isActive && (offer.which === ESCAPE_KEYCODE || offer.which === SPACE_KEYCODE)) {
+        if (offer.which === ESCAPE_KEYCODE) {
           var toggle = $(parent).find(Selector.DATA_TOGGLE)[0];
           $(toggle).trigger('focus');
         }
@@ -4187,14 +4187,14 @@ var Dropdown = function () {
         return;
       }
 
-      var index = items.indexOf(event.target);
+      var index = items.indexOf(offer.target);
 
-      if (event.which === ARROW_UP_KEYCODE && index > 0) {
+      if (offer.which === ARROW_UP_KEYCODE && index > 0) {
         // up
         index--;
       }
 
-      if (event.which === ARROW_DOWN_KEYCODE && index < items.length - 1) {
+      if (offer.which === ARROW_DOWN_KEYCODE && index < items.length - 1) {
         // down
         index++;
       }
@@ -4231,12 +4231,12 @@ var Dropdown = function () {
    */
 
 
-  $(document).on(Event.KEYDOWN_DATA_API, Selector.DATA_TOGGLE, Dropdown._dataApiKeydownHandler).on(Event.KEYDOWN_DATA_API, Selector.MENU, Dropdown._dataApiKeydownHandler).on(Event.CLICK_DATA_API + " " + Event.KEYUP_DATA_API, Dropdown._clearMenus).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
-    event.preventDefault();
-    event.stopPropagation();
+  $(document).on(Offer.KEYDOWN_DATA_API, Selector.DATA_TOGGLE, Dropdown._dataApiKeydownHandler).on(Offer.KEYDOWN_DATA_API, Selector.MENU, Dropdown._dataApiKeydownHandler).on(Offer.CLICK_DATA_API + " " + Offer.KEYUP_DATA_API, Dropdown._clearMenus).on(Offer.CLICK_DATA_API, Selector.DATA_TOGGLE, function (offer) {
+    offer.profferDefault();
+    offer.stopPropagation();
 
     Dropdown._jQueryInterface.call($(this), 'toggle');
-  }).on(Event.CLICK_DATA_API, Selector.FORM_CHILD, function (e) {
+  }).on(Offer.CLICK_DATA_API, Selector.FORM_CHILD, function (e) {
     e.stopPropagation();
   });
   /**
@@ -4277,7 +4277,7 @@ var Modal = function () {
   var JQUERY_NO_CONFLICT = $.fn[NAME];
   var TRANSITION_DURATION = 300;
   var BACKDROP_TRANSITION_DURATION = 150;
-  var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
+  var ESCAPE_KEYCODE = 27; // KeyboardOffer.which value for Escape (Esc) key
 
   var Default = {
     backdrop: true,
@@ -4291,7 +4291,7 @@ var Modal = function () {
     focus: 'boolean',
     show: 'boolean'
   };
-  var Event = {
+  var Offer = {
     HIDE: "hide" + EVENT_KEY,
     HIDDEN: "hidden" + EVENT_KEY,
     SHOW: "show" + EVENT_KEY,
@@ -4360,12 +4360,12 @@ var Modal = function () {
         this._isTransitioning = true;
       }
 
-      var showEvent = $.Event(Event.SHOW, {
+      var showOffer = $.Offer(Offer.SHOW, {
         relatedTarget: relatedTarget
       });
-      $(this._element).trigger(showEvent);
+      $(this._element).trigger(showOffer);
 
-      if (this._isShown || showEvent.isDefaultPrevented()) {
+      if (this._isShown || showOffer.isDefaultProffered()) {
         return;
       }
 
@@ -4379,16 +4379,16 @@ var Modal = function () {
 
       $(document.body).addClass(ClassName.OPEN);
 
-      this._setEscapeEvent();
+      this._setEscapeOffer();
 
-      this._setResizeEvent();
+      this._setResizeOffer();
 
-      $(this._element).on(Event.CLICK_DISMISS, Selector.DATA_DISMISS, function (event) {
-        return _this.hide(event);
+      $(this._element).on(Offer.CLICK_DISMISS, Selector.DATA_DISMISS, function (offer) {
+        return _this.hide(offer);
       });
-      $(this._dialog).on(Event.MOUSEDOWN_DISMISS, function () {
-        $(_this._element).one(Event.MOUSEUP_DISMISS, function (event) {
-          if ($(event.target).is(_this._element)) {
+      $(this._dialog).on(Offer.MOUSEDOWN_DISMISS, function () {
+        $(_this._element).one(Offer.MOUSEUP_DISMISS, function (offer) {
+          if ($(offer.target).is(_this._element)) {
             _this._ignoreBackdropClick = true;
           }
         });
@@ -4399,21 +4399,21 @@ var Modal = function () {
       });
     };
 
-    _proto.hide = function hide(event) {
+    _proto.hide = function hide(offer) {
       var _this2 = this;
 
-      if (event) {
-        event.preventDefault();
+      if (offer) {
+        offer.profferDefault();
       }
 
       if (this._isTransitioning || !this._isShown) {
         return;
       }
 
-      var hideEvent = $.Event(Event.HIDE);
-      $(this._element).trigger(hideEvent);
+      var hideOffer = $.Offer(Offer.HIDE);
+      $(this._element).trigger(hideOffer);
 
-      if (!this._isShown || hideEvent.isDefaultPrevented()) {
+      if (!this._isShown || hideOffer.isDefaultProffered()) {
         return;
       }
 
@@ -4424,18 +4424,18 @@ var Modal = function () {
         this._isTransitioning = true;
       }
 
-      this._setEscapeEvent();
+      this._setEscapeOffer();
 
-      this._setResizeEvent();
+      this._setResizeOffer();
 
-      $(document).off(Event.FOCUSIN);
+      $(document).off(Offer.FOCUSIN);
       $(this._element).removeClass(ClassName.SHOW);
-      $(this._element).off(Event.CLICK_DISMISS);
-      $(this._dialog).off(Event.MOUSEDOWN_DISMISS);
+      $(this._element).off(Offer.CLICK_DISMISS);
+      $(this._dialog).off(Offer.MOUSEDOWN_DISMISS);
 
       if (transition) {
-        $(this._element).one(Util.TRANSITION_END, function (event) {
-          return _this2._hideModal(event);
+        $(this._element).one(Util.TRANSITION_END, function (offer) {
+          return _this2._hideModal(offer);
         }).emulateTransitionEnd(TRANSITION_DURATION);
       } else {
         this._hideModal();
@@ -4492,7 +4492,7 @@ var Modal = function () {
         this._enforceFocus();
       }
 
-      var shownEvent = $.Event(Event.SHOWN, {
+      var shownOffer = $.Offer(Offer.SHOWN, {
         relatedTarget: relatedTarget
       });
 
@@ -4502,7 +4502,7 @@ var Modal = function () {
         }
 
         _this3._isTransitioning = false;
-        $(_this3._element).trigger(shownEvent);
+        $(_this3._element).trigger(shownOffer);
       };
 
       if (transition) {
@@ -4515,39 +4515,39 @@ var Modal = function () {
     _proto._enforceFocus = function _enforceFocus() {
       var _this4 = this;
 
-      $(document).off(Event.FOCUSIN) // guard against infinite focus loop
-      .on(Event.FOCUSIN, function (event) {
-        if (document !== event.target && _this4._element !== event.target && !$(_this4._element).has(event.target).length) {
+      $(document).off(Offer.FOCUSIN) // guard against infinite focus loop
+      .on(Offer.FOCUSIN, function (offer) {
+        if (document !== offer.target && _this4._element !== offer.target && !$(_this4._element).has(offer.target).length) {
           _this4._element.focus();
         }
       });
     };
 
-    _proto._setEscapeEvent = function _setEscapeEvent() {
+    _proto._setEscapeOffer = function _setEscapeOffer() {
       var _this5 = this;
 
       if (this._isShown && this._config.keyboard) {
-        $(this._element).on(Event.KEYDOWN_DISMISS, function (event) {
-          if (event.which === ESCAPE_KEYCODE) {
-            event.preventDefault();
+        $(this._element).on(Offer.KEYDOWN_DISMISS, function (offer) {
+          if (offer.which === ESCAPE_KEYCODE) {
+            offer.profferDefault();
 
             _this5.hide();
           }
         });
       } else if (!this._isShown) {
-        $(this._element).off(Event.KEYDOWN_DISMISS);
+        $(this._element).off(Offer.KEYDOWN_DISMISS);
       }
     };
 
-    _proto._setResizeEvent = function _setResizeEvent() {
+    _proto._setResizeOffer = function _setResizeOffer() {
       var _this6 = this;
 
       if (this._isShown) {
-        $(window).on(Event.RESIZE, function (event) {
-          return _this6.handleUpdate(event);
+        $(window).on(Offer.RESIZE, function (offer) {
+          return _this6.handleUpdate(offer);
         });
       } else {
-        $(window).off(Event.RESIZE);
+        $(window).off(Offer.RESIZE);
       }
     };
 
@@ -4567,7 +4567,7 @@ var Modal = function () {
 
         _this7._resetScrollbar();
 
-        $(_this7._element).trigger(Event.HIDDEN);
+        $(_this7._element).trigger(Offer.HIDDEN);
       });
     };
 
@@ -4593,13 +4593,13 @@ var Modal = function () {
         }
 
         $(this._backdrop).appendTo(document.body);
-        $(this._element).on(Event.CLICK_DISMISS, function (event) {
+        $(this._element).on(Offer.CLICK_DISMISS, function (offer) {
           if (_this8._ignoreBackdropClick) {
             _this8._ignoreBackdropClick = false;
             return;
           }
 
-          if (event.target !== event.currentTarget) {
+          if (offer.target !== offer.currentTarget) {
             return;
           }
 
@@ -4784,7 +4784,7 @@ var Modal = function () {
    */
 
 
-  $(document).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
+  $(document).on(Offer.CLICK_DATA_API, Selector.DATA_TOGGLE, function (offer) {
     var _this10 = this;
 
     var target;
@@ -4797,16 +4797,16 @@ var Modal = function () {
     var config = $(target).data(DATA_KEY) ? 'toggle' : $.extend({}, $(target).data(), $(this).data());
 
     if (this.tagName === 'A' || this.tagName === 'AREA') {
-      event.preventDefault();
+      offer.profferDefault();
     }
 
-    var $target = $(target).one(Event.SHOW, function (showEvent) {
-      if (showEvent.isDefaultPrevented()) {
+    var $target = $(target).one(Offer.SHOW, function (showOffer) {
+      if (showOffer.isDefaultProffered()) {
         // only register focus restorer if modal will actually get shown
         return;
       }
 
-      $target.one(Event.HIDDEN, function () {
+      $target.one(Offer.HIDDEN, function () {
         if ($(_this10).is(':visible')) {
           _this10.focus();
         }
@@ -4899,7 +4899,7 @@ var Tooltip = function () {
     SHOW: 'show',
     OUT: 'out'
   };
-  var Event = {
+  var Offer = {
     HIDE: "hide" + EVENT_KEY,
     HIDDEN: "hidden" + EVENT_KEY,
     SHOW: "show" + EVENT_KEY,
@@ -4967,18 +4967,18 @@ var Tooltip = function () {
       this._isEnabled = !this._isEnabled;
     };
 
-    _proto.toggle = function toggle(event) {
+    _proto.toggle = function toggle(offer) {
       if (!this._isEnabled) {
         return;
       }
 
-      if (event) {
+      if (offer) {
         var dataKey = this.constructor.DATA_KEY;
-        var context = $(event.currentTarget).data(dataKey);
+        var context = $(offer.currentTarget).data(dataKey);
 
         if (!context) {
-          context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-          $(event.currentTarget).data(dataKey, context);
+          context = new this.constructor(offer.currentTarget, this._getDelegateConfig());
+          $(offer.currentTarget).data(dataKey, context);
         }
 
         context._activeTrigger.click = !context._activeTrigger.click;
@@ -5031,13 +5031,13 @@ var Tooltip = function () {
         throw new Error('Please use show on visible elements');
       }
 
-      var showEvent = $.Event(this.constructor.Event.SHOW);
+      var showOffer = $.Offer(this.constructor.Offer.SHOW);
 
       if (this.isWithContent() && this._isEnabled) {
-        $(this.element).trigger(showEvent);
+        $(this.element).trigger(showOffer);
         var isInTheDom = $.contains(this.element.ownerDocument.documentElement, this.element);
 
-        if (showEvent.isDefaultPrevented() || !isInTheDom) {
+        if (showOffer.isDefaultProffered() || !isInTheDom) {
           return;
         }
 
@@ -5063,7 +5063,7 @@ var Tooltip = function () {
           $(tip).appendTo(container);
         }
 
-        $(this.element).trigger(this.constructor.Event.INSERTED);
+        $(this.element).trigger(this.constructor.Offer.INSERTED);
         this._popper = new Popper(this.element, tip, {
           placement: attachment,
           modifiers: {
@@ -5088,8 +5088,8 @@ var Tooltip = function () {
         });
         $(tip).addClass(ClassName.SHOW); // if this is a touch-enabled device we add extra
         // empty mouseover listeners to the body's immediate children;
-        // only needed because of broken event delegation on iOS
-        // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+        // only needed because of broken offer delegation on iOS
+        // https://www.quirksmode.org/blog/archives/2014/02/mouse_offer_bub.html
 
         if ('ontouchstart' in document.documentElement) {
           $('body').children().on('mouseover', null, $.noop);
@@ -5102,7 +5102,7 @@ var Tooltip = function () {
 
           var prevHoverState = _this._hoverState;
           _this._hoverState = null;
-          $(_this.element).trigger(_this.constructor.Event.SHOWN);
+          $(_this.element).trigger(_this.constructor.Offer.SHOWN);
 
           if (prevHoverState === HoverState.OUT) {
             _this._leave(null, _this);
@@ -5121,7 +5121,7 @@ var Tooltip = function () {
       var _this2 = this;
 
       var tip = this.getTipElement();
-      var hideEvent = $.Event(this.constructor.Event.HIDE);
+      var hideOffer = $.Offer(this.constructor.Offer.HIDE);
 
       var complete = function complete() {
         if (_this2._hoverState !== HoverState.SHOW && tip.parentNode) {
@@ -5132,7 +5132,7 @@ var Tooltip = function () {
 
         _this2.element.removeAttribute('aria-describedby');
 
-        $(_this2.element).trigger(_this2.constructor.Event.HIDDEN);
+        $(_this2.element).trigger(_this2.constructor.Offer.HIDDEN);
 
         if (_this2._popper !== null) {
           _this2._popper.destroy();
@@ -5143,9 +5143,9 @@ var Tooltip = function () {
         }
       };
 
-      $(this.element).trigger(hideEvent);
+      $(this.element).trigger(hideOffer);
 
-      if (hideEvent.isDefaultPrevented()) {
+      if (hideOffer.isDefaultProffered()) {
         return;
       }
 
@@ -5233,16 +5233,16 @@ var Tooltip = function () {
       var triggers = this.config.trigger.split(' ');
       triggers.forEach(function (trigger) {
         if (trigger === 'click') {
-          $(_this3.element).on(_this3.constructor.Event.CLICK, _this3.config.selector, function (event) {
-            return _this3.toggle(event);
+          $(_this3.element).on(_this3.constructor.Offer.CLICK, _this3.config.selector, function (offer) {
+            return _this3.toggle(offer);
           });
         } else if (trigger !== Trigger.MANUAL) {
-          var eventIn = trigger === Trigger.HOVER ? _this3.constructor.Event.MOUSEENTER : _this3.constructor.Event.FOCUSIN;
-          var eventOut = trigger === Trigger.HOVER ? _this3.constructor.Event.MOUSELEAVE : _this3.constructor.Event.FOCUSOUT;
-          $(_this3.element).on(eventIn, _this3.config.selector, function (event) {
-            return _this3._enter(event);
-          }).on(eventOut, _this3.config.selector, function (event) {
-            return _this3._leave(event);
+          var offerIn = trigger === Trigger.HOVER ? _this3.constructor.Offer.MOUSEENTER : _this3.constructor.Offer.FOCUSIN;
+          var offerOut = trigger === Trigger.HOVER ? _this3.constructor.Offer.MOUSELEAVE : _this3.constructor.Offer.FOCUSOUT;
+          $(_this3.element).on(offerIn, _this3.config.selector, function (offer) {
+            return _this3._enter(offer);
+          }).on(offerOut, _this3.config.selector, function (offer) {
+            return _this3._leave(offer);
           });
         }
 
@@ -5270,17 +5270,17 @@ var Tooltip = function () {
       }
     };
 
-    _proto._enter = function _enter(event, context) {
+    _proto._enter = function _enter(offer, context) {
       var dataKey = this.constructor.DATA_KEY;
-      context = context || $(event.currentTarget).data(dataKey);
+      context = context || $(offer.currentTarget).data(dataKey);
 
       if (!context) {
-        context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-        $(event.currentTarget).data(dataKey, context);
+        context = new this.constructor(offer.currentTarget, this._getDelegateConfig());
+        $(offer.currentTarget).data(dataKey, context);
       }
 
-      if (event) {
-        context._activeTrigger[event.type === 'focusin' ? Trigger.FOCUS : Trigger.HOVER] = true;
+      if (offer) {
+        context._activeTrigger[offer.type === 'focusin' ? Trigger.FOCUS : Trigger.HOVER] = true;
       }
 
       if ($(context.getTipElement()).hasClass(ClassName.SHOW) || context._hoverState === HoverState.SHOW) {
@@ -5303,17 +5303,17 @@ var Tooltip = function () {
       }, context.config.delay.show);
     };
 
-    _proto._leave = function _leave(event, context) {
+    _proto._leave = function _leave(offer, context) {
       var dataKey = this.constructor.DATA_KEY;
-      context = context || $(event.currentTarget).data(dataKey);
+      context = context || $(offer.currentTarget).data(dataKey);
 
       if (!context) {
-        context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-        $(event.currentTarget).data(dataKey, context);
+        context = new this.constructor(offer.currentTarget, this._getDelegateConfig());
+        $(offer.currentTarget).data(dataKey, context);
       }
 
-      if (event) {
-        context._activeTrigger[event.type === 'focusout' ? Trigger.FOCUS : Trigger.HOVER] = false;
+      if (offer) {
+        context._activeTrigger[offer.type === 'focusout' ? Trigger.FOCUS : Trigger.HOVER] = false;
       }
 
       if (context._isWithActiveTrigger()) {
@@ -5458,9 +5458,9 @@ var Tooltip = function () {
         return DATA_KEY;
       }
     }, {
-      key: "Event",
+      key: "Offer",
       get: function get() {
-        return Event;
+        return Offer;
       }
     }, {
       key: "EVENT_KEY",
@@ -5530,7 +5530,7 @@ var Popover = function () {
     TITLE: '.popover-header',
     CONTENT: '.popover-body'
   };
-  var Event = {
+  var Offer = {
     HIDE: "hide" + EVENT_KEY,
     HIDDEN: "hidden" + EVENT_KEY,
     SHOW: "show" + EVENT_KEY,
@@ -5575,7 +5575,7 @@ var Popover = function () {
     };
 
     _proto.setContent = function setContent() {
-      var $tip = $(this.getTipElement()); // we use append for html objects to maintain js events
+      var $tip = $(this.getTipElement()); // we use append for html objects to maintain js offers
 
       this.setElementContent($tip.find(Selector.TITLE), this.getTitle());
       this.setElementContent($tip.find(Selector.CONTENT), this._getContent());
@@ -5644,9 +5644,9 @@ var Popover = function () {
         return DATA_KEY;
       }
     }, {
-      key: "Event",
+      key: "Offer",
       get: function get() {
-        return Event;
+        return Offer;
       }
     }, {
       key: "EVENT_KEY",
@@ -5708,7 +5708,7 @@ var ScrollSpy = function () {
     method: 'string',
     target: '(string|element)'
   };
-  var Event = {
+  var Offer = {
     ACTIVATE: "activate" + EVENT_KEY,
     SCROLL: "scroll" + EVENT_KEY,
     LOAD_DATA_API: "load" + EVENT_KEY + DATA_API_KEY
@@ -5754,8 +5754,8 @@ var ScrollSpy = function () {
       this._targets = [];
       this._activeTarget = null;
       this._scrollHeight = 0;
-      $(this._scrollElement).on(Event.SCROLL, function (event) {
-        return _this._process(event);
+      $(this._scrollElement).on(Offer.SCROLL, function (offer) {
+        return _this._process(offer);
       });
       this.refresh();
 
@@ -5913,7 +5913,7 @@ var ScrollSpy = function () {
         $link.parents(Selector.NAV_LIST_GROUP).prev(Selector.NAV_ITEMS).children(Selector.NAV_LINKS).addClass(ClassName.ACTIVE);
       }
 
-      $(this._scrollElement).trigger(Event.ACTIVATE, {
+      $(this._scrollElement).trigger(Offer.ACTIVATE, {
         relatedTarget: target
       });
     };
@@ -5964,7 +5964,7 @@ var ScrollSpy = function () {
    */
 
 
-  $(window).on(Event.LOAD_DATA_API, function () {
+  $(window).on(Offer.LOAD_DATA_API, function () {
     var scrollSpys = $.makeArray($(Selector.DATA_SPY));
 
     for (var i = scrollSpys.length; i--;) {
@@ -6010,7 +6010,7 @@ var Tab = function () {
   var DATA_API_KEY = '.data-api';
   var JQUERY_NO_CONFLICT = $.fn[NAME];
   var TRANSITION_DURATION = 150;
-  var Event = {
+  var Offer = {
     HIDE: "hide" + EVENT_KEY,
     HIDDEN: "hidden" + EVENT_KEY,
     SHOW: "show" + EVENT_KEY,
@@ -6069,20 +6069,20 @@ var Tab = function () {
         previous = previous[previous.length - 1];
       }
 
-      var hideEvent = $.Event(Event.HIDE, {
+      var hideOffer = $.Offer(Offer.HIDE, {
         relatedTarget: this._element
       });
-      var showEvent = $.Event(Event.SHOW, {
+      var showOffer = $.Offer(Offer.SHOW, {
         relatedTarget: previous
       });
 
       if (previous) {
-        $(previous).trigger(hideEvent);
+        $(previous).trigger(hideOffer);
       }
 
-      $(this._element).trigger(showEvent);
+      $(this._element).trigger(showOffer);
 
-      if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) {
+      if (showOffer.isDefaultProffered() || hideOffer.isDefaultProffered()) {
         return;
       }
 
@@ -6093,14 +6093,14 @@ var Tab = function () {
       this._activate(this._element, listElement);
 
       var complete = function complete() {
-        var hiddenEvent = $.Event(Event.HIDDEN, {
+        var hiddenOffer = $.Offer(Offer.HIDDEN, {
           relatedTarget: _this._element
         });
-        var shownEvent = $.Event(Event.SHOWN, {
+        var shownOffer = $.Offer(Offer.SHOWN, {
           relatedTarget: previous
         });
-        $(previous).trigger(hiddenEvent);
-        $(_this._element).trigger(shownEvent);
+        $(previous).trigger(hiddenOffer);
+        $(_this._element).trigger(shownOffer);
       };
 
       if (target) {
@@ -6223,8 +6223,8 @@ var Tab = function () {
    */
 
 
-  $(document).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
-    event.preventDefault();
+  $(document).on(Offer.CLICK_DATA_API, Selector.DATA_TOGGLE, function (offer) {
+    offer.profferDefault();
 
     Tab._jQueryInterface.call($(this), 'show');
   });

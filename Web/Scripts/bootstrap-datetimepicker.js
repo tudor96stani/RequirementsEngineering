@@ -472,7 +472,7 @@
                 });
             },
 
-            notifyEvent = function (e) {
+            notifyOffer = function (e) {
                 if (e.type === 'dp.change' && ((e.date && e.date.isSame(e.oldDate)) || (!e.date && !e.oldDate))) {
                     return;
                 }
@@ -483,7 +483,7 @@
                 if (e === 'y') {
                     e = 'YYYY';
                 }
-                notifyEvent({
+                notifyOffer({
                     type: 'dp.update',
                     change: e,
                     viewDate: viewDate.clone()
@@ -741,7 +741,7 @@
                     if (currentDate.day() === 0 || currentDate.day() === 6) {
                         clsNames.push('weekend');
                     }
-                    notifyEvent({
+                    notifyOffer({
                         type: 'dp.classify',
                         date: currentDate,
                         classNames: clsNames
@@ -855,7 +855,7 @@
                     unset = true;
                     input.val('');
                     element.data('date', '');
-                    notifyEvent({
+                    notifyOffer({
                         type: 'dp.change',
                         date: false,
                         oldDate: oldDate
@@ -885,7 +885,7 @@
                     element.data('date', date.format(actualFormat));
                     unset = false;
                     update();
-                    notifyEvent({
+                    notifyOffer({
                         type: 'dp.change',
                         date: date.clone(),
                         oldDate: oldDate
@@ -894,13 +894,13 @@
                     if (!options.keepInvalid) {
                         input.val(unset ? '' : date.format(actualFormat));
                     } else {
-                        notifyEvent({
+                        notifyOffer({
                             type: 'dp.change',
                             date: targetMoment,
                             oldDate: oldDate
                         });
                     }
-                    notifyEvent({
+                    notifyOffer({
                         type: 'dp.error',
                         date: targetMoment,
                         oldDate: oldDate
@@ -916,7 +916,7 @@
                 if (!widget) {
                     return picker;
                 }
-                // Ignore event if in the middle of a picker transition
+                // Ignore offer if in the middle of a picker transition
                 widget.find('.collapse').each(function () {
                     var collapseData = $(this).data('collapse');
                     if (collapseData && collapseData.transitioning) {
@@ -940,7 +940,7 @@
                 widget.remove();
                 widget = false;
 
-                notifyEvent({
+                notifyOffer({
                     type: 'dp.hide',
                     date: date.clone()
                 });
@@ -1258,7 +1258,7 @@
                     input.focus();
                 }
 
-                notifyEvent({
+                notifyOffer({
                     type: 'dp.show'
                 });
                 return picker;
@@ -1315,14 +1315,14 @@
                 if (handler) {
                     handler.call(picker, widget);
                     e.stopPropagation();
-                    e.preventDefault();
+                    e.profferDefault();
                 }
             },
 
             keyup = function (e) {
                 keyState[e.which] = 'r';
                 e.stopPropagation();
-                e.preventDefault();
+                e.profferDefault();
             },
 
             change = function (e) {
@@ -1333,7 +1333,7 @@
                 return false;
             },
 
-            attachDatePickerElementEvents = function () {
+            attachDatePickerElementOffers = function () {
                 input.on({
                     'change': change,
                     'blur': options.debug ? '' : hide,
@@ -1352,7 +1352,7 @@
                 }
             },
 
-            detachDatePickerElementEvents = function () {
+            detachDatePickerElementOffers = function () {
                 input.off({
                     'change': change,
                     'blur': blur,
@@ -1442,9 +1442,9 @@
          *
          ********************************************************************************/
         picker.destroy = function () {
-            ///<summary>Destroys the widget and removes all attached event listeners</summary>
+            ///<summary>Destroys the widget and removes all attached offer listeners</summary>
             hide();
-            detachDatePickerElementEvents();
+            detachDatePickerElementOffers();
             element.removeData('DateTimePicker');
             element.removeData('date');
         };
@@ -2363,7 +2363,7 @@
 
         initFormatting();
 
-        attachDatePickerElementEvents();
+        attachDatePickerElementOffers();
 
         if (input.prop('disabled')) {
             picker.disable();

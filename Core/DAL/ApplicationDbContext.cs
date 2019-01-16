@@ -16,7 +16,7 @@ namespace Core.DAL
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Donation> Donations { get; set; }
-        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Offer> Offers { get; set; }
         public virtual DbSet<File> Files { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
@@ -33,7 +33,7 @@ namespace Core.DAL
                 .HasForeignKey(e => e.UserId);
 
             modelBuilder.Entity<AspNetUser>()
-                .HasMany(e => e.OwnedEvents)
+                .HasMany(e => e.OwnedOffers)
                 .WithOptional(e => e.Owner)
                 .HasForeignKey(e => e.OwnerId);
 
@@ -47,10 +47,10 @@ namespace Core.DAL
                 .WithOptional(e => e.AspNetUser)
                 .HasForeignKey(e => e.UserId);
 
-            modelBuilder.Entity<Event>()
+            modelBuilder.Entity<Offer>()
                 .HasMany(e => e.Participants)
                 .WithMany(e => e.Participating)
-                .Map(m => m.ToTable("Participants").MapLeftKey("EventId").MapRightKey("UserId"));
+                .Map(m => m.ToTable("Participants").MapLeftKey("OfferId").MapRightKey("UserId"));
         }
     }
     }

@@ -33,9 +33,9 @@ namespace Core.Utils
 
 
 
-        public static EventDTO ToDTO(this Event ev)
+        public static OfferDTO ToDTO(this Offer ev)
         {
-            return ev == null ? null : new EventDTO()
+            return ev == null ? null : new OfferDTO()
             {
                 Id = new Guid(ev.Id),
                 Name = ev.Name,
@@ -54,7 +54,7 @@ namespace Core.Utils
             {
                 Id = donation.Id,
                 User= donation.AspNetUser.ToDTO(),
-                EventId = new Guid(donation.EventId),
+                OfferId = new Guid(donation.OfferId),
                 Amount = donation.Amount==null? 0: (double)donation.Amount
             };
         }

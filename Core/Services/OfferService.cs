@@ -12,53 +12,53 @@ using System.Data.Entity;
 namespace Core.Services
 {
 
-    public class EventService : IEventService
+    public class OfferService : IOfferService
     {
-        public List<EventQuickInfoDTO> GetAll()
+        public List<OfferQuickInfoDTO> GetAll()
         {
             using (var dbContext = new ApplicationDbContext())
             {
                 
-                var events = dbContext.Events.Include(x => x.Owner).Include(x => x.Donations).Include(x => x.Location).ToList().Select(x => x.ToDTO());
-                var result = new List<EventQuickInfoDTO>();
-                foreach(var eventObj in events)
+                var offers = dbContext.Offers.Include(x => x.Owner).Include(x => x.Donations).Include(x => x.Location).ToList().Select(x => x.ToDTO());
+                var result = new List<OfferQuickInfoDTO>();
+                foreach(var offerObj in offers)
                 {
-                    result.Add(new EventQuickInfoDTO(eventObj));
+                    result.Add(new OfferQuickInfoDTO(offerObj));
                 }
 
                 return result;
             }
         }
 
-        public List<EventDTO> GetAllDtos()
+        public List<OfferDTO> GetAllDtos()
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                var events = dbContext.Events.Include(x => x.Owner).Include(x => x.Donations).Include(x => x.Location).ToList().Select(x => x.ToDTO()).ToList();
-                return events;
+                var offers = dbContext.Offers.Include(x => x.Owner).Include(x => x.Donations).Include(x => x.Location).ToList().Select(x => x.ToDTO()).ToList();
+                return offers;
 
 
             }
         }
 
-        public EventDTO GetDto(Guid eventId)
+        public OfferDTO GetDto(Guid offerId)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                var eventDto = dbContext.Events.Include(x => x.Owner).Include(x => x.Donations).Include(x => x.Location).ToList().Select(x => x.ToDTO()).FirstOrDefault(x=>x.Id==eventId);
-                return eventDto;
+                var offerDto = dbContext.Offers.Include(x => x.Owner).Include(x => x.Donations).Include(x => x.Location).ToList().Select(x => x.ToDTO()).FirstOrDefault(x=>x.Id==offerId);
+                return offerDto;
 
 
             }
         }
 
-        public void AddParticipant(string eventId, string userId)
+        public void AddParticipant(string offerId, string userId)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                var eventt = dbContext.Events.Include(x => x.Participants).FirstOrDefault(x => x.Id == eventId.ToString());
+                var offert = dbContext.Offers.Include(x => x.Participants).FirstOrDefault(x => x.Id == offerId.ToString());
                 var user = dbContext.AspNetUsers.FirstOrDefault(u => u.Id == userId);
-                eventt?.Participants.Add(user);
+                offert?.Participants.Add(user);
                 dbContext.SaveChanges();
             }
 
@@ -73,7 +73,7 @@ namespace Core.Services
                     location = dbContext.Locations.Add(new Location() { Id = Guid.NewGuid().ToString(), Country = country, City = city, Street = street, Number = number });
                 }
                 var owner = dbContext.AspNetUsers.FirstOrDefault(x => x.Id == organizationId.ToString());
-                var ev = new Event()
+                var ev = new Offer()
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = name,
@@ -83,10 +83,10 @@ namespace Core.Services
                     OwnerId=owner.Id,
                     Owner = owner,
                     Description=description,
-                    VolunteersGoal=volGoal,
+                    CandidatesGoal=volGoal,
                     DonationsGoal=donGoal
                 };
-                var result = dbContext.Events.Add(ev);
+                var result = dbContext.Offers.Add(ev);
                 
                 dbContext.SaveChanges();
                 if (result == null)
@@ -99,37 +99,37 @@ namespace Core.Services
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                var eventObj = dbContext.Events.Include(x=>x.Participants).Include(x=>x.Donations).Include(x=>x.Location).Include(x=>x.Owner).FirstOrDefault(x => x.Id == id.ToString());
-                if (eventObj == null)
+                var offerObj = dbContext.Offers.Include(x=>x.Participants).Include(x=>x.Donations).Include(x=>x.Location).Include(x=>x.Owner).FirstOrDefault(x => x.Id == id.ToString());
+                if (offerObj == null)
                     throw new Exception("Object could not be found!");
                 
-                dbContext.Events.Remove(eventObj);
+                dbContext.Offers.Remove(offerObj);
                 dbContext.SaveChanges();
             }
         }
-        public void UpdateEvent(string name, DateTime dateTimeUtc, string description, string locationId, Guid eventId)
+        public void UpdateOffer(string name, DateTime dateTimeUtc, string description, string locationId, Guid offerId)
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                Event eventt = dbContext.Events.Find(eventId.ToString());
-                if (eventt != null)
+                Offer offert = dbContext.Offers.Find(offerId.ToString());
+                if (offert != null)
                 {
-                    eventt.Name = name;
-                    eventt.DateTimeUTC = dateTimeUtc;
-                    eventt.LocationId = locationId;
-                    eventt.Description = description;
+                    offert.Name = name;
+                    offert.DateTimeUTC = dateTimeUtc;
+                    offert.LocationId = locationId;
+                    offert.Description = description;
                     dbContext.SaveChanges();
 
                 }
             }
         }
-        public List<EventQuickInfoDTO> GetEventsWithLocation(string cityName)
+        public List<OfferQuickInfoDTO> GetOffersWithLocation(string cityName)
         {
             using(var dbCtx = new ApplicationDbContext())
             {
                 var locationIdsFromRequestedCity = dbCtx.Locations.Where(x => x.City == cityName).Select(x => x.Id).ToList();
-                var events = dbCtx.Events.Include(x => x.Location).Where(x => locationIdsFromRequestedCity.Contains(x.LocationId)).OrderByDescending(x=>x.DateTimeUTC).ToList();
-                return events.Select(x => new EventQuickInfoDTO(x.ToDTO())).ToList();
+                var offers = dbCtx.Offers.Include(x => x.Location).Where(x => locationIdsFromRequestedCity.Contains(x.LocationId)).OrderByDescending(x=>x.DateTimeUTC).ToList();
+                return offers.Select(x => new OfferQuickInfoDTO(x.ToDTO())).ToList();
             }
         }
     }

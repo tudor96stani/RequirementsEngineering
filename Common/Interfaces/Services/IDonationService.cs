@@ -5,6 +5,6 @@ namespace Common.Interfaces.Services
 {
     public interface IDonationService
     {
-         void Add(string userId, string eventId, double amount);
+         void Add(string userId, string offerId, double amount);
     }
 }

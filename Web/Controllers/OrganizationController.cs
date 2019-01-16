@@ -13,13 +13,13 @@ namespace Web.Controllers
     public class OrganizationController : Controller
     {
         private readonly IOrganizationService _orgService;
-        private readonly IEventService _eventService;
+        private readonly IOfferService _offerService;
         private readonly IRatingService _ratingService;
 
         public OrganizationController()
         {
             _orgService = ServiceDependencyResolver.GetOrganizationService();
-            _eventService = ServiceDependencyResolver.GetEventService();
+            _offerService = ServiceDependencyResolver.GetOfferService();
             _ratingService = ServiceDependencyResolver.GetRatingService();
         }
 
@@ -40,11 +40,11 @@ namespace Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult GetEvents(Guid id)
+        public ActionResult GetOffers(Guid id)
         {
 
-            var events = _orgService.GetAllEventsForOrganization(id);
-            var viewModels = events.Select(x => new EventBasicInfoViewModel(x));
+            var offers = _orgService.GetAllOffersForOrganization(id);
+            var viewModels = offers.Select(x => new OfferBasicInfoViewModel(x));
             return Json(viewModels, JsonRequestBehavior.AllowGet);
             //return Json(null);
         }
@@ -52,48 +52,48 @@ namespace Web.Controllers
         public ActionResult Homepage()
         {
             var viewModel = new OrganizationHomepageViewModel();
-            viewModel.topVolunteers = GetTopVolunteers();
-            viewModel.orderedEvents = _orgService.GetAllEvents().Select(x=>new EventQuickDetailsViewModel(x)).ToList();
+            viewModel.topCandidates = GetTopCandidates();
+            viewModel.orderedOffers = _orgService.GetAllOffers().Select(x=>new OfferQuickDetailsViewModel(x)).ToList();
             return View(viewModel);
         }
 
      
 
-        private List<TopVolunteerViewModel> GetTopVolunteers()
+        private List<TopCandidateViewModel> GetTopCandidates()
         {
-            var topVolunteers = _orgService.GetTopVolunteers();
-            if (topVolunteers != null)
+            var topCandidates = _orgService.GetTopCandidates();
+            if (topCandidates != null)
             {
-                var volunteersviewModel = topVolunteers.Select(x => new TopVolunteerViewModel(x)).ToList();
-                return volunteersviewModel;
+                var candidatesviewModel = topCandidates.Select(x => new TopCandidateViewModel(x)).ToList();
+                return candidatesviewModel;
             }
 
-            return new List<TopVolunteerViewModel>();
+            return new List<TopCandidateViewModel>();
         }
 
-        private List<EventQuickDetailsViewModel> GetEventsOrderedByDate(Guid id)
+        private List<OfferQuickDetailsViewModel> GetOffersOrderedByDate(Guid id)
         {
-            var orderedEvents = _orgService.GetAllEventsForOrganizationOrderedByDate(id);
-            if (orderedEvents != null)
+            var orderedOffers = _orgService.GetAllOffersForOrganizationOrderedByDate(id);
+            if (orderedOffers != null)
             {
-                var eventsviewModel = orderedEvents.Select(x => new EventQuickDetailsViewModel(x)).ToList();
-                return eventsviewModel;
+                var offersviewModel = orderedOffers.Select(x => new OfferQuickDetailsViewModel(x)).ToList();
+                return offersviewModel;
             }
-            return new List<EventQuickDetailsViewModel>();
+            return new List<OfferQuickDetailsViewModel>();
         }
 
         [HttpPost]
-        public ActionResult CreateEvent(CreateEventViewModel model)
+        public ActionResult CreateOffer(CreateOfferViewModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    if (_eventService.Create(model.OwnerId, model.Name, model.Country, model.City, model.Street, model.Number, model.Date, model.Description, model.VolunteersGoals, model.DonationsGoal))
+                    if (_offerService.Create(model.OwnerId, model.Name, model.Country, model.City, model.Street, model.Number, model.Date, model.Description, model.CandidatesGoals, model.DonationsGoal))
                     {
                         return Json(new { Ok = true, Message = "Ok" }, JsonRequestBehavior.AllowGet);
                     }
-                    return Json(new { Ok = false, Message = "Event could not be created!" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Ok = false, Message = "Offer could not be created!" }, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception)
                 {
@@ -104,11 +104,11 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteEvent(Guid id)
+        public ActionResult DeleteOffer(Guid id)
         {
             try
             {
-                _eventService.Delete(id);
+                _offerService.Delete(id);
                 return Json(new { Ok = true, Message = "Ok" }, JsonRequestBehavior.AllowGet);
             }
             catch(Exception e)

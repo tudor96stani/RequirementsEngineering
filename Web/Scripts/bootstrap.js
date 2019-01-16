@@ -34,16 +34,16 @@ if (typeof jQuery === 'undefined') {
   function transitionEnd() {
     var el = document.createElement('bootstrap')
 
-    var transEndEventNames = {
+    var transEndOfferNames = {
       WebkitTransition : 'webkitTransitionEnd',
       MozTransition    : 'transitionend',
       OTransition      : 'oTransitionEnd otransitionend',
       transition       : 'transitionend'
     }
 
-    for (var name in transEndEventNames) {
+    for (var name in transEndOfferNames) {
       if (el.style[name] !== undefined) {
-        return { end: transEndEventNames[name] }
+        return { end: transEndOfferNames[name] }
       }
     }
 
@@ -65,7 +65,7 @@ if (typeof jQuery === 'undefined') {
 
     if (!$.support.transition) return
 
-    $.event.special.bsTransitionEnd = {
+    $.offer.special.bsTransitionEnd = {
       bindType: $.support.transition.end,
       delegateType: $.support.transition.end,
       handle: function (e) {
@@ -111,20 +111,20 @@ if (typeof jQuery === 'undefined') {
 
     var $parent = $(selector === '#' ? [] : selector)
 
-    if (e) e.preventDefault()
+    if (e) e.profferDefault()
 
     if (!$parent.length) {
       $parent = $this.closest('.alert')
     }
 
-    $parent.trigger(e = $.Event('close.bs.alert'))
+    $parent.trigger(e = $.Offer('close.bs.alert'))
 
-    if (e.isDefaultPrevented()) return
+    if (e.isDefaultProffered()) return
 
     $parent.removeClass('in')
 
     function removeElement() {
-      // detach from parent, fire event then clean up data
+      // detach from parent, fire offer then clean up data
       $parent.detach().trigger('closed.bs.alert').remove()
     }
 
@@ -208,7 +208,7 @@ if (typeof jQuery === 'undefined') {
 
     if (data.resetText == null) $el.data('resetText', $el[val]())
 
-    // push to event loop to allow forms to submit
+    // push to offer loop to allow forms to submit
     setTimeout($.proxy(function () {
       $el[val](data[state] == null ? this.options[state] : data[state])
 
@@ -284,8 +284,8 @@ if (typeof jQuery === 'undefined') {
       var $btn = $(e.target).closest('.btn')
       Plugin.call($btn, 'toggle')
       if (!($(e.target).is('input[type="radio"], input[type="checkbox"]'))) {
-        // Prevent double click on radios, and the double selections (so cancellation) on checkboxes
-        e.preventDefault()
+        // Proffer double click on radios, and the double selections (so cancellation) on checkboxes
+        e.profferDefault()
         // The target component still receive the focus
         if ($btn.is('input,button')) $btn.trigger('focus')
         else $btn.find('input:visible,button:visible').first().trigger('focus')
@@ -348,7 +348,7 @@ if (typeof jQuery === 'undefined') {
       default: return
     }
 
-    e.preventDefault()
+    e.profferDefault()
   }
 
   Carousel.prototype.cycle = function (e) {
@@ -423,12 +423,12 @@ if (typeof jQuery === 'undefined') {
     if ($next.hasClass('active')) return (this.sliding = false)
 
     var relatedTarget = $next[0]
-    var slideEvent = $.Event('slide.bs.carousel', {
+    var slideOffer = $.Offer('slide.bs.carousel', {
       relatedTarget: relatedTarget,
       direction: direction
     })
-    this.$element.trigger(slideEvent)
-    if (slideEvent.isDefaultPrevented()) return
+    this.$element.trigger(slideOffer)
+    if (slideOffer.isDefaultProffered()) return
 
     this.sliding = true
 
@@ -440,7 +440,7 @@ if (typeof jQuery === 'undefined') {
       $nextIndicator && $nextIndicator.addClass('active')
     }
 
-    var slidEvent = $.Event('slid.bs.carousel', { relatedTarget: relatedTarget, direction: direction }) // yes, "slid"
+    var slidOffer = $.Offer('slid.bs.carousel', { relatedTarget: relatedTarget, direction: direction }) // yes, "slid"
     if ($.support.transition && this.$element.hasClass('slide')) {
       $next.addClass(type)
       $next[0].offsetWidth // force reflow
@@ -452,7 +452,7 @@ if (typeof jQuery === 'undefined') {
           $active.removeClass(['active', direction].join(' '))
           that.sliding = false
           setTimeout(function () {
-            that.$element.trigger(slidEvent)
+            that.$element.trigger(slidOffer)
           }, 0)
         })
         .emulateTransitionEnd(Carousel.TRANSITION_DURATION)
@@ -460,7 +460,7 @@ if (typeof jQuery === 'undefined') {
       $active.removeClass('active')
       $next.addClass('active')
       this.sliding = false
-      this.$element.trigger(slidEvent)
+      this.$element.trigger(slidOffer)
     }
 
     isCycling && this.cycle()
@@ -519,7 +519,7 @@ if (typeof jQuery === 'undefined') {
       $target.data('bs.carousel').to(slideIndex)
     }
 
-    e.preventDefault()
+    e.profferDefault()
   }
 
   $(document)
@@ -591,9 +591,9 @@ if (typeof jQuery === 'undefined') {
       if (activesData && activesData.transitioning) return
     }
 
-    var startEvent = $.Event('show.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
+    var startOffer = $.Offer('show.bs.collapse')
+    this.$element.trigger(startOffer)
+    if (startOffer.isDefaultProffered()) return
 
     if (actives && actives.length) {
       Plugin.call(actives, 'hide')
@@ -634,9 +634,9 @@ if (typeof jQuery === 'undefined') {
   Collapse.prototype.hide = function () {
     if (this.transitioning || !this.$element.hasClass('in')) return
 
-    var startEvent = $.Event('hide.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
+    var startOffer = $.Offer('hide.bs.collapse')
+    this.$element.trigger(startOffer)
+    if (startOffer.isDefaultProffered()) return
 
     var dimension = this.dimension()
 
@@ -737,7 +737,7 @@ if (typeof jQuery === 'undefined') {
   $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
     var $this   = $(this)
 
-    if (!$this.attr('data-target')) e.preventDefault()
+    if (!$this.attr('data-target')) e.profferDefault()
 
     var $target = getTargetFromTrigger($this)
     var data    = $target.data('bs.collapse')
@@ -796,12 +796,12 @@ if (typeof jQuery === 'undefined') {
 
       if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
 
-      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
+      $parent.trigger(e = $.Offer('hide.bs.dropdown', relatedTarget))
 
-      if (e.isDefaultPrevented()) return
+      if (e.isDefaultProffered()) return
 
       $this.attr('aria-expanded', 'false')
-      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
+      $parent.removeClass('open').trigger($.Offer('hidden.bs.dropdown', relatedTarget))
     })
   }
 
@@ -817,7 +817,7 @@ if (typeof jQuery === 'undefined') {
 
     if (!isActive) {
       if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
-        // if mobile we use a backdrop because click events don't delegate
+        // if mobile we use a backdrop because click offers don't delegate
         $(document.createElement('div'))
           .addClass('dropdown-backdrop')
           .insertAfter($(this))
@@ -825,9 +825,9 @@ if (typeof jQuery === 'undefined') {
       }
 
       var relatedTarget = { relatedTarget: this }
-      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
+      $parent.trigger(e = $.Offer('show.bs.dropdown', relatedTarget))
 
-      if (e.isDefaultPrevented()) return
+      if (e.isDefaultProffered()) return
 
       $this
         .trigger('focus')
@@ -835,7 +835,7 @@ if (typeof jQuery === 'undefined') {
 
       $parent
         .toggleClass('open')
-        .trigger($.Event('shown.bs.dropdown', relatedTarget))
+        .trigger($.Offer('shown.bs.dropdown', relatedTarget))
     }
 
     return false
@@ -846,7 +846,7 @@ if (typeof jQuery === 'undefined') {
 
     var $this = $(this)
 
-    e.preventDefault()
+    e.profferDefault()
     e.stopPropagation()
 
     if ($this.is('.disabled, :disabled')) return
@@ -966,11 +966,11 @@ if (typeof jQuery === 'undefined') {
 
   Modal.prototype.show = function (_relatedTarget) {
     var that = this
-    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
+    var e    = $.Offer('show.bs.modal', { relatedTarget: _relatedTarget })
 
     this.$element.trigger(e)
 
-    if (this.isShown || e.isDefaultPrevented()) return
+    if (this.isShown || e.isDefaultProffered()) return
 
     this.isShown = true
 
@@ -1010,7 +1010,7 @@ if (typeof jQuery === 'undefined') {
 
       that.enforceFocus()
 
-      var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
+      var e = $.Offer('shown.bs.modal', { relatedTarget: _relatedTarget })
 
       transition ?
         that.$dialog // wait for modal to slide in
@@ -1023,13 +1023,13 @@ if (typeof jQuery === 'undefined') {
   }
 
   Modal.prototype.hide = function (e) {
-    if (e) e.preventDefault()
+    if (e) e.profferDefault()
 
-    e = $.Event('hide.bs.modal')
+    e = $.Offer('hide.bs.modal')
 
     this.$element.trigger(e)
 
-    if (!this.isShown || e.isDefaultPrevented()) return
+    if (!this.isShown || e.isDefaultProffered()) return
 
     this.isShown = false
 
@@ -1241,10 +1241,10 @@ if (typeof jQuery === 'undefined') {
     var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
     var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
 
-    if ($this.is('a')) e.preventDefault()
+    if ($this.is('a')) e.profferDefault()
 
-    $target.one('show.bs.modal', function (showEvent) {
-      if (showEvent.isDefaultPrevented()) return // only register focus restorer if modal will actually get shown
+    $target.one('show.bs.modal', function (showOffer) {
+      if (showOffer.isDefaultProffered()) return // only register focus restorer if modal will actually get shown
       $target.one('hidden.bs.modal', function () {
         $this.is(':visible') && $this.trigger('focus')
       })
@@ -1322,11 +1322,11 @@ if (typeof jQuery === 'undefined') {
       if (trigger == 'click') {
         this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))
       } else if (trigger != 'manual') {
-        var eventIn  = trigger == 'hover' ? 'mouseenter' : 'focusin'
-        var eventOut = trigger == 'hover' ? 'mouseleave' : 'focusout'
+        var offerIn  = trigger == 'hover' ? 'mouseenter' : 'focusin'
+        var offerOut = trigger == 'hover' ? 'mouseleave' : 'focusout'
 
-        this.$element.on(eventIn  + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
-        this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
+        this.$element.on(offerIn  + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
+        this.$element.on(offerOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
       }
     }
 
@@ -1372,7 +1372,7 @@ if (typeof jQuery === 'undefined') {
       $(obj.currentTarget).data('bs.' + this.type, self)
     }
 
-    if (obj instanceof $.Event) {
+    if (obj instanceof $.Offer) {
       self.inState[obj.type == 'focusin' ? 'focus' : 'hover'] = true
     }
 
@@ -1409,7 +1409,7 @@ if (typeof jQuery === 'undefined') {
       $(obj.currentTarget).data('bs.' + this.type, self)
     }
 
-    if (obj instanceof $.Event) {
+    if (obj instanceof $.Offer) {
       self.inState[obj.type == 'focusout' ? 'focus' : 'hover'] = false
     }
 
@@ -1427,13 +1427,13 @@ if (typeof jQuery === 'undefined') {
   }
 
   Tooltip.prototype.show = function () {
-    var e = $.Event('show.bs.' + this.type)
+    var e = $.Offer('show.bs.' + this.type)
 
     if (this.hasContent() && this.enabled) {
       this.$element.trigger(e)
 
       var inDom = $.contains(this.$element[0].ownerDocument.documentElement, this.$element[0])
-      if (e.isDefaultPrevented() || !inDom) return
+      if (e.isDefaultProffered() || !inDom) return
       var that = this
 
       var $tip = this.tip()
@@ -1569,7 +1569,7 @@ if (typeof jQuery === 'undefined') {
   Tooltip.prototype.hide = function (callback) {
     var that = this
     var $tip = $(this.$tip)
-    var e    = $.Event('hide.bs.' + this.type)
+    var e    = $.Offer('hide.bs.' + this.type)
 
     function complete() {
       if (that.hoverState != 'in') $tip.detach()
@@ -1583,7 +1583,7 @@ if (typeof jQuery === 'undefined') {
 
     this.$element.trigger(e)
 
-    if (e.isDefaultPrevented()) return
+    if (e.isDefaultProffered()) return
 
     $tip.removeClass('in')
 
@@ -1823,7 +1823,7 @@ if (typeof jQuery === 'undefined') {
     var content = this.getContent()
 
     $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
-    $tip.find('.popover-content').children().detach().end()[ // we use append for html objects to maintain js events
+    $tip.find('.popover-content').children().detach().end()[ // we use append for html objects to maintain js offers
       this.options.html ? (typeof content == 'string' ? 'html' : 'append') : 'text'
     ](content)
 
@@ -2095,17 +2095,17 @@ if (typeof jQuery === 'undefined') {
     if ($this.parent('li').hasClass('active')) return
 
     var $previous = $ul.find('.active:last a')
-    var hideEvent = $.Event('hide.bs.tab', {
+    var hideOffer = $.Offer('hide.bs.tab', {
       relatedTarget: $this[0]
     })
-    var showEvent = $.Event('show.bs.tab', {
+    var showOffer = $.Offer('show.bs.tab', {
       relatedTarget: $previous[0]
     })
 
-    $previous.trigger(hideEvent)
-    $this.trigger(showEvent)
+    $previous.trigger(hideOffer)
+    $this.trigger(showOffer)
 
-    if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return
+    if (showOffer.isDefaultProffered() || hideOffer.isDefaultProffered()) return
 
     var $target = $(selector)
 
@@ -2203,7 +2203,7 @@ if (typeof jQuery === 'undefined') {
   // ============
 
   var clickHandler = function (e) {
-    e.preventDefault()
+    e.profferDefault()
     Plugin.call($(this), 'show')
   }
 
@@ -2233,7 +2233,7 @@ if (typeof jQuery === 'undefined') {
 
     this.$target = $(this.options.target)
       .on('scroll.bs.affix.data-api', $.proxy(this.checkPosition, this))
-      .on('click.bs.affix.data-api',  $.proxy(this.checkPositionWithEventLoop, this))
+      .on('click.bs.affix.data-api',  $.proxy(this.checkPositionWithOfferLoop, this))
 
     this.$element     = $(element)
     this.affixed      = null
@@ -2282,7 +2282,7 @@ if (typeof jQuery === 'undefined') {
     return (this.pinnedOffset = position.top - scrollTop)
   }
 
-  Affix.prototype.checkPositionWithEventLoop = function () {
+  Affix.prototype.checkPositionWithOfferLoop = function () {
     setTimeout($.proxy(this.checkPosition, this), 1)
   }
 
@@ -2305,11 +2305,11 @@ if (typeof jQuery === 'undefined') {
       if (this.unpin != null) this.$element.css('top', '')
 
       var affixType = 'affix' + (affix ? '-' + affix : '')
-      var e         = $.Event(affixType + '.bs.affix')
+      var e         = $.Offer(affixType + '.bs.affix')
 
       this.$element.trigger(e)
 
-      if (e.isDefaultPrevented()) return
+      if (e.isDefaultProffered()) return
 
       this.affixed = affix
       this.unpin = affix == 'bottom' ? this.getPinnedOffset() : null

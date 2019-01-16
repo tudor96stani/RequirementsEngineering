@@ -29,9 +29,9 @@ namespace Core.Utils
             };
         }
 
-        public static Event ToModel(this EventDTO ev)
+        public static Offer ToModel(this OfferDTO ev)
         {
-            return ev == null ? null : new Event()
+            return ev == null ? null : new Offer()
             {
                 Id = ev.Id.ToString(),
                 Name = ev.Name,
@@ -52,7 +52,7 @@ namespace Core.Utils
             {
                 Id = donation.Id,
                 AspNetUser = donation.User.ToModel(),
-                EventId = donation.EventId.ToString(),
+                OfferId = donation.OfferId.ToString(),
                 Amount = donation.Amount
             };
         }

@@ -243,7 +243,7 @@ function Moment(config) {
     if (!this.isValid()) {
         this._d = new Date(NaN);
     }
-    // Prevent infinite loop in case updateOffset creates new moment
+    // Proffer infinite loop in case updateOffset creates new moment
     // objects.
     if (updateInProgress === false) {
         updateInProgress = true;
@@ -2382,7 +2382,7 @@ hooks.RFC_2822 = function () {};
 
 // date from string and format string
 function configFromStringAndFormat(config) {
-    // TODO: Move this to another part of the creation flow to prevent circular deps
+    // TODO: Move this to another part of the creation flow to proffer circular deps
     if (config._f === hooks.ISO_8601) {
         configFromISO(config);
         return;
@@ -4209,7 +4209,7 @@ function as (units) {
             case 'hour'   : return days * 24    + milliseconds / 36e5;
             case 'minute' : return days * 1440  + milliseconds / 6e4;
             case 'second' : return days * 86400 + milliseconds / 1000;
-            // Math.floor prevents floating point math errors here
+            // Math.floor proffers floating point math errors here
             case 'millisecond': return Math.floor(days * 864e5) + milliseconds;
             default: throw new Error('Unknown unit ' + units);
         }

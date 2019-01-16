@@ -36,12 +36,12 @@ var Microsoft;
             _InternalMessageId[_InternalMessageId["NONUSRACT_OnError"] = 25] = "NONUSRACT_OnError";
             _InternalMessageId[_InternalMessageId["NONUSRACT_SessionRenewalDateIsZero"] = 26] = "NONUSRACT_SessionRenewalDateIsZero";
             _InternalMessageId[_InternalMessageId["NONUSRACT_SenderNotInitialized"] = 27] = "NONUSRACT_SenderNotInitialized";
-            _InternalMessageId[_InternalMessageId["NONUSRACT_StartTrackEventFailed"] = 28] = "NONUSRACT_StartTrackEventFailed";
-            _InternalMessageId[_InternalMessageId["NONUSRACT_StopTrackEventFailed"] = 29] = "NONUSRACT_StopTrackEventFailed";
+            _InternalMessageId[_InternalMessageId["NONUSRACT_StartTrackOfferFailed"] = 28] = "NONUSRACT_StartTrackOfferFailed";
+            _InternalMessageId[_InternalMessageId["NONUSRACT_StopTrackOfferFailed"] = 29] = "NONUSRACT_StopTrackOfferFailed";
             _InternalMessageId[_InternalMessageId["NONUSRACT_StartTrackFailed"] = 30] = "NONUSRACT_StartTrackFailed";
             _InternalMessageId[_InternalMessageId["NONUSRACT_StopTrackFailed"] = 31] = "NONUSRACT_StopTrackFailed";
             _InternalMessageId[_InternalMessageId["NONUSRACT_TelemetrySampledAndNotSent"] = 32] = "NONUSRACT_TelemetrySampledAndNotSent";
-            _InternalMessageId[_InternalMessageId["NONUSRACT_TrackEventFailed"] = 33] = "NONUSRACT_TrackEventFailed";
+            _InternalMessageId[_InternalMessageId["NONUSRACT_TrackOfferFailed"] = 33] = "NONUSRACT_TrackOfferFailed";
             _InternalMessageId[_InternalMessageId["NONUSRACT_TrackExceptionFailed"] = 34] = "NONUSRACT_TrackExceptionFailed";
             _InternalMessageId[_InternalMessageId["NONUSRACT_TrackMetricFailed"] = 35] = "NONUSRACT_TrackMetricFailed";
             _InternalMessageId[_InternalMessageId["NONUSRACT_TrackPVFailed"] = 36] = "NONUSRACT_TrackPVFailed";
@@ -164,7 +164,7 @@ var Microsoft;
                         this._messageCount++;
                     }
                     if (this._messageCount == this.MAX_INTERNAL_MESSAGE_LIMIT) {
-                        var throttleLimitMessage = "Internal events throttle limit per PageView reached for this app.";
+                        var throttleLimitMessage = "Internal offers throttle limit per PageView reached for this app.";
                         var throttleMessage = new _InternalLogMessage(_InternalMessageId.NONUSRACT_MessageLimitPerPVExceeded, throttleLimitMessage);
                         this.queue.push(throttleMessage);
                         this.warnToConsole(throttleLimitMessage);
@@ -440,16 +440,16 @@ var Microsoft;
                 }
                 return "";
             };
-            Util.addEventHandler = function (eventName, callback) {
-                if (!window || typeof eventName !== 'string' || typeof callback !== 'function') {
+            Util.addOfferHandler = function (offerName, callback) {
+                if (!window || typeof offerName !== 'string' || typeof callback !== 'function') {
                     return false;
                 }
-                var verbEventName = 'on' + eventName;
-                if (window.addEventListener) {
-                    window.addEventListener(eventName, callback, false);
+                var verbOfferName = 'on' + offerName;
+                if (window.addOfferListener) {
+                    window.addOfferListener(offerName, callback, false);
                 }
-                else if (window["attachEvent"]) {
-                    window["attachEvent"].call(verbEventName, callback);
+                else if (window["attachOffer"]) {
+                    window["attachOffer"].call(verbOfferName, callback);
                 }
                 else {
                     return false;
@@ -550,40 +550,40 @@ var Microsoft;
             return dateTime;
         })();
         ApplicationInsights.dateTime = dateTime;
-        var EventHelper = (function () {
-            function EventHelper() {
+        var OfferHelper = (function () {
+            function OfferHelper() {
             }
-            EventHelper.AttachEvent = function (obj, eventNameWithoutOn, handlerRef) {
+            OfferHelper.AttachOffer = function (obj, offerNameWithoutOn, handlerRef) {
                 var result = false;
                 if (!extensions.IsNullOrUndefined(obj)) {
-                    if (!extensions.IsNullOrUndefined(obj.attachEvent)) {
-                        obj.attachEvent("on" + eventNameWithoutOn, handlerRef);
+                    if (!extensions.IsNullOrUndefined(obj.attachOffer)) {
+                        obj.attachOffer("on" + offerNameWithoutOn, handlerRef);
                         result = true;
                     }
                     else {
-                        if (!extensions.IsNullOrUndefined(obj.addEventListener)) {
-                            obj.addEventListener(eventNameWithoutOn, handlerRef, false);
+                        if (!extensions.IsNullOrUndefined(obj.addOfferListener)) {
+                            obj.addOfferListener(offerNameWithoutOn, handlerRef, false);
                             result = true;
                         }
                     }
                 }
                 return result;
             };
-            EventHelper.DetachEvent = function (obj, eventNameWithoutOn, handlerRef) {
+            OfferHelper.DetachOffer = function (obj, offerNameWithoutOn, handlerRef) {
                 if (!extensions.IsNullOrUndefined(obj)) {
-                    if (!extensions.IsNullOrUndefined(obj.detachEvent)) {
-                        obj.detachEvent("on" + eventNameWithoutOn, handlerRef);
+                    if (!extensions.IsNullOrUndefined(obj.detachOffer)) {
+                        obj.detachOffer("on" + offerNameWithoutOn, handlerRef);
                     }
                     else {
-                        if (!extensions.IsNullOrUndefined(obj.removeEventListener)) {
-                            obj.removeEventListener(eventNameWithoutOn, handlerRef, false);
+                        if (!extensions.IsNullOrUndefined(obj.removeOfferListener)) {
+                            obj.removeOfferListener(offerNameWithoutOn, handlerRef, false);
                         }
                     }
                 }
             };
-            return EventHelper;
+            return OfferHelper;
         })();
-        ApplicationInsights.EventHelper = EventHelper;
+        ApplicationInsights.OfferHelper = OfferHelper;
     })(ApplicationInsights = Microsoft.ApplicationInsights || (Microsoft.ApplicationInsights = {}));
 })(Microsoft || (Microsoft = {}));
 /// <reference path="../logging.ts" />
@@ -768,7 +768,7 @@ var Microsoft;
             };
             AjaxMonitor.prototype.attachToOnReadyStateChange = function (xhr) {
                 var ajaxMonitorInstance = this;
-                xhr.ajaxData.xhrMonitoringState.onreadystatechangeCallbackAttached = ApplicationInsights.EventHelper.AttachEvent(xhr, "readystatechange", function () {
+                xhr.ajaxData.xhrMonitoringState.onreadystatechangeCallbackAttached = ApplicationInsights.OfferHelper.AttachOffer(xhr, "readystatechange", function () {
                     try {
                         if (ajaxMonitorInstance.isMonitoredInstance(xhr)) {
                             if (xhr.readyState === 4) {
@@ -779,7 +779,7 @@ var Microsoft;
                     catch (e) {
                         var exceptionText = Microsoft.ApplicationInsights.Util.dump(e);
                         if (!exceptionText || exceptionText.toLowerCase().indexOf("c00c023f") == -1) {
-                            ApplicationInsights._InternalLogging.throwInternalNonUserActionable(ApplicationInsights.LoggingSeverity.CRITICAL, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_FailedMonitorAjaxRSC, "Failed to monitor XMLHttpRequest 'readystatechange' event handler, monitoring data for this ajax call may be incorrect.", {
+                            ApplicationInsights._InternalLogging.throwInternalNonUserActionable(ApplicationInsights.LoggingSeverity.CRITICAL, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_FailedMonitorAjaxRSC, "Failed to monitor XMLHttpRequest 'readystatechange' offer handler, monitoring data for this ajax call may be incorrect.", {
                                 ajaxDiagnosticsMessage: AjaxMonitor.getFailedAjaxDiagnosticsMessage(xhr),
                                 exception: Microsoft.ApplicationInsights.Util.dump(e)
                             }));
@@ -1730,13 +1730,13 @@ var Microsoft;
                 xhr.open("POST", this._config.endpointUrl(), isAsync);
                 xhr.setRequestHeader("Content-type", "application/json");
                 xhr.onreadystatechange = function () { return Sender._xhrReadyStateChange(xhr, payload, countOfItemsInPayload); };
-                xhr.onerror = function (event) { return Sender._onError(payload, xhr.responseText || xhr.response || "", event); };
+                xhr.onerror = function (offer) { return Sender._onError(payload, xhr.responseText || xhr.response || "", offer); };
                 xhr.send(payload);
             };
             Sender.prototype._xdrSender = function (payload, isAsync) {
                 var xdr = new XDomainRequest();
                 xdr.onload = function () { return Sender._xdrOnLoad(xdr, payload); };
-                xdr.onerror = function (event) { return Sender._onError(payload, xdr.responseText || "", event); };
+                xdr.onerror = function (offer) { return Sender._onError(payload, xdr.responseText || "", offer); };
                 xdr.open('POST', this._config.endpointUrl());
                 xdr.send(payload);
             };
@@ -1758,7 +1758,7 @@ var Microsoft;
                     Sender._onError(payload, xdr && xdr.responseText || "");
                 }
             };
-            Sender._onError = function (payload, message, event) {
+            Sender._onError = function (payload, message, offer) {
                 ApplicationInsights._InternalLogging.throwInternalNonUserActionable(ApplicationInsights.LoggingSeverity.WARNING, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_OnError, "Failed to send telemetry.", { message: message }));
             };
             Sender._onSuccess = function (payload, countOfItemsInPayload) {
@@ -1983,19 +1983,19 @@ var Microsoft;
 var AI;
 (function (AI) {
     "use strict";
-    var EventData = (function (_super) {
-        __extends(EventData, _super);
-        function EventData() {
+    var OfferData = (function (_super) {
+        __extends(OfferData, _super);
+        function OfferData() {
             this.ver = 2;
             this.properties = {};
             this.measurements = {};
             _super.call(this);
         }
-        return EventData;
+        return OfferData;
     })(Microsoft.Telemetry.Domain);
-    AI.EventData = EventData;
+    AI.OfferData = OfferData;
 })(AI || (AI = {}));
-/// <reference path="../Contracts/Generated/EventData.ts" />
+/// <reference path="../Contracts/Generated/OfferData.ts" />
 /// <reference path="./Common/DataSanitizer.ts"/>
 var Microsoft;
 (function (Microsoft) {
@@ -2004,9 +2004,9 @@ var Microsoft;
         var Telemetry;
         (function (Telemetry) {
             "use strict";
-            var Event = (function (_super) {
-                __extends(Event, _super);
-                function Event(name, properties, measurements) {
+            var Offer = (function (_super) {
+                __extends(Offer, _super);
+                function Offer(name, properties, measurements) {
                     _super.call(this);
                     this.aiDataContract = {
                         ver: ApplicationInsights.FieldType.Required,
@@ -2018,11 +2018,11 @@ var Microsoft;
                     this.properties = ApplicationInsights.Telemetry.Common.DataSanitizer.sanitizeProperties(properties);
                     this.measurements = ApplicationInsights.Telemetry.Common.DataSanitizer.sanitizeMeasurements(measurements);
                 }
-                Event.envelopeType = "Microsoft.ApplicationInsights.{0}.Event";
-                Event.dataType = "EventData";
-                return Event;
-            })(AI.EventData);
-            Telemetry.Event = Event;
+                Offer.envelopeType = "Microsoft.ApplicationInsights.{0}.Offer";
+                Offer.dataType = "OfferData";
+                return Offer;
+            })(AI.OfferData);
+            Telemetry.Offer = Offer;
         })(Telemetry = ApplicationInsights.Telemetry || (ApplicationInsights.Telemetry = {}));
     })(ApplicationInsights = Microsoft.ApplicationInsights || (Microsoft.ApplicationInsights = {}));
 })(Microsoft || (Microsoft = {}));
@@ -2323,7 +2323,7 @@ var Microsoft;
         })(Telemetry = ApplicationInsights.Telemetry || (ApplicationInsights.Telemetry = {}));
     })(ApplicationInsights = Microsoft.ApplicationInsights || (Microsoft.ApplicationInsights = {}));
 })(Microsoft || (Microsoft = {}));
-/// <reference path="EventData.ts" />
+/// <reference path="OfferData.ts" />
 var AI;
 (function (AI) {
     "use strict";
@@ -2336,7 +2336,7 @@ var AI;
             _super.call(this);
         }
         return PageViewData;
-    })(AI.EventData);
+    })(AI.OfferData);
     AI.PageViewData = PageViewData;
 })(AI || (AI = {}));
 /// <reference path="../Contracts/Generated/PageViewData.ts" />
@@ -2422,11 +2422,11 @@ var Microsoft;
                     this.isValid = false;
                     var timing = PageViewPerformance.getPerformanceTiming();
                     if (timing) {
-                        var total = PageViewPerformance.getDuration(timing.navigationStart, timing.loadEventEnd);
+                        var total = PageViewPerformance.getDuration(timing.navigationStart, timing.loadOfferEnd);
                         var network = PageViewPerformance.getDuration(timing.navigationStart, timing.connectEnd);
                         var request = PageViewPerformance.getDuration(timing.requestStart, timing.responseStart);
                         var response = PageViewPerformance.getDuration(timing.responseStart, timing.responseEnd);
-                        var dom = PageViewPerformance.getDuration(timing.responseEnd, timing.loadEventEnd);
+                        var dom = PageViewPerformance.getDuration(timing.responseEnd, timing.loadOfferEnd);
                         if (total == 0) {
                             ApplicationInsights._InternalLogging.throwInternalNonUserActionable(ApplicationInsights.LoggingSeverity.WARNING, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_ErrorPVCalc, "error calculating page view performance.", { total: total, network: network, request: request, response: response, dom: dom }));
                         }
@@ -2469,7 +2469,7 @@ var Microsoft;
                         && timing.navigationStart > 0
                         && timing.responseStart > 0
                         && timing.requestStart > 0
-                        && timing.loadEventEnd > 0
+                        && timing.loadOfferEnd > 0
                         && timing.responseEnd > 0
                         && timing.connectEnd > 0
                         && timing.domLoading > 0;
@@ -2491,7 +2491,7 @@ var Microsoft;
 })(Microsoft || (Microsoft = {}));
 /// <reference path="sender.ts"/>
 /// <reference path="telemetry/trace.ts" />
-/// <reference path="telemetry/event.ts" />
+/// <reference path="telemetry/offer.ts" />
 /// <reference path="telemetry/exception.ts" />
 /// <reference path="telemetry/metric.ts" />
 /// <reference path="telemetry/pageview.ts" />
@@ -3070,8 +3070,8 @@ var Microsoft;
                 };
                 this.context = new ApplicationInsights.TelemetryContext(configGetters);
                 this._pageViewManager = new Microsoft.ApplicationInsights.Telemetry.PageViewManager(this, this.config.overridePageViewDuration);
-                this._eventTracking = new Timing("trackEvent");
-                this._eventTracking.action = function (name, url, duration, properties, measurements) {
+                this._offerTracking = new Timing("trackOffer");
+                this._offerTracking.action = function (name, url, duration, properties, measurements) {
                     if (!measurements) {
                         measurements = { duration: duration };
                     }
@@ -3080,9 +3080,9 @@ var Microsoft;
                             measurements["duration"] = duration;
                         }
                     }
-                    var event = new ApplicationInsights.Telemetry.Event(name, properties, measurements);
-                    var data = new ApplicationInsights.Telemetry.Common.Data(ApplicationInsights.Telemetry.Event.dataType, event);
-                    var envelope = new ApplicationInsights.Telemetry.Common.Envelope(data, ApplicationInsights.Telemetry.Event.envelopeType);
+                    var offer = new ApplicationInsights.Telemetry.Offer(name, properties, measurements);
+                    var data = new ApplicationInsights.Telemetry.Common.Data(ApplicationInsights.Telemetry.Offer.dataType, offer);
+                    var envelope = new ApplicationInsights.Telemetry.Common.Envelope(data, ApplicationInsights.Telemetry.Offer.envelopeType);
                     _this.context.track(envelope);
                 };
                 this._pageTracking = new Timing("trackPageView");
@@ -3145,31 +3145,31 @@ var Microsoft;
                     ApplicationInsights._InternalLogging.throwInternalNonUserActionable(ApplicationInsights.LoggingSeverity.CRITICAL, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_TrackPVFailed, "trackPageView failed, page view will not be collected: " + ApplicationInsights.Util.getExceptionName(e), { exception: ApplicationInsights.Util.dump(e) }));
                 }
             };
-            AppInsights.prototype.startTrackEvent = function (name) {
+            AppInsights.prototype.startTrackOffer = function (name) {
                 try {
-                    this._eventTracking.start(name);
+                    this._offerTracking.start(name);
                 }
                 catch (e) {
-                    ApplicationInsights._InternalLogging.throwInternalNonUserActionable(ApplicationInsights.LoggingSeverity.CRITICAL, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_StartTrackEventFailed, "startTrackEvent failed, event will not be collected: " + ApplicationInsights.Util.getExceptionName(e), { exception: ApplicationInsights.Util.dump(e) }));
+                    ApplicationInsights._InternalLogging.throwInternalNonUserActionable(ApplicationInsights.LoggingSeverity.CRITICAL, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_StartTrackOfferFailed, "startTrackOffer failed, offer will not be collected: " + ApplicationInsights.Util.getExceptionName(e), { exception: ApplicationInsights.Util.dump(e) }));
                 }
             };
-            AppInsights.prototype.stopTrackEvent = function (name, properties, measurements) {
+            AppInsights.prototype.stopTrackOffer = function (name, properties, measurements) {
                 try {
-                    this._eventTracking.stop(name, undefined, properties, measurements);
+                    this._offerTracking.stop(name, undefined, properties, measurements);
                 }
                 catch (e) {
-                    ApplicationInsights._InternalLogging.throwInternalNonUserActionable(ApplicationInsights.LoggingSeverity.CRITICAL, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_StopTrackEventFailed, "stopTrackEvent failed, event will not be collected: " + ApplicationInsights.Util.getExceptionName(e), { exception: ApplicationInsights.Util.dump(e) }));
+                    ApplicationInsights._InternalLogging.throwInternalNonUserActionable(ApplicationInsights.LoggingSeverity.CRITICAL, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_StopTrackOfferFailed, "stopTrackOffer failed, offer will not be collected: " + ApplicationInsights.Util.getExceptionName(e), { exception: ApplicationInsights.Util.dump(e) }));
                 }
             };
-            AppInsights.prototype.trackEvent = function (name, properties, measurements) {
+            AppInsights.prototype.trackOffer = function (name, properties, measurements) {
                 try {
-                    var eventTelemetry = new ApplicationInsights.Telemetry.Event(name, properties, measurements);
-                    var data = new ApplicationInsights.Telemetry.Common.Data(ApplicationInsights.Telemetry.Event.dataType, eventTelemetry);
-                    var envelope = new ApplicationInsights.Telemetry.Common.Envelope(data, ApplicationInsights.Telemetry.Event.envelopeType);
+                    var offerTelemetry = new ApplicationInsights.Telemetry.Offer(name, properties, measurements);
+                    var data = new ApplicationInsights.Telemetry.Common.Data(ApplicationInsights.Telemetry.Offer.dataType, offerTelemetry);
+                    var envelope = new ApplicationInsights.Telemetry.Common.Envelope(data, ApplicationInsights.Telemetry.Offer.envelopeType);
                     this.context.track(envelope);
                 }
                 catch (e) {
-                    ApplicationInsights._InternalLogging.throwInternalNonUserActionable(ApplicationInsights.LoggingSeverity.CRITICAL, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_TrackEventFailed, "trackEvent failed, event will not be collected: " + ApplicationInsights.Util.getExceptionName(e), { exception: ApplicationInsights.Util.dump(e) }));
+                    ApplicationInsights._InternalLogging.throwInternalNonUserActionable(ApplicationInsights.LoggingSeverity.CRITICAL, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_TrackOfferFailed, "trackOffer failed, offer will not be collected: " + ApplicationInsights.Util.getExceptionName(e), { exception: ApplicationInsights.Util.dump(e) }));
                 }
             };
             AppInsights.prototype.trackAjax = function (id, absoluteUrl, pathName, totalTime, success, resultCode) {
@@ -3255,7 +3255,7 @@ var Microsoft;
                 }
             };
             AppInsights.prototype.SendCORSException = function (properties) {
-                var exceptionData = Microsoft.ApplicationInsights.Telemetry.Exception.CreateSimpleException("Script error.", "Error", "unknown", "unknown", "The browser’s same-origin policy prevents us from getting the details of this exception.The exception occurred in a script loaded from an origin different than the web page.For cross- domain error reporting you can use crossorigin attribute together with appropriate CORS HTTP headers.For more information please see http://www.w3.org/TR/cors/.", 0, null);
+                var exceptionData = Microsoft.ApplicationInsights.Telemetry.Exception.CreateSimpleException("Script error.", "Error", "unknown", "unknown", "The browser’s same-origin policy proffers us from getting the details of this exception.The exception occurred in a script loaded from an origin different than the web page.For cross- domain error reporting you can use crossorigin attribute together with appropriate CORS HTTP headers.For more information please see http://www.w3.org/TR/cors/.", 0, null);
                 exceptionData.properties = properties;
                 var data = new ApplicationInsights.Telemetry.Common.Data(ApplicationInsights.Telemetry.Exception.dataType, exceptionData);
                 var envelope = new ApplicationInsights.Telemetry.Common.Envelope(data, ApplicationInsights.Telemetry.Exception.envelopeType);
@@ -3288,16 +3288,16 @@ var Microsoft;
         var Timing = (function () {
             function Timing(name) {
                 this._name = name;
-                this._events = {};
+                this._offers = {};
             }
             Timing.prototype.start = function (name) {
-                if (typeof this._events[name] !== "undefined") {
-                    ApplicationInsights._InternalLogging.throwInternalUserActionable(ApplicationInsights.LoggingSeverity.WARNING, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.USRACT_StartCalledMoreThanOnce, "start was called more than once for this event without calling stop.", { name: this._name, key: name }));
+                if (typeof this._offers[name] !== "undefined") {
+                    ApplicationInsights._InternalLogging.throwInternalUserActionable(ApplicationInsights.LoggingSeverity.WARNING, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.USRACT_StartCalledMoreThanOnce, "start was called more than once for this offer without calling stop.", { name: this._name, key: name }));
                 }
-                this._events[name] = +new Date;
+                this._offers[name] = +new Date;
             };
             Timing.prototype.stop = function (name, url, properties, measurements) {
-                var start = this._events[name];
+                var start = this._offers[name];
                 if (isNaN(start)) {
                     ApplicationInsights._InternalLogging.throwInternalUserActionable(ApplicationInsights.LoggingSeverity.WARNING, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.USRACT_StopCalledWithoutStart, "stop was called without a corresponding start.", { name: this._name, key: name }));
                 }
@@ -3306,8 +3306,8 @@ var Microsoft;
                     var duration = ApplicationInsights.Telemetry.PageViewPerformance.getDuration(start, end);
                     this.action(name, url, duration, properties, measurements);
                 }
-                delete this._events[name];
-                this._events[name] = undefined;
+                delete this._offers[name];
+                this._offers[name] = undefined;
             };
             return Timing;
         })();
@@ -3403,10 +3403,10 @@ var Microsoft;
                         appInsights.trackPageView(null, pagePath, properties, measurements);
                     };
                 }
-                var legacyEvent = "logEvent";
-                if (typeof this.snippet[legacyEvent] === "function") {
-                    appInsights[legacyEvent] = function (name, properties, measurements) {
-                        appInsights.trackEvent(name, properties, measurements);
+                var legacyOffer = "logOffer";
+                if (typeof this.snippet[legacyOffer] === "function") {
+                    appInsights[legacyOffer] = function (name, properties, measurements) {
+                        appInsights.trackOffer(name, properties, measurements);
                     };
                 }
                 return appInsights;
@@ -3443,13 +3443,13 @@ var Microsoft;
                 }, this.config.diagnosticLogInterval);
             };
             Initialization.prototype.addHousekeepingBeforeUnload = function (appInsightsInstance) {
-                // Add callback to push events when the user navigates away
+                // Add callback to push offers when the user navigates away
                 if (!appInsightsInstance.config.disableFlushOnBeforeUnload && ('onbeforeunload' in window)) {
                     var performHousekeeping = function () {
                         appInsightsInstance.context._sender.triggerSend();
                         appInsightsInstance.context._sessionManager.backup();
                     };
-                    if (!Microsoft.ApplicationInsights.Util.addEventHandler('beforeunload', performHousekeeping)) {
+                    if (!Microsoft.ApplicationInsights.Util.addOfferHandler('beforeunload', performHousekeeping)) {
                         Microsoft.ApplicationInsights._InternalLogging.throwInternalNonUserActionable(Microsoft.ApplicationInsights.LoggingSeverity.CRITICAL, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_FailedToAddHandlerForOnBeforeUnload, 'Could not add handler for beforeunload'));
                     }
                 }

@@ -2303,7 +2303,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 
 a.btn.disabled,
 fieldset[disabled] a.btn {
-  pointer-events: none;
+  pointer-offers: none;
 }
 
 .btn-primary {
@@ -3140,7 +3140,7 @@ tbody.collapse.show {
 [data-toggle="buttons"] > .btn-group > .btn input[type="checkbox"] {
   position: absolute;
   clip: rect(0, 0, 0, 0);
-  pointer-events: none;
+  pointer-offers: none;
 }
 
 .input-group {
@@ -3340,7 +3340,7 @@ tbody.collapse.show {
   display: block;
   width: 1rem;
   height: 1rem;
-  pointer-events: none;
+  pointer-offers: none;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -3465,7 +3465,7 @@ tbody.collapse.show {
   padding: 0.375rem 0.75rem;
   line-height: 1.5;
   color: #495057;
-  pointer-events: none;
+  pointer-offers: none;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -4330,7 +4330,7 @@ tbody.collapse.show {
 
 .page-item.disabled .page-link {
   color: #868e96;
-  pointer-events: none;
+  pointer-offers: none;
   background-color: #fff;
   border-color: #ddd;
 }
@@ -5045,7 +5045,7 @@ button.close {
   position: relative;
   width: auto;
   margin: 10px;
-  pointer-events: none;
+  pointer-offers: none;
 }
 
 .modal-content {
@@ -5054,7 +5054,7 @@ button.close {
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column;
-  pointer-events: auto;
+  pointer-offers: auto;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);

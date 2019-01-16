@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.DTO
 {
-    public class EventQuickInfoDTO
+    public class OfferQuickInfoDTO
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -15,19 +15,19 @@ namespace Common.DTO
         public List<DonationDetailDTO> Donations { get; set; }
         public DateTime DateTimeUTC { get; set; }
 
-        public EventQuickInfoDTO()
+        public OfferQuickInfoDTO()
         {
 
         }
 
-        public EventQuickInfoDTO(EventDTO eventdto)
+        public OfferQuickInfoDTO(OfferDTO offerdto)
         {
-            Id = eventdto.Id;
-            Name = eventdto.Name;
-            Location = eventdto.Location;
-            Owner = eventdto.Owner;
-            DateTimeUTC = eventdto.DateTimeUtc;
-            Donations = eventdto.Donations.Select(x => new DonationDetailDTO(x.User, x.Amount)).ToList();
+            Id = offerdto.Id;
+            Name = offerdto.Name;
+            Location = offerdto.Location;
+            Owner = offerdto.Owner;
+            DateTimeUTC = offerdto.DateTimeUtc;
+            Donations = offerdto.Donations.Select(x => new DonationDetailDTO(x.User, x.Amount)).ToList();
         }
     }
 }

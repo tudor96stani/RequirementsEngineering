@@ -89,9 +89,9 @@ namespace Web.Controllers
                         {
                             return RedirectToAction("Homepage", "Organization");
                         }
-                        else if (roles.Contains("Volunteer"))
+                        else if (roles.Contains("Candidate"))
                         {
-                            return RedirectToAction("Index", "Volunteer");
+                            return RedirectToAction("Index", "Candidate");
                         }
                         else
                         {
@@ -185,8 +185,8 @@ namespace Web.Controllers
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     if(model.UserRoles.Contains("Organization"))
                         return RedirectToAction("Homepage", "Organization");
-                    if (model.UserRoles.Contains("Volunteer"))
-                        return RedirectToAction("Index", "Volunteer");
+                    if (model.UserRoles.Contains("Candidate"))
+                        return RedirectToAction("Index", "Candidate");
                 }
                 ViewBag.Name = new SelectList(_userService.GetAllRoles()
                                             .ToList(), "Name", "Name");

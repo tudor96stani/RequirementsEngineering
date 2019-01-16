@@ -12,11 +12,11 @@ namespace Core.DAL
         public AspNetUser()
         {
             Donations = new HashSet<Donation>();
-            OwnedEvents = new HashSet<Event>();
+            OwnedOffers = new HashSet<Offer>();
             Files = new HashSet<File>();
             Ratings = new HashSet<Rating>();
             AspNetRoles = new HashSet<AspNetRole>();
-            Participating = new HashSet<Event>();
+            Participating = new HashSet<Offer>();
         }
 
         public string Id { get; set; }
@@ -52,7 +52,7 @@ namespace Core.DAL
         public virtual ICollection<Donation> Donations { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Event> OwnedEvents { get; set; }
+        public virtual ICollection<Offer> OwnedOffers { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<File> Files { get; set; }
@@ -64,6 +64,6 @@ namespace Core.DAL
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Event> Participating { get; set; }
+        public virtual ICollection<Offer> Participating { get; set; }
     }
 }

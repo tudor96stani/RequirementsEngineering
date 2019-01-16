@@ -31,40 +31,40 @@ namespace Core.Services
             }
         }
 
-        public List<EventDTO> GetAllEventsForOrganization(Guid id)
+        public List<OfferDTO> GetAllOffersForOrganization(Guid id)
         {
             using (var db = new ApplicationDbContext())
             {
-                var events = db.Events.Where(x => x.OwnerId == id.ToString()).ToList().Select(x => x.ToDTO()).ToList();
-                return events;
+                var offers = db.Offers.Where(x => x.OwnerId == id.ToString()).ToList().Select(x => x.ToDTO()).ToList();
+                return offers;
             }
         }
 
-        public List<EventQuickInfoDTO> GetAllEventsForOrganizationOrderedByDate(Guid id)
+        public List<OfferQuickInfoDTO> GetAllOffersForOrganizationOrderedByDate(Guid id)
         {
             using (var db = new ApplicationDbContext())
             {
-                var events = db.Events.Where(x => x.OwnerId == id.ToString()).ToList().Select(x => x.ToDTO()).OrderByDescending(x => x.DateTimeUtc).ToList().Select(x => new EventQuickInfoDTO(x)).ToList();
-                return events;
+                var offers = db.Offers.Where(x => x.OwnerId == id.ToString()).ToList().Select(x => x.ToDTO()).OrderByDescending(x => x.DateTimeUtc).ToList().Select(x => new OfferQuickInfoDTO(x)).ToList();
+                return offers;
             }
         }
 
-        public List<UserDTO> GetTopVolunteers()
+        public List<UserDTO> GetTopCandidates()
         {
             using (var db = new ApplicationDbContext())
             {
-                AspNetRole volunteerRole = db.AspNetRoles.FirstOrDefault(x => x.Name == "Volunteer");
-                var topVolunteers = db.AspNetUsers.Include(x => x.Ratings).Where(x=>x.AspNetRoles.Any(y=>y.Name=="Volunteer")).OrderByDescending(x => x.Ratings.Select(y => y.Rating1).Average()).Take(10).ToList();
-                return topVolunteers.Select(x => x.ToDTO()).ToList();
+                AspNetRole candidateRole = db.AspNetRoles.FirstOrDefault(x => x.Name == "Candidate");
+                var topCandidates = db.AspNetUsers.Include(x => x.Ratings).Where(x=>x.AspNetRoles.Any(y=>y.Name=="Candidate")).OrderByDescending(x => x.Ratings.Select(y => y.Rating1).Average()).Take(10).ToList();
+                return topCandidates.Select(x => x.ToDTO()).ToList();
             }
         }
 
-        public List<EventQuickInfoDTO> GetAllEvents()
+        public List<OfferQuickInfoDTO> GetAllOffers()
         {
             using(var db = new ApplicationDbContext())
             {
-                var events = db.Events.Include(x => x.Owner).Include(x => x.Location).Include(x => x.Donations).OrderByDescending(x => x.DateTimeUTC).ToList().Select(x=>x.ToDTO()).Select(x => new EventQuickInfoDTO(x)).ToList();
-                return events;
+                var offers = db.Offers.Include(x => x.Owner).Include(x => x.Location).Include(x => x.Donations).OrderByDescending(x => x.DateTimeUTC).ToList().Select(x=>x.ToDTO()).Select(x => new OfferQuickInfoDTO(x)).ToList();
+                return offers;
             }
         }
     }

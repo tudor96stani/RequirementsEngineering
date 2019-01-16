@@ -10,12 +10,12 @@ namespace Common.Interfaces.Services
     public interface IOrganizationService
     {
         OrganizationDTO GetOrganizationProfileDetails(Guid id);
-        List<EventDTO> GetAllEventsForOrganization(Guid id);
+        List<OfferDTO> GetAllOffersForOrganization(Guid id);
 
-        List<EventQuickInfoDTO> GetAllEventsForOrganizationOrderedByDate(Guid id);
-        List<UserDTO> GetTopVolunteers();
+        List<OfferQuickInfoDTO> GetAllOffersForOrganizationOrderedByDate(Guid id);
+        List<UserDTO> GetTopCandidates();
 
-        List<EventQuickInfoDTO> GetAllEvents();
+        List<OfferQuickInfoDTO> GetAllOffers();
         
     }
 }

@@ -43,9 +43,9 @@ $.extend( $.fn, {
 
 		if ( validator.settings.onsubmit ) {
 
-			this.on( "click.validate", ":submit", function( event ) {
+			this.on( "click.validate", ":submit", function( offer ) {
 				if ( validator.settings.submitHandler ) {
-					validator.submitButton = event.target;
+					validator.submitButton = offer.target;
 				}
 
 				// Allow suppressing validation by adding a cancel class to the submit button
@@ -60,11 +60,11 @@ $.extend( $.fn, {
 			} );
 
 			// Validate the form on submit
-			this.on( "submit.validate", function( event ) {
+			this.on( "submit.validate", function( offer ) {
 				if ( validator.settings.debug ) {
 
-					// Prevent form submit to be able to see console output
-					event.preventDefault();
+					// Proffer form submit to be able to see console output
+					offer.profferDefault();
 				}
 				function handle() {
 					var hidden, result;
@@ -77,7 +77,7 @@ $.extend( $.fn, {
 								.val( $( validator.submitButton ).val() )
 								.appendTo( validator.currentForm );
 						}
-						result = validator.settings.submitHandler.call( validator, validator.currentForm, event );
+						result = validator.settings.submitHandler.call( validator, validator.currentForm, offer );
 						if ( validator.submitButton ) {
 
 							// And clean up afterwards; thanks to no-block-scope, hidden can be referenced
@@ -91,7 +91,7 @@ $.extend( $.fn, {
 					return true;
 				}
 
-				// Prevent submit for invalid forms or custom submit handlers
+				// Proffer submit for invalid forms or custom submit handlers
 				if ( validator.cancelSubmit ) {
 					validator.cancelSubmit = false;
 					return handle();
@@ -289,7 +289,7 @@ $.extend( $.validator, {
 				this.element( element );
 			}
 		},
-		onkeyup: function( element, event ) {
+		onkeyup: function( element, offer ) {
 
 			// Avoid revalidate the field when pressing one of the following keys
 			// Shift       => 16
@@ -310,7 +310,7 @@ $.extend( $.validator, {
 				38, 39, 40, 45, 144, 225
 			];
 
-			if ( event.which === 9 && this.elementValue( element ) === "" || $.inArray( event.keyCode, excludedKeys ) !== -1 ) {
+			if ( offer.which === 9 && this.elementValue( element ) === "" || $.inArray( offer.keyCode, excludedKeys ) !== -1 ) {
 				return;
 			} else if ( element.name in this.submitted || element.name in this.invalid ) {
 				this.element( element );
@@ -397,7 +397,7 @@ $.extend( $.validator, {
 				rules[ key ] = $.validator.normalizeRule( value );
 			} );
 
-			function delegate( event ) {
+			function delegate( offer ) {
 
 				// Set form expando on contenteditable
 				if ( !this.form && this.hasAttribute( "contenteditable" ) ) {
@@ -405,10 +405,10 @@ $.extend( $.validator, {
 				}
 
 				var validator = $.data( this.form, "validator" ),
-					eventType = "on" + event.type.replace( /^validate/, "" ),
+					offerType = "on" + offer.type.replace( /^validate/, "" ),
 					settings = validator.settings;
-				if ( settings[ eventType ] && !$( this ).is( settings.ignore ) ) {
-					settings[ eventType ].call( validator, this, event );
+				if ( settings[ offerType ] && !$( this ).is( settings.ignore ) ) {
+					settings[ offerType ].call( validator, this, offer );
 				}
 			}
 
@@ -420,7 +420,7 @@ $.extend( $.validator, {
 					"[type='radio'], [type='checkbox'], [contenteditable], [type='button']", delegate )
 
 				// Support: Chrome, oldIE
-				// "select" is provided as event.target when clicking a option
+				// "select" is provided as offer.target when clicking a option
 				.on( "click.validate", "select, option, [type='radio'], [type='checkbox']", delegate );
 
 			if ( this.settings.invalidHandler ) {
@@ -601,7 +601,7 @@ $.extend( $.validator, {
 					.filter( ":visible" )
 					.focus()
 
-					// Manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
+					// Manually trigger focusin offer; without it, focusin handler isn't called, findLastActive won't have anything to find
 					.trigger( "focusin" );
 				} catch ( e ) {
 
@@ -1106,7 +1106,7 @@ $.extend( $.validator, {
 			} );
 		},
 
-		// Cleans up all forms and elements, removes validator-specific events
+		// Cleans up all forms and elements, removes validator-specific offers
 		destroy: function() {
 			this.resetForm();
 
@@ -1461,7 +1461,7 @@ $.extend( $.validator, {
 		// http://jqueryvalidation.org/equalTo-method/
 		equalTo: function( value, element, param ) {
 
-			// Bind to the blur event of the target in order to revalidate whenever the target field is updated
+			// Bind to the blur offer of the target in order to revalidate whenever the target field is updated
 			var target = $( param );
 			if ( this.settings.onfocusout && target.not( ".validate-equalTo-blur" ).length ) {
 				target.addClass( "validate-equalTo-blur" ).on( "blur.validate-equalTo", function() {

@@ -173,16 +173,16 @@ window.Modernizr = (function( window, document, undefined ) {
      /*>>mq*/
 
 
-    /*>>hasevent*/
+    /*>>hasoffer*/
     //
-    // isEventSupported determines if a given element supports the given event
-    // kangax.github.com/iseventsupported/
+    // isOfferSupported determines if a given element supports the given offer
+    // kangax.github.com/isoffersupported/
     //
     // The following results are known incorrects:
-    //   Modernizr.hasEvent("webkitTransitionEnd", elem) // false negative
-    //   Modernizr.hasEvent("textInput") // in Webkit. github.com/Modernizr/Modernizr/issues/333
+    //   Modernizr.hasOffer("webkitTransitionEnd", elem) // false negative
+    //   Modernizr.hasOffer("textInput") // in Webkit. github.com/Modernizr/Modernizr/issues/333
     //   ...
-    isEventSupported = (function() {
+    isOfferSupported = (function() {
 
       var TAGNAMES = {
         'select': 'input', 'change': 'input',
@@ -190,13 +190,13 @@ window.Modernizr = (function( window, document, undefined ) {
         'error': 'img', 'load': 'img', 'abort': 'img'
       };
 
-      function isEventSupported( eventName, element ) {
+      function isOfferSupported( offerName, element ) {
 
-        element = element || document.createElement(TAGNAMES[eventName] || 'div');
-        eventName = 'on' + eventName;
+        element = element || document.createElement(TAGNAMES[offerName] || 'div');
+        offerName = 'on' + offerName;
 
         // When using `setAttribute`, IE skips "unload", WebKit skips "unload" and "resize", whereas `in` "catches" those
-        var isSupported = eventName in element;
+        var isSupported = offerName in element;
 
         if ( !isSupported ) {
           // If it has no `setAttribute` (i.e. doesn't implement Node interface), try generic element
@@ -204,23 +204,23 @@ window.Modernizr = (function( window, document, undefined ) {
             element = document.createElement('div');
           }
           if ( element.setAttribute && element.removeAttribute ) {
-            element.setAttribute(eventName, '');
-            isSupported = is(element[eventName], 'function');
+            element.setAttribute(offerName, '');
+            isSupported = is(element[offerName], 'function');
 
             // If property was created, "remove it" (by setting value to `undefined`)
-            if ( !is(element[eventName], 'undefined') ) {
-              element[eventName] = undefined;
+            if ( !is(element[offerName], 'undefined') ) {
+              element[offerName] = undefined;
             }
-            element.removeAttribute(eventName);
+            element.removeAttribute(offerName);
           }
         }
 
         element = null;
         return isSupported;
       }
-      return isEventSupported;
+      return isOfferSupported;
     })(),
-    /*>>hasevent*/
+    /*>>hasoffer*/
 
     // TODO :: Add flag for hasownprop ? didn't last time
 
@@ -436,7 +436,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
     /*
      * The Modernizr.touch test only indicates if the browser supports
-     *    touch events, which does not necessarily reflect a touchscreen
+     *    touch offers, which does not necessarily reflect a touchscreen
      *    device, as evidenced by tablets running Windows 7 or, alas,
      *    the Palm Pre / WebOS (touch) phones.
      *
@@ -500,7 +500,7 @@ window.Modernizr = (function( window, document, undefined ) {
     // documentMode logic from YUI to filter out IE8 Compat Mode
     //   which false positives.
     tests['hashchange'] = function() {
-      return isEventSupported('hashchange', window) && (document.documentMode === undefined || document.documentMode > 7);
+      return isOfferSupported('hashchange', window) && (document.documentMode === undefined || document.documentMode > 7);
     };
 
     // Per 1.6:
@@ -1331,16 +1331,16 @@ window.Modernizr = (function( window, document, undefined ) {
     Modernizr.mq            = testMediaQuery;
     /*>>mq*/
 
-    /*>>hasevent*/
-    // Modernizr.hasEvent() detects support for a given event, with an optional element to test on
-    // Modernizr.hasEvent('gesturestart', elem)
-    Modernizr.hasEvent      = isEventSupported;
-    /*>>hasevent*/
+    /*>>hasoffer*/
+    // Modernizr.hasOffer() detects support for a given offer, with an optional element to test on
+    // Modernizr.hasOffer('gesturestart', elem)
+    Modernizr.hasOffer      = isOfferSupported;
+    /*>>hasoffer*/
 
     /*>>testprop*/
     // Modernizr.testProp() investigates whether a given style property is recognized
     // Note that the property names must be provided in the camelCase variant.
-    // Modernizr.testProp('pointerEvents')
+    // Modernizr.testProp('pointerOffers')
     Modernizr.testProp      = function(prop){
         return testProps([prop]);
     };
@@ -1371,16 +1371,16 @@ window.Modernizr = (function( window, document, undefined ) {
     //
     //     str.replace(/([A-Z])/g, function(str,m1){ return '-' + m1.toLowerCase(); }).replace(/^ms-/,'-ms-');
 
-    // If you're trying to ascertain which transition end event to bind to, you might do something like...
+    // If you're trying to ascertain which transition end offer to bind to, you might do something like...
     //
-    //     var transEndEventNames = {
+    //     var transEndOfferNames = {
     //       'WebkitTransition' : 'webkitTransitionEnd',
     //       'MozTransition'    : 'transitionend',
     //       'OTransition'      : 'oTransitionEnd',
     //       'msTransition'     : 'MSTransitionEnd',
     //       'transition'       : 'transitionend'
     //     },
-    //     transEndEventName = transEndEventNames[ Modernizr.prefixed('transition') ];
+    //     transEndOfferName = transEndOfferNames[ Modernizr.prefixed('transition') ];
 
     Modernizr.prefixed      = function(prop, obj, elem){
       if(!obj) {

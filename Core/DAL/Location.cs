@@ -11,7 +11,7 @@ namespace Core.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Location()
         {
-            Events = new HashSet<Event>();
+            Offers = new HashSet<Offer>();
         }
 
         public string Id { get; set; }
@@ -28,6 +28,6 @@ namespace Core.DAL
         public int? Number { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<Offer> Offers { get; set; }
     }
 }

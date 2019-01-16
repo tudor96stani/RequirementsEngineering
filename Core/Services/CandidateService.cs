@@ -11,21 +11,21 @@ using System.Data.Entity;
 
 namespace Core.Services
 {
-    public class VolunteerService : IVolunteerService
+    public class CandidateService : ICandidateService
     {
-        public VolunteerDTO GetVolunteerProfileDetails(Guid id)
+        public CandidateDTO GetCandidateProfileDetails(Guid id)
         {
             using (var db = new ApplicationDbContext())
             {
                 //Get the user object that corresponds to the organization
-                var volunteerModelObj = db.AspNetUsers.FirstOrDefault(x => x.Id == id.ToString()).ToDTO();
-                //Convert the UserDTO to a VolunteerDTO
-                var dto = new VolunteerDTO(volunteerModelObj);
+                var candidateModelObj = db.AspNetUsers.FirstOrDefault(x => x.Id == id.ToString()).ToDTO();
+                //Convert the UserDTO to a CandidateDTO
+                var dto = new CandidateDTO(candidateModelObj);
                 //Get the ratings associated to this particular user
                 var ratings = db.Ratings.Where(x => x.UserId == id.ToString()).ToList();
                 //Compute the average rating
                 var averageRating = ratings.Select(x => x.Rating1).Average();
-                dto.VolunteerRating = averageRating == 0 ? (double)averageRating : 0;
+                dto.CandidateRating = averageRating == 0 ? (double)averageRating : 0;
                 return dto;
             }
         }
@@ -40,32 +40,32 @@ namespace Core.Services
             }
         }
 
-		public List<EventDTO> GetAllEventsForVolunteer(Guid id)
+		public List<OfferDTO> GetAllOffersForCandidate(Guid id)
 		{
 			using (var db = new ApplicationDbContext())
 			{
-				var events = db.Events.Where(y => y.Participants.Any(x => x.Id == id.ToString()) == true).ToList().Select(x => x.ToDTO()).ToList();
-				return events;
+				var offers = db.Offers.Where(y => y.Participants.Any(x => x.Id == id.ToString()) == true).ToList().Select(x => x.ToDTO()).ToList();
+				return offers;
 			}
 		}
 
-		public List<EventQuickInfoDTO> GetAllEventsForVolunteerOrderedByDate(Guid id)
+		public List<OfferQuickInfoDTO> GetAllOffersForCandidateOrderedByDate(Guid id)
 		{
 			using (var db = new ApplicationDbContext())
 			{
-				//var events = db.Events.Where(x => x.OwnerId == id.ToString()).ToList().Select(x => x.ToDTO()).OrderBy(x => x.DateTimeUtc).ToList().Select(x => new EventQuickInfoDTO(x)).ToList();
-				var events = db.Events.Where(y => y.Participants.Any(x => x.Id == id.ToString()) == true).ToList()
-					.Select(x => x.ToDTO()).OrderBy(x => x.DateTimeUtc).ToList().Select(x => new EventQuickInfoDTO(x)).ToList();
-                return events;
+				//var offers = db.Offers.Where(x => x.OwnerId == id.ToString()).ToList().Select(x => x.ToDTO()).OrderBy(x => x.DateTimeUtc).ToList().Select(x => new OfferQuickInfoDTO(x)).ToList();
+				var offers = db.Offers.Where(y => y.Participants.Any(x => x.Id == id.ToString()) == true).ToList()
+					.Select(x => x.ToDTO()).OrderBy(x => x.DateTimeUtc).ToList().Select(x => new OfferQuickInfoDTO(x)).ToList();
+                return offers;
 			}
 		}
 
-        public List<EventQuickInfoDTO> GetAllEvents()
+        public List<OfferQuickInfoDTO> GetAllOffers()
         {
             using (var db = new ApplicationDbContext())
             {
-                var events = db.Events.Include(x => x.Owner).Include(x => x.Location).Include(x => x.Donations).OrderByDescending(x => x.DateTimeUTC).ToList().Select(x => x.ToDTO()).Select(x => new EventQuickInfoDTO(x)).ToList();
-                return events;
+                var offers = db.Offers.Include(x => x.Owner).Include(x => x.Location).Include(x => x.Donations).OrderByDescending(x => x.DateTimeUTC).ToList().Select(x => x.ToDTO()).Select(x => new OfferQuickInfoDTO(x)).ToList();
+                return offers;
             }
         }
     }

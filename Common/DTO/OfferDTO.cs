@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.DTO
 {
-    public class EventDTO
+    public class OfferDTO
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

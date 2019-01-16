@@ -216,9 +216,9 @@
   function callMedia() {
     applyMedia(true);
   }
-  if (w.addEventListener) {
-    w.addEventListener("resize", callMedia, false);
-  } else if (w.attachEvent) {
-    w.attachEvent("onresize", callMedia);
+  if (w.addOfferListener) {
+    w.addOfferListener("resize", callMedia, false);
+  } else if (w.attachOffer) {
+    w.attachOffer("onresize", callMedia);
   }
 })(this);

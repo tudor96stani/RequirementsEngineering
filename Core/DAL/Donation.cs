@@ -14,12 +14,12 @@ namespace Core.DAL
         public string UserId { get; set; }
 
         [StringLength(128)]
-        public string EventId { get; set; }
+        public string OfferId { get; set; }
 
         public double? Amount { get; set; }
 
         public virtual AspNetUser AspNetUser { get; set; }
 
-        public virtual Event Event { get; set; }
+        public virtual Offer Offer { get; set; }
     }
 }

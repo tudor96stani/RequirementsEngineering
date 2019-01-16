@@ -179,7 +179,7 @@ intellisense.annotate(jQuery, {
   },
   'holdReady': function() {
     /// <signature>
-    ///   <summary>Holds or releases the execution of jQuery's ready event.</summary>
+    ///   <summary>Holds or releases the execution of jQuery's ready offer.</summary>
     ///   <param name="hold" type="Boolean">Indicates whether the ready hold is being requested or released</param>
     /// </signature>
   },
@@ -413,7 +413,7 @@ intellisense.annotate(jQuery, {
   },
   'when': function() {
     /// <signature>
-    ///   <summary>Provides a way to execute callback functions based on one or more objects, usually Deferred objects that represent asynchronous events.</summary>
+    ///   <summary>Provides a way to execute callback functions based on one or more objects, usually Deferred objects that represent asynchronous offers.</summary>
     ///   <param name="deferreds" type="Deferred">One or more Deferred objects, or plain JavaScript objects.</param>
     ///   <returns type="Promise" />
     /// </signature>
@@ -632,37 +632,37 @@ return _object;
 };
 intellisense.redirectDefinition(jQuery.Callbacks, _731531622);
 
-intellisense.annotate(jQuery.Event.prototype, {
+intellisense.annotate(jQuery.Offer.prototype, {
   'currentTarget': function() {
-    /// <summary>The current DOM element within the event bubbling phase.</summary>
+    /// <summary>The current DOM element within the offer bubbling phase.</summary>
     /// <returns type="Element" />
   },
   'data': function() {
-    /// <summary>An optional object of data passed to an event method when the current executing handler is bound.</summary>
+    /// <summary>An optional object of data passed to an offer method when the current executing handler is bound.</summary>
     /// <returns type="Object" />
   },
   'delegateTarget': function() {
-    /// <summary>The element where the currently-called jQuery event handler was attached.</summary>
+    /// <summary>The element where the currently-called jQuery offer handler was attached.</summary>
     /// <returns type="Element" />
   },
-  'isDefaultPrevented': function() {
-    /// <summary>Returns whether event.preventDefault() was ever called on this event object.</summary>
+  'isDefaultProffered': function() {
+    /// <summary>Returns whether offer.profferDefault() was ever called on this offer object.</summary>
     /// <returns type="Boolean" />
   },
   'isImmediatePropagationStopped': function() {
-    /// <summary>Returns whether event.stopImmediatePropagation() was ever called on this event object.</summary>
+    /// <summary>Returns whether offer.stopImmediatePropagation() was ever called on this offer object.</summary>
     /// <returns type="Boolean" />
   },
   'isPropagationStopped': function() {
-    /// <summary>Returns whether event.stopPropagation() was ever called on this event object.</summary>
+    /// <summary>Returns whether offer.stopPropagation() was ever called on this offer object.</summary>
     /// <returns type="Boolean" />
   },
   'metaKey': function() {
-    /// <summary>Indicates whether the META key was pressed when the event fired.</summary>
+    /// <summary>Indicates whether the META key was pressed when the offer fired.</summary>
     /// <returns type="Boolean" />
   },
   'namespace': function() {
-    /// <summary>The namespace specified when the event was triggered.</summary>
+    /// <summary>The namespace specified when the offer was triggered.</summary>
     /// <returns type="String" />
   },
   'pageX': function() {
@@ -673,37 +673,37 @@ intellisense.annotate(jQuery.Event.prototype, {
     /// <summary>The mouse position relative to the top edge of the document.</summary>
     /// <returns type="Number" />
   },
-  'preventDefault': function() {
-    /// <summary>If this method is called, the default action of the event will not be triggered.</summary>
+  'profferDefault': function() {
+    /// <summary>If this method is called, the default action of the offer will not be triggered.</summary>
   },
   'relatedTarget': function() {
-    /// <summary>The other DOM element involved in the event, if any.</summary>
+    /// <summary>The other DOM element involved in the offer, if any.</summary>
     /// <returns type="Element" />
   },
   'result': function() {
-    /// <summary>The last value returned by an event handler that was triggered by this event, unless the value was undefined.</summary>
+    /// <summary>The last value returned by an offer handler that was triggered by this offer, unless the value was undefined.</summary>
     /// <returns type="Object" />
   },
   'stopImmediatePropagation': function() {
-    /// <summary>Keeps the rest of the handlers from being executed and prevents the event from bubbling up the DOM tree.</summary>
+    /// <summary>Keeps the rest of the handlers from being executed and proffers the offer from bubbling up the DOM tree.</summary>
   },
   'stopPropagation': function() {
-    /// <summary>Prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event.</summary>
+    /// <summary>Proffers the offer from bubbling up the DOM tree, proffering any parent handlers from being notified of the offer.</summary>
   },
   'target': function() {
-    /// <summary>The DOM element that initiated the event.</summary>
+    /// <summary>The DOM element that initiated the offer.</summary>
     /// <returns type="Element" />
   },
   'timeStamp': function() {
-    /// <summary>The difference in milliseconds between the time the browser created the event and January 1, 1970.</summary>
+    /// <summary>The difference in milliseconds between the time the browser created the offer and January 1, 1970.</summary>
     /// <returns type="Number" />
   },
   'type': function() {
-    /// <summary>Describes the nature of the event.</summary>
+    /// <summary>Describes the nature of the offer.</summary>
     /// <returns type="String" />
   },
   'which': function() {
-    /// <summary>For key or mouse events, this property indicates the specific key or button that was pressed.</summary>
+    /// <summary>For key or mouse offers, this property indicates the specific key or button that was pressed.</summary>
     /// <returns type="Number" />
   },
 });
@@ -771,43 +771,43 @@ intellisense.annotate(jQuery.fn, {
   },
   'ajaxComplete': function() {
     /// <signature>
-    ///   <summary>Register a handler to be called when Ajax requests complete. This is an AjaxEvent.</summary>
-    ///   <param name="handler(event, XMLHttpRequest, ajaxOptions)" type="Function">The function to be invoked.</param>
+    ///   <summary>Register a handler to be called when Ajax requests complete. This is an AjaxOffer.</summary>
+    ///   <param name="handler(offer, XMLHttpRequest, ajaxOptions)" type="Function">The function to be invoked.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'ajaxError': function() {
     /// <signature>
-    ///   <summary>Register a handler to be called when Ajax requests complete with an error. This is an Ajax Event.</summary>
-    ///   <param name="handler(event, jqXHR, ajaxSettings, thrownError)" type="Function">The function to be invoked.</param>
+    ///   <summary>Register a handler to be called when Ajax requests complete with an error. This is an Ajax Offer.</summary>
+    ///   <param name="handler(offer, jqXHR, ajaxSettings, thrownError)" type="Function">The function to be invoked.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'ajaxSend': function() {
     /// <signature>
-    ///   <summary>Attach a function to be executed before an Ajax request is sent. This is an Ajax Event.</summary>
-    ///   <param name="handler(event, jqXHR, ajaxOptions)" type="Function">The function to be invoked.</param>
+    ///   <summary>Attach a function to be executed before an Ajax request is sent. This is an Ajax Offer.</summary>
+    ///   <param name="handler(offer, jqXHR, ajaxOptions)" type="Function">The function to be invoked.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'ajaxStart': function() {
     /// <signature>
-    ///   <summary>Register a handler to be called when the first Ajax request begins. This is an Ajax Event.</summary>
+    ///   <summary>Register a handler to be called when the first Ajax request begins. This is an Ajax Offer.</summary>
     ///   <param name="handler()" type="Function">The function to be invoked.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'ajaxStop': function() {
     /// <signature>
-    ///   <summary>Register a handler to be called when all Ajax requests have completed. This is an Ajax Event.</summary>
+    ///   <summary>Register a handler to be called when all Ajax requests have completed. This is an Ajax Offer.</summary>
     ///   <param name="handler()" type="Function">The function to be invoked.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'ajaxSuccess': function() {
     /// <signature>
-    ///   <summary>Attach a function to be executed whenever an Ajax request completes successfully. This is an Ajax Event.</summary>
-    ///   <param name="handler(event, XMLHttpRequest, ajaxOptions)" type="Function">The function to be invoked.</param>
+    ///   <summary>Attach a function to be executed whenever an Ajax request completes successfully. This is an Ajax Offer.</summary>
+    ///   <param name="handler(offer, XMLHttpRequest, ajaxOptions)" type="Function">The function to be invoked.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -954,35 +954,35 @@ intellisense.annotate(jQuery.fn, {
   },
   'bind': function() {
     /// <signature>
-    ///   <summary>Attach a handler to an event for the elements.</summary>
-    ///   <param name="eventType" type="String">A string containing one or more DOM event types, such as "click" or "submit," or custom event names.</param>
-    ///   <param name="eventData" type="Object">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Attach a handler to an offer for the elements.</summary>
+    ///   <param name="offerType" type="String">A string containing one or more DOM offer types, such as "click" or "submit," or custom offer names.</param>
+    ///   <param name="offerData" type="Object">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Attach a handler to an event for the elements.</summary>
-    ///   <param name="eventType" type="String">A string containing one or more DOM event types, such as "click" or "submit," or custom event names.</param>
-    ///   <param name="eventData" type="Object">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="preventBubble" type="Boolean">Setting the third argument to false will attach a function that prevents the default action from occurring and stops the event from bubbling. The default is true.</param>
+    ///   <summary>Attach a handler to an offer for the elements.</summary>
+    ///   <param name="offerType" type="String">A string containing one or more DOM offer types, such as "click" or "submit," or custom offer names.</param>
+    ///   <param name="offerData" type="Object">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="profferBubble" type="Boolean">Setting the third argument to false will attach a function that proffers the default action from occurring and stops the offer from bubbling. The default is true.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Attach a handler to an event for the elements.</summary>
-    ///   <param name="events" type="Object">An object containing one or more DOM event types and functions to execute for them.</param>
+    ///   <summary>Attach a handler to an offer for the elements.</summary>
+    ///   <param name="offers" type="Object">An object containing one or more DOM offer types and functions to execute for them.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'blur': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "blur" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "blur" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "blur" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="Object">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "blur" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="Object">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -991,14 +991,14 @@ intellisense.annotate(jQuery.fn, {
   },
   'change': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "change" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "change" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "change" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="Object">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "change" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="Object">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1037,27 +1037,27 @@ intellisense.annotate(jQuery.fn, {
   },
   'click': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "click" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "click" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "click" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="Object">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "click" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="Object">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'clone': function() {
     /// <signature>
     ///   <summary>Create a deep copy of the set of matched elements.</summary>
-    ///   <param name="withDataAndEvents" type="Boolean">A Boolean indicating whether event handlers should be copied along with the elements. As of jQuery 1.4, element data will be copied as well.</param>
+    ///   <param name="withDataAndOffers" type="Boolean">A Boolean indicating whether offer handlers should be copied along with the elements. As of jQuery 1.4, element data will be copied as well.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
     ///   <summary>Create a deep copy of the set of matched elements.</summary>
-    ///   <param name="withDataAndEvents" type="Boolean">A Boolean indicating whether event handlers and data should be copied along with the elements. The default value is false. *In jQuery 1.5.0 the default value was incorrectly true; it was changed back to false in 1.5.1 and up.</param>
-    ///   <param name="deepWithDataAndEvents" type="Boolean">A Boolean indicating whether event handlers and data for all children of the cloned element should be copied. By default its value matches the first argument's value (which defaults to false).</param>
+    ///   <param name="withDataAndOffers" type="Boolean">A Boolean indicating whether offer handlers and data should be copied along with the elements. The default value is false. *In jQuery 1.5.0 the default value was incorrectly true; it was changed back to false in 1.5.1 and up.</param>
+    ///   <param name="deepWithDataAndOffers" type="Boolean">A Boolean indicating whether offer handlers and data for all children of the cloned element should be copied. By default its value matches the first argument's value (which defaults to false).</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1132,14 +1132,14 @@ intellisense.annotate(jQuery.fn, {
   },
   'dblclick': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "dblclick" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "dblclick" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "dblclick" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="Object">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "dblclick" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="Object">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1153,24 +1153,24 @@ intellisense.annotate(jQuery.fn, {
   },
   'delegate': function() {
     /// <signature>
-    ///   <summary>Attach a handler to one or more events for all elements that match the selector, now or in the future, based on a specific set of root elements.</summary>
-    ///   <param name="selector" type="String">A selector to filter the elements that trigger the event.</param>
-    ///   <param name="eventType" type="String">A string containing one or more space-separated JavaScript event types, such as "click" or "keydown," or custom event names.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute at the time the event is triggered.</param>
+    ///   <summary>Attach a handler to one or more offers for all elements that match the selector, now or in the future, based on a specific set of root elements.</summary>
+    ///   <param name="selector" type="String">A selector to filter the elements that trigger the offer.</param>
+    ///   <param name="offerType" type="String">A string containing one or more space-separated JavaScript offer types, such as "click" or "keydown," or custom offer names.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute at the time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Attach a handler to one or more events for all elements that match the selector, now or in the future, based on a specific set of root elements.</summary>
-    ///   <param name="selector" type="String">A selector to filter the elements that trigger the event.</param>
-    ///   <param name="eventType" type="String">A string containing one or more space-separated JavaScript event types, such as "click" or "keydown," or custom event names.</param>
-    ///   <param name="eventData" type="Object">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute at the time the event is triggered.</param>
+    ///   <summary>Attach a handler to one or more offers for all elements that match the selector, now or in the future, based on a specific set of root elements.</summary>
+    ///   <param name="selector" type="String">A selector to filter the elements that trigger the offer.</param>
+    ///   <param name="offerType" type="String">A string containing one or more space-separated JavaScript offer types, such as "click" or "keydown," or custom offer names.</param>
+    ///   <param name="offerData" type="Object">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute at the time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Attach a handler to one or more events for all elements that match the selector, now or in the future, based on a specific set of root elements.</summary>
-    ///   <param name="selector" type="String">A selector to filter the elements that trigger the event.</param>
-    ///   <param name="events" type="PlainObject">A plain object of one or more event types and functions to execute for them.</param>
+    ///   <summary>Attach a handler to one or more offers for all elements that match the selector, now or in the future, based on a specific set of root elements.</summary>
+    ///   <param name="selector" type="String">A selector to filter the elements that trigger the offer.</param>
+    ///   <param name="offers" type="PlainObject">A plain object of one or more offer types and functions to execute for them.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1197,14 +1197,14 @@ intellisense.annotate(jQuery.fn, {
   },
   'die': function() {
     /// <signature>
-    ///   <summary>Remove event handlers previously attached using .live() from the elements.</summary>
-    ///   <param name="eventType" type="String">A string containing a JavaScript event type, such as click or keydown.</param>
+    ///   <summary>Remove offer handlers previously attached using .live() from the elements.</summary>
+    ///   <param name="offerType" type="String">A string containing a JavaScript offer type, such as click or keydown.</param>
     ///   <param name="handler" type="String">The function that is no longer to be executed.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Remove event handlers previously attached using .live() from the elements.</summary>
-    ///   <param name="events" type="PlainObject">A plain object of one or more event types, such as click or keydown and their corresponding functions that are no longer to be executed.</param>
+    ///   <summary>Remove offer handlers previously attached using .live() from the elements.</summary>
+    ///   <param name="offers" type="PlainObject">A plain object of one or more offer types, such as click or keydown and their corresponding functions that are no longer to be executed.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1246,14 +1246,14 @@ intellisense.annotate(jQuery.fn, {
   },
   'error': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "error" JavaScript event.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute when the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "error" JavaScript offer.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute when the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "error" JavaScript event.</summary>
-    ///   <param name="eventData" type="Object">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "error" JavaScript offer.</summary>
+    ///   <param name="offerData" type="Object">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1391,40 +1391,40 @@ intellisense.annotate(jQuery.fn, {
   },
   'focus': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "focus" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "focus" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "focus" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="Object">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "focus" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="Object">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'focusin': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "focusin" event.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "focusin" offer.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "focusin" event.</summary>
-    ///   <param name="eventData" type="Object">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "focusin" offer.</summary>
+    ///   <param name="offerData" type="Object">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'focusout': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "focusout" JavaScript event.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "focusout" JavaScript offer.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "focusout" JavaScript event.</summary>
-    ///   <param name="eventData" type="Object">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "focusout" JavaScript offer.</summary>
+    ///   <param name="offerData" type="Object">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1505,8 +1505,8 @@ intellisense.annotate(jQuery.fn, {
   'hover': function() {
     /// <signature>
     ///   <summary>Bind two handlers to the matched elements, to be executed when the mouse pointer enters and leaves the elements.</summary>
-    ///   <param name="handlerIn(eventObject)" type="Function">A function to execute when the mouse pointer enters the element.</param>
-    ///   <param name="handlerOut(eventObject)" type="Function">A function to execute when the mouse pointer leaves the element.</param>
+    ///   <param name="handlerIn(offerObject)" type="Function">A function to execute when the mouse pointer enters the element.</param>
+    ///   <param name="handlerOut(offerObject)" type="Function">A function to execute when the mouse pointer leaves the element.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1624,40 +1624,40 @@ intellisense.annotate(jQuery.fn, {
   },
   'keydown': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "keydown" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "keydown" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "keydown" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "keydown" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'keypress': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "keypress" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "keypress" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "keypress" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "keypress" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'keyup': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "keyup" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "keyup" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "keyup" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "keyup" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1682,34 +1682,34 @@ intellisense.annotate(jQuery.fn, {
   },
   'live': function() {
     /// <signature>
-    ///   <summary>Attach an event handler for all elements which match the current selector, now and in the future.</summary>
-    ///   <param name="events" type="String">A string containing a JavaScript event type, such as "click" or "keydown." As of jQuery 1.4 the string can contain multiple, space-separated event types or custom event names.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute at the time the event is triggered.</param>
+    ///   <summary>Attach an offer handler for all elements which match the current selector, now and in the future.</summary>
+    ///   <param name="offers" type="String">A string containing a JavaScript offer type, such as "click" or "keydown." As of jQuery 1.4 the string can contain multiple, space-separated offer types or custom offer names.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute at the time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Attach an event handler for all elements which match the current selector, now and in the future.</summary>
-    ///   <param name="events" type="String">A string containing a JavaScript event type, such as "click" or "keydown." As of jQuery 1.4 the string can contain multiple, space-separated event types or custom event names.</param>
-    ///   <param name="data" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute at the time the event is triggered.</param>
+    ///   <summary>Attach an offer handler for all elements which match the current selector, now and in the future.</summary>
+    ///   <param name="offers" type="String">A string containing a JavaScript offer type, such as "click" or "keydown." As of jQuery 1.4 the string can contain multiple, space-separated offer types or custom offer names.</param>
+    ///   <param name="data" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute at the time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Attach an event handler for all elements which match the current selector, now and in the future.</summary>
-    ///   <param name="events" type="PlainObject">A plain object of one or more JavaScript event types and functions to execute for them.</param>
+    ///   <summary>Attach an offer handler for all elements which match the current selector, now and in the future.</summary>
+    ///   <param name="offers" type="PlainObject">A plain object of one or more JavaScript offer types and functions to execute for them.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'load': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "load" JavaScript event.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute when the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "load" JavaScript offer.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute when the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "load" JavaScript event.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "load" JavaScript offer.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1732,92 +1732,92 @@ intellisense.annotate(jQuery.fn, {
   },
   'mousedown': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "mousedown" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "mousedown" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "mousedown" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "mousedown" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'mouseenter': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to be fired when the mouse enters an element, or trigger that handler on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to be fired when the mouse enters an element, or trigger that handler on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to be fired when the mouse enters an element, or trigger that handler on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to be fired when the mouse enters an element, or trigger that handler on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'mouseleave': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to be fired when the mouse leaves an element, or trigger that handler on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to be fired when the mouse leaves an element, or trigger that handler on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to be fired when the mouse leaves an element, or trigger that handler on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to be fired when the mouse leaves an element, or trigger that handler on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'mousemove': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "mousemove" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "mousemove" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "mousemove" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "mousemove" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'mouseout': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "mouseout" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "mouseout" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "mouseout" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "mouseout" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'mouseover': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "mouseover" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "mouseover" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "mouseover" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "mouseover" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'mouseup': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "mouseup" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "mouseup" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "mouseup" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "mouseup" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1922,16 +1922,16 @@ intellisense.annotate(jQuery.fn, {
   },
   'off': function() {
     /// <signature>
-    ///   <summary>Remove an event handler.</summary>
-    ///   <param name="events" type="String">One or more space-separated event types and optional namespaces, or just namespaces, such as "click", "keydown.myPlugin", or ".myPlugin".</param>
-    ///   <param name="selector" type="String">A selector which should match the one originally passed to .on() when attaching event handlers.</param>
-    ///   <param name="handler(eventObject)" type="Function">A handler function previously attached for the event(s), or the special value false.</param>
+    ///   <summary>Remove an offer handler.</summary>
+    ///   <param name="offers" type="String">One or more space-separated offer types and optional namespaces, or just namespaces, such as "click", "keydown.myPlugin", or ".myPlugin".</param>
+    ///   <param name="selector" type="String">A selector which should match the one originally passed to .on() when attaching offer handlers.</param>
+    ///   <param name="handler(offerObject)" type="Function">A handler function previously attached for the offer(s), or the special value false.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Remove an event handler.</summary>
-    ///   <param name="events" type="PlainObject">An object where the string keys represent one or more space-separated event types and optional namespaces, and the values represent handler functions previously attached for the event(s).</param>
-    ///   <param name="selector" type="String">A selector which should match the one originally passed to .on() when attaching event handlers.</param>
+    ///   <summary>Remove an offer handler.</summary>
+    ///   <param name="offers" type="PlainObject">An object where the string keys represent one or more space-separated offer types and optional namespaces, and the values represent handler functions previously attached for the offer(s).</param>
+    ///   <param name="selector" type="String">A selector which should match the one originally passed to .on() when attaching offer handlers.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1953,42 +1953,42 @@ intellisense.annotate(jQuery.fn, {
   },
   'on': function() {
     /// <signature>
-    ///   <summary>Attach an event handler function for one or more events to the selected elements.</summary>
-    ///   <param name="events" type="String">One or more space-separated event types and optional namespaces, such as "click" or "keydown.myPlugin".</param>
-    ///   <param name="selector" type="String">A selector string to filter the descendants of the selected elements that trigger the event. If the selector is null or omitted, the event is always triggered when it reaches the selected element.</param>
-    ///   <param name="data" type="Anything">Data to be passed to the handler in event.data when an event is triggered.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute when the event is triggered. The value false is also allowed as a shorthand for a function that simply does return false.</param>
+    ///   <summary>Attach an offer handler function for one or more offers to the selected elements.</summary>
+    ///   <param name="offers" type="String">One or more space-separated offer types and optional namespaces, such as "click" or "keydown.myPlugin".</param>
+    ///   <param name="selector" type="String">A selector string to filter the descendants of the selected elements that trigger the offer. If the selector is null or omitted, the offer is always triggered when it reaches the selected element.</param>
+    ///   <param name="data" type="Anything">Data to be passed to the handler in offer.data when an offer is triggered.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute when the offer is triggered. The value false is also allowed as a shorthand for a function that simply does return false.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Attach an event handler function for one or more events to the selected elements.</summary>
-    ///   <param name="events" type="PlainObject">An object in which the string keys represent one or more space-separated event types and optional namespaces, and the values represent a handler function to be called for the event(s).</param>
+    ///   <summary>Attach an offer handler function for one or more offers to the selected elements.</summary>
+    ///   <param name="offers" type="PlainObject">An object in which the string keys represent one or more space-separated offer types and optional namespaces, and the values represent a handler function to be called for the offer(s).</param>
     ///   <param name="selector" type="String">A selector string to filter the descendants of the selected elements that will call the handler. If the selector is null or omitted, the handler is always called when it reaches the selected element.</param>
-    ///   <param name="data" type="Anything">Data to be passed to the handler in event.data when an event occurs.</param>
+    ///   <param name="data" type="Anything">Data to be passed to the handler in offer.data when an offer occurs.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'one': function() {
     /// <signature>
-    ///   <summary>Attach a handler to an event for the elements. The handler is executed at most once per element.</summary>
-    ///   <param name="events" type="String">A string containing one or more JavaScript event types, such as "click" or "submit," or custom event names.</param>
-    ///   <param name="data" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute at the time the event is triggered.</param>
+    ///   <summary>Attach a handler to an offer for the elements. The handler is executed at most once per element.</summary>
+    ///   <param name="offers" type="String">A string containing one or more JavaScript offer types, such as "click" or "submit," or custom offer names.</param>
+    ///   <param name="data" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute at the time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Attach a handler to an event for the elements. The handler is executed at most once per element.</summary>
-    ///   <param name="events" type="String">One or more space-separated event types and optional namespaces, such as "click" or "keydown.myPlugin".</param>
-    ///   <param name="selector" type="String">A selector string to filter the descendants of the selected elements that trigger the event. If the selector is null or omitted, the event is always triggered when it reaches the selected element.</param>
-    ///   <param name="data" type="Anything">Data to be passed to the handler in event.data when an event is triggered.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute when the event is triggered. The value false is also allowed as a shorthand for a function that simply does return false.</param>
+    ///   <summary>Attach a handler to an offer for the elements. The handler is executed at most once per element.</summary>
+    ///   <param name="offers" type="String">One or more space-separated offer types and optional namespaces, such as "click" or "keydown.myPlugin".</param>
+    ///   <param name="selector" type="String">A selector string to filter the descendants of the selected elements that trigger the offer. If the selector is null or omitted, the offer is always triggered when it reaches the selected element.</param>
+    ///   <param name="data" type="Anything">Data to be passed to the handler in offer.data when an offer is triggered.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute when the offer is triggered. The value false is also allowed as a shorthand for a function that simply does return false.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Attach a handler to an event for the elements. The handler is executed at most once per element.</summary>
-    ///   <param name="events" type="PlainObject">An object in which the string keys represent one or more space-separated event types and optional namespaces, and the values represent a handler function to be called for the event(s).</param>
+    ///   <summary>Attach a handler to an offer for the elements. The handler is executed at most once per element.</summary>
+    ///   <param name="offers" type="PlainObject">An object in which the string keys represent one or more space-separated offer types and optional namespaces, and the values represent a handler function to be called for the offer(s).</param>
     ///   <param name="selector" type="String">A selector string to filter the descendants of the selected elements that will call the handler. If the selector is null or omitted, the handler is always called when it reaches the selected element.</param>
-    ///   <param name="data" type="Anything">Data to be passed to the handler in event.data when an event occurs.</param>
+    ///   <param name="data" type="Anything">Data to be passed to the handler in offer.data when an offer occurs.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -2229,14 +2229,14 @@ intellisense.annotate(jQuery.fn, {
   },
   'resize': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "resize" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "resize" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "resize" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "resize" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -2245,14 +2245,14 @@ intellisense.annotate(jQuery.fn, {
   },
   'scroll': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "scroll" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "scroll" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "scroll" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "scroll" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -2272,14 +2272,14 @@ intellisense.annotate(jQuery.fn, {
   },
   'select': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "select" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "select" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "select" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "select" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -2414,14 +2414,14 @@ intellisense.annotate(jQuery.fn, {
   },
   'submit': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "submit" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "submit" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "submit" JavaScript event, or trigger that event on an element.</summary>
-    ///   <param name="eventData" type="PlainObject">An object containing data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "submit" JavaScript offer, or trigger that offer on an element.</summary>
+    ///   <param name="offerData" type="PlainObject">An object containing data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -2495,81 +2495,81 @@ intellisense.annotate(jQuery.fn, {
   },
   'trigger': function() {
     /// <signature>
-    ///   <summary>Execute all handlers and behaviors attached to the matched elements for the given event type.</summary>
-    ///   <param name="eventType" type="String">A string containing a JavaScript event type, such as click or submit.</param>
-    ///   <param name="extraParameters" type="">Additional parameters to pass along to the event handler.</param>
+    ///   <summary>Execute all handlers and behaviors attached to the matched elements for the given offer type.</summary>
+    ///   <param name="offerType" type="String">A string containing a JavaScript offer type, such as click or submit.</param>
+    ///   <param name="extraParameters" type="">Additional parameters to pass along to the offer handler.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Execute all handlers and behaviors attached to the matched elements for the given event type.</summary>
-    ///   <param name="event" type="Event">A jQuery.Event object.</param>
-    ///   <param name="extraParameters" type="">Additional parameters to pass along to the event handler.</param>
+    ///   <summary>Execute all handlers and behaviors attached to the matched elements for the given offer type.</summary>
+    ///   <param name="offer" type="Offer">A jQuery.Offer object.</param>
+    ///   <param name="extraParameters" type="">Additional parameters to pass along to the offer handler.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'triggerHandler': function() {
     /// <signature>
-    ///   <summary>Execute all handlers attached to an element for an event.</summary>
-    ///   <param name="eventType" type="String">A string containing a JavaScript event type, such as click or submit.</param>
-    ///   <param name="extraParameters" type="Array">An array of additional parameters to pass along to the event handler.</param>
+    ///   <summary>Execute all handlers attached to an element for an offer.</summary>
+    ///   <param name="offerType" type="String">A string containing a JavaScript offer type, such as click or submit.</param>
+    ///   <param name="extraParameters" type="Array">An array of additional parameters to pass along to the offer handler.</param>
     ///   <returns type="Object" />
     /// </signature>
   },
   'unbind': function() {
     /// <signature>
-    ///   <summary>Remove a previously-attached event handler from the elements.</summary>
-    ///   <param name="eventType" type="String">A string containing a JavaScript event type, such as click or submit.</param>
-    ///   <param name="handler(eventObject)" type="Function">The function that is to be no longer executed.</param>
+    ///   <summary>Remove a previously-attached offer handler from the elements.</summary>
+    ///   <param name="offerType" type="String">A string containing a JavaScript offer type, such as click or submit.</param>
+    ///   <param name="handler(offerObject)" type="Function">The function that is to be no longer executed.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Remove a previously-attached event handler from the elements.</summary>
-    ///   <param name="eventType" type="String">A string containing a JavaScript event type, such as click or submit.</param>
-    ///   <param name="false" type="Boolean">Unbinds the corresponding 'return false' function that was bound using .bind( eventType, false ).</param>
+    ///   <summary>Remove a previously-attached offer handler from the elements.</summary>
+    ///   <param name="offerType" type="String">A string containing a JavaScript offer type, such as click or submit.</param>
+    ///   <param name="false" type="Boolean">Unbinds the corresponding 'return false' function that was bound using .bind( offerType, false ).</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Remove a previously-attached event handler from the elements.</summary>
-    ///   <param name="event" type="Object">A JavaScript event object as passed to an event handler.</param>
+    ///   <summary>Remove a previously-attached offer handler from the elements.</summary>
+    ///   <param name="offer" type="Object">A JavaScript offer object as passed to an offer handler.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'undelegate': function() {
     /// <signature>
-    ///   <summary>Remove a handler from the event for all elements which match the current selector, based upon a specific set of root elements.</summary>
-    ///   <param name="selector" type="String">A selector which will be used to filter the event results.</param>
-    ///   <param name="eventType" type="String">A string containing a JavaScript event type, such as "click" or "keydown"</param>
+    ///   <summary>Remove a handler from the offer for all elements which match the current selector, based upon a specific set of root elements.</summary>
+    ///   <param name="selector" type="String">A selector which will be used to filter the offer results.</param>
+    ///   <param name="offerType" type="String">A string containing a JavaScript offer type, such as "click" or "keydown"</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Remove a handler from the event for all elements which match the current selector, based upon a specific set of root elements.</summary>
-    ///   <param name="selector" type="String">A selector which will be used to filter the event results.</param>
-    ///   <param name="eventType" type="String">A string containing a JavaScript event type, such as "click" or "keydown"</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute at the time the event is triggered.</param>
+    ///   <summary>Remove a handler from the offer for all elements which match the current selector, based upon a specific set of root elements.</summary>
+    ///   <param name="selector" type="String">A selector which will be used to filter the offer results.</param>
+    ///   <param name="offerType" type="String">A string containing a JavaScript offer type, such as "click" or "keydown"</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute at the time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Remove a handler from the event for all elements which match the current selector, based upon a specific set of root elements.</summary>
-    ///   <param name="selector" type="String">A selector which will be used to filter the event results.</param>
-    ///   <param name="events" type="PlainObject">An object of one or more event types and previously bound functions to unbind from them.</param>
+    ///   <summary>Remove a handler from the offer for all elements which match the current selector, based upon a specific set of root elements.</summary>
+    ///   <param name="selector" type="String">A selector which will be used to filter the offer results.</param>
+    ///   <param name="offers" type="PlainObject">An object of one or more offer types and previously bound functions to unbind from them.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Remove a handler from the event for all elements which match the current selector, based upon a specific set of root elements.</summary>
-    ///   <param name="namespace" type="String">A string containing a namespace to unbind all events from.</param>
+    ///   <summary>Remove a handler from the offer for all elements which match the current selector, based upon a specific set of root elements.</summary>
+    ///   <param name="namespace" type="String">A string containing a namespace to unbind all offers from.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'unload': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "unload" JavaScript event.</summary>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute when the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "unload" JavaScript offer.</summary>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute when the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "unload" JavaScript event.</summary>
-    ///   <param name="eventData" type="Object">A plain object of data that will be passed to the event handler.</param>
-    ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
+    ///   <summary>Bind an offer handler to the "unload" JavaScript offer.</summary>
+    ///   <param name="offerData" type="Object">A plain object of data that will be passed to the offer handler.</param>
+    ///   <param name="handler(offerObject)" type="Function">A function to execute each time the offer is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },

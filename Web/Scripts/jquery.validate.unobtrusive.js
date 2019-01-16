@@ -69,7 +69,7 @@
         }
     }
 
-    function onErrors(event, validator) {  // 'this' is the form element
+    function onErrors(offer, validator) {  // 'this' is the form element
         var container = $(this).find("[data-valmsg-summary=true]"),
             list = container.find("ul");
 
@@ -98,7 +98,7 @@
         }
     }
 
-    function onReset(event) {  // 'this' is the form element
+    function onReset(offer) {  // 'this' is the form element
         var $form = $(this),
             key = '__jquery_unobtrusive_validation_form_reset';
         if ($form.data(key)) {

@@ -7,8 +7,8 @@ namespace Web.Models
 {
     public class OrganizationHomepageViewModel
     {
-        public List<TopVolunteerViewModel> topVolunteers { get; set; }
-        public List<EventQuickDetailsViewModel> orderedEvents { get; set; }
+        public List<TopCandidateViewModel> topCandidates { get; set; }
+        public List<OfferQuickDetailsViewModel> orderedOffers { get; set; }
 
     }
 }

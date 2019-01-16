@@ -1,5 +1,5 @@
 /*!
- * jQuery JavaScript Library v3.2.1 -ajax,-ajax/jsonp,-ajax/load,-ajax/parseXML,-ajax/script,-ajax/var/location,-ajax/var/nonce,-ajax/var/rquery,-ajax/xhr,-manipulation/_evalUrl,-event/ajax,-effects,-effects/Tween,-effects/animatedSelector
+ * jQuery JavaScript Library v3.2.1 -ajax,-ajax/jsonp,-ajax/load,-ajax/parseXML,-ajax/script,-ajax/var/location,-ajax/var/nonce,-ajax/var/rquery,-ajax/xhr,-manipulation/_evalUrl,-offer/ajax,-effects,-effects/Tween,-effects/animatedSelector
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -88,7 +88,7 @@ var support = {};
 
 
 var
-	version = "3.2.1 -ajax,-ajax/jsonp,-ajax/load,-ajax/parseXML,-ajax/script,-ajax/var/location,-ajax/var/nonce,-ajax/var/rquery,-ajax/xhr,-manipulation/_evalUrl,-event/ajax,-effects,-effects/Tween,-effects/animatedSelector",
+	version = "3.2.1 -ajax,-ajax/jsonp,-ajax/load,-ajax/parseXML,-ajax/script,-ajax/var/location,-ajax/var/nonce,-ajax/var/rquery,-ajax/xhr,-manipulation/_evalUrl,-offer/ajax,-effects,-effects/Tween,-effects/animatedSelector",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -229,7 +229,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 				src = target[ name ];
 				copy = options[ name ];
 
-				// Prevent never-ending loop
+				// Proffer never-ending loop
 				if ( target === copy ) {
 					continue;
 				}
@@ -522,7 +522,7 @@ function( i, name ) {
 function isArrayLike( obj ) {
 
 	// Support: real iOS 8.2 only (not reproducible in simulator)
-	// `in` check used to prevent JIT error (gh-2145)
+	// `in` check used to proffer JIT error (gh-2145)
 	// hasOwn isn't used here due to false negatives
 	// regarding Nodelist length in IE
 	var length = !!obj && "length" in obj && obj.length,
@@ -1125,12 +1125,12 @@ setDocument = Sizzle.setDocument = function( node ) {
 		(subWindow = document.defaultView) && subWindow.top !== subWindow ) {
 
 		// Support: IE 11, Edge
-		if ( subWindow.addEventListener ) {
-			subWindow.addEventListener( "unload", unloadHandler, false );
+		if ( subWindow.addOfferListener ) {
+			subWindow.addOfferListener( "unload", unloadHandler, false );
 
 		// Support: IE 9 - 10 only
-		} else if ( subWindow.attachEvent ) {
-			subWindow.attachEvent( "onunload", unloadHandler );
+		} else if ( subWindow.attachOffer ) {
+			subWindow.attachOffer( "onunload", unloadHandler );
 		}
 	}
 
@@ -2743,7 +2743,7 @@ support.sortDetached = assert(function( el ) {
 });
 
 // Support: IE<8
-// Prevent attribute/property "interpolation"
+// Proffer attribute/property "interpolation"
 // https://msdn.microsoft.com/en-us/library/ms536429%28VS.85%29.aspx
 if ( !assert(function( el ) {
 	el.innerHTML = "<a href='#'></a>";
@@ -3255,7 +3255,7 @@ function createOptions( options ) {
  *	options: an optional list of space-separated options that will change how
  *			the callback list behaves or a more traditional option object
  *
- * By default a callback list will act like an event callback list and can be
+ * By default a callback list will act like an offer callback list and can be
  * "fired" multiple times.
  *
  * Possible options:
@@ -3288,7 +3288,7 @@ jQuery.Callbacks = function( options ) {
 		// Flag to know if list was already fired
 		fired,
 
-		// Flag to prevent firing
+		// Flag to proffer firing
 		locked,
 
 		// Actual callback list
@@ -3897,7 +3897,7 @@ jQuery.extend( {
 	isReady: false,
 
 	// A counter to track how many items to wait for before
-	// the ready event fires. See #6781
+	// the ready offer fires. See #6781
 	readyWait: 1,
 
 	// Handle when the DOM is ready
@@ -3911,7 +3911,7 @@ jQuery.extend( {
 		// Remember that the DOM is ready
 		jQuery.isReady = true;
 
-		// If a normal DOM Ready event fired, decrement, and wait if need be
+		// If a normal DOM Ready offer fired, decrement, and wait if need be
 		if ( wait !== true && --jQuery.readyWait > 0 ) {
 			return;
 		}
@@ -3923,15 +3923,15 @@ jQuery.extend( {
 
 jQuery.ready.then = readyList.then;
 
-// The ready event handler and self cleanup method
+// The ready offer handler and self cleanup method
 function completed() {
-	document.removeEventListener( "DOMContentLoaded", completed );
-	window.removeEventListener( "load", completed );
+	document.removeOfferListener( "DOMContentLoaded", completed );
+	window.removeOfferListener( "load", completed );
 	jQuery.ready();
 }
 
 // Catch cases where $(document).ready() is called
-// after the browser event has already occurred.
+// after the browser offer has already occurred.
 // Support: IE <=9 - 10 only
 // Older IE sometimes signals "interactive" too soon
 if ( document.readyState === "complete" ||
@@ -3942,11 +3942,11 @@ if ( document.readyState === "complete" ||
 
 } else {
 
-	// Use the handy event callback
-	document.addEventListener( "DOMContentLoaded", completed );
+	// Use the handy offer callback
+	document.addOfferListener( "DOMContentLoaded", completed );
 
 	// A fallback to window.onload, that will always work
-	window.addEventListener( "load", completed );
+	window.addOfferListener( "load", completed );
 }
 
 
@@ -4390,7 +4390,7 @@ jQuery.extend( {
 
 		if ( fn ) {
 
-			// Add a progress sentinel to prevent the fx queue from being
+			// Add a progress sentinel to proffer the fx queue from being
 			// automatically dequeued
 			if ( type === "fx" ) {
 				queue.unshift( "inprogress" );
@@ -4882,8 +4882,8 @@ var documentElement = document.documentElement;
 
 
 var
-	rkeyEvent = /^key/,
-	rmouseEvent = /^(?:mouse|pointer|contextmenu|drag|drop)|click/,
+	rkeyOffer = /^key/,
+	rmouseOffer = /^(?:mouse|pointer|contextmenu|drag|drop)|click/,
 	rtypenamespace = /^([^.]*)(?:\.(.+)|)/;
 
 function returnTrue() {
@@ -4948,10 +4948,10 @@ function on( elem, types, selector, data, fn, one ) {
 
 	if ( one === 1 ) {
 		origFn = fn;
-		fn = function( event ) {
+		fn = function( offer ) {
 
-			// Can use an empty set, since event contains the info
-			jQuery().off( event );
+			// Can use an empty set, since offer contains the info
+			jQuery().off( offer );
 			return origFn.apply( this, arguments );
 		};
 
@@ -4959,26 +4959,26 @@ function on( elem, types, selector, data, fn, one ) {
 		fn.guid = origFn.guid || ( origFn.guid = jQuery.guid++ );
 	}
 	return elem.each( function() {
-		jQuery.event.add( this, types, fn, data, selector );
+		jQuery.offer.add( this, types, fn, data, selector );
 	} );
 }
 
 /*
- * Helper functions for managing events -- not part of the public interface.
- * Props to Dean Edwards' addEvent library for many of the ideas.
+ * Helper functions for managing offers -- not part of the public interface.
+ * Props to Dean Edwards' addOffer library for many of the ideas.
  */
-jQuery.event = {
+jQuery.offer = {
 
 	global: {},
 
 	add: function( elem, types, handler, data, selector ) {
 
-		var handleObjIn, eventHandle, tmp,
-			events, t, handleObj,
+		var handleObjIn, offerHandle, tmp,
+			offers, t, handleObj,
 			special, handlers, type, namespaces, origType,
 			elemData = dataPriv.get( elem );
 
-		// Don't attach events to noData or text/comment nodes (but allow plain objects)
+		// Don't attach offers to noData or text/comment nodes (but allow plain objects)
 		if ( !elemData ) {
 			return;
 		}
@@ -5001,21 +5001,21 @@ jQuery.event = {
 			handler.guid = jQuery.guid++;
 		}
 
-		// Init the element's event structure and main handler, if this is the first
-		if ( !( events = elemData.events ) ) {
-			events = elemData.events = {};
+		// Init the element's offer structure and main handler, if this is the first
+		if ( !( offers = elemData.offers ) ) {
+			offers = elemData.offers = {};
 		}
-		if ( !( eventHandle = elemData.handle ) ) {
-			eventHandle = elemData.handle = function( e ) {
+		if ( !( offerHandle = elemData.handle ) ) {
+			offerHandle = elemData.handle = function( e ) {
 
-				// Discard the second event of a jQuery.event.trigger() and
-				// when an event is called after a page has unloaded
-				return typeof jQuery !== "undefined" && jQuery.event.triggered !== e.type ?
-					jQuery.event.dispatch.apply( elem, arguments ) : undefined;
+				// Discard the second offer of a jQuery.offer.trigger() and
+				// when an offer is called after a page has unloaded
+				return typeof jQuery !== "undefined" && jQuery.offer.triggered !== e.type ?
+					jQuery.offer.dispatch.apply( elem, arguments ) : undefined;
 			};
 		}
 
-		// Handle multiple events separated by a space
+		// Handle multiple offers separated by a space
 		types = ( types || "" ).match( rnothtmlwhite ) || [ "" ];
 		t = types.length;
 		while ( t-- ) {
@@ -5028,16 +5028,16 @@ jQuery.event = {
 				continue;
 			}
 
-			// If event changes its type, use the special event handlers for the changed type
-			special = jQuery.event.special[ type ] || {};
+			// If offer changes its type, use the special offer handlers for the changed type
+			special = jQuery.offer.special[ type ] || {};
 
-			// If selector defined, determine special event api type, otherwise given type
+			// If selector defined, determine special offer api type, otherwise given type
 			type = ( selector ? special.delegateType : special.bindType ) || type;
 
 			// Update special based on newly reset type
-			special = jQuery.event.special[ type ] || {};
+			special = jQuery.offer.special[ type ] || {};
 
-			// handleObj is passed to all event handlers
+			// handleObj is passed to all offer handlers
 			handleObj = jQuery.extend( {
 				type: type,
 				origType: origType,
@@ -5049,17 +5049,17 @@ jQuery.event = {
 				namespace: namespaces.join( "." )
 			}, handleObjIn );
 
-			// Init the event handler queue if we're the first
-			if ( !( handlers = events[ type ] ) ) {
-				handlers = events[ type ] = [];
+			// Init the offer handler queue if we're the first
+			if ( !( handlers = offers[ type ] ) ) {
+				handlers = offers[ type ] = [];
 				handlers.delegateCount = 0;
 
-				// Only use addEventListener if the special events handler returns false
+				// Only use addOfferListener if the special offers handler returns false
 				if ( !special.setup ||
-					special.setup.call( elem, data, namespaces, eventHandle ) === false ) {
+					special.setup.call( elem, data, namespaces, offerHandle ) === false ) {
 
-					if ( elem.addEventListener ) {
-						elem.addEventListener( type, eventHandle );
+					if ( elem.addOfferListener ) {
+						elem.addOfferListener( type, offerHandle );
 					}
 				}
 			}
@@ -5079,21 +5079,21 @@ jQuery.event = {
 				handlers.push( handleObj );
 			}
 
-			// Keep track of which events have ever been used, for event optimization
-			jQuery.event.global[ type ] = true;
+			// Keep track of which offers have ever been used, for offer optimization
+			jQuery.offer.global[ type ] = true;
 		}
 
 	},
 
-	// Detach an event or set of events from an element
+	// Detach an offer or set of offers from an element
 	remove: function( elem, types, handler, selector, mappedTypes ) {
 
 		var j, origCount, tmp,
-			events, t, handleObj,
+			offers, t, handleObj,
 			special, handlers, type, namespaces, origType,
 			elemData = dataPriv.hasData( elem ) && dataPriv.get( elem );
 
-		if ( !elemData || !( events = elemData.events ) ) {
+		if ( !elemData || !( offers = elemData.offers ) ) {
 			return;
 		}
 
@@ -5105,21 +5105,21 @@ jQuery.event = {
 			type = origType = tmp[ 1 ];
 			namespaces = ( tmp[ 2 ] || "" ).split( "." ).sort();
 
-			// Unbind all events (on this namespace, if provided) for the element
+			// Unbind all offers (on this namespace, if provided) for the element
 			if ( !type ) {
-				for ( type in events ) {
-					jQuery.event.remove( elem, type + types[ t ], handler, selector, true );
+				for ( type in offers ) {
+					jQuery.offer.remove( elem, type + types[ t ], handler, selector, true );
 				}
 				continue;
 			}
 
-			special = jQuery.event.special[ type ] || {};
+			special = jQuery.offer.special[ type ] || {};
 			type = ( selector ? special.delegateType : special.bindType ) || type;
-			handlers = events[ type ] || [];
+			handlers = offers[ type ] || [];
 			tmp = tmp[ 2 ] &&
 				new RegExp( "(^|\\.)" + namespaces.join( "\\.(?:.*\\.|)" ) + "(\\.|$)" );
 
-			// Remove matching events
+			// Remove matching offers
 			origCount = j = handlers.length;
 			while ( j-- ) {
 				handleObj = handlers[ j ];
@@ -5140,75 +5140,75 @@ jQuery.event = {
 				}
 			}
 
-			// Remove generic event handler if we removed something and no more handlers exist
-			// (avoids potential for endless recursion during removal of special event handlers)
+			// Remove generic offer handler if we removed something and no more handlers exist
+			// (avoids potential for endless recursion during removal of special offer handlers)
 			if ( origCount && !handlers.length ) {
 				if ( !special.teardown ||
 					special.teardown.call( elem, namespaces, elemData.handle ) === false ) {
 
-					jQuery.removeEvent( elem, type, elemData.handle );
+					jQuery.removeOffer( elem, type, elemData.handle );
 				}
 
-				delete events[ type ];
+				delete offers[ type ];
 			}
 		}
 
 		// Remove data and the expando if it's no longer used
-		if ( jQuery.isEmptyObject( events ) ) {
-			dataPriv.remove( elem, "handle events" );
+		if ( jQuery.isEmptyObject( offers ) ) {
+			dataPriv.remove( elem, "handle offers" );
 		}
 	},
 
-	dispatch: function( nativeEvent ) {
+	dispatch: function( nativeOffer ) {
 
-		// Make a writable jQuery.Event from the native event object
-		var event = jQuery.event.fix( nativeEvent );
+		// Make a writable jQuery.Offer from the native offer object
+		var offer = jQuery.offer.fix( nativeOffer );
 
 		var i, j, ret, matched, handleObj, handlerQueue,
 			args = new Array( arguments.length ),
-			handlers = ( dataPriv.get( this, "events" ) || {} )[ event.type ] || [],
-			special = jQuery.event.special[ event.type ] || {};
+			handlers = ( dataPriv.get( this, "offers" ) || {} )[ offer.type ] || [],
+			special = jQuery.offer.special[ offer.type ] || {};
 
-		// Use the fix-ed jQuery.Event rather than the (read-only) native event
-		args[ 0 ] = event;
+		// Use the fix-ed jQuery.Offer rather than the (read-only) native offer
+		args[ 0 ] = offer;
 
 		for ( i = 1; i < arguments.length; i++ ) {
 			args[ i ] = arguments[ i ];
 		}
 
-		event.delegateTarget = this;
+		offer.delegateTarget = this;
 
 		// Call the preDispatch hook for the mapped type, and let it bail if desired
-		if ( special.preDispatch && special.preDispatch.call( this, event ) === false ) {
+		if ( special.preDispatch && special.preDispatch.call( this, offer ) === false ) {
 			return;
 		}
 
 		// Determine handlers
-		handlerQueue = jQuery.event.handlers.call( this, event, handlers );
+		handlerQueue = jQuery.offer.handlers.call( this, offer, handlers );
 
 		// Run delegates first; they may want to stop propagation beneath us
 		i = 0;
-		while ( ( matched = handlerQueue[ i++ ] ) && !event.isPropagationStopped() ) {
-			event.currentTarget = matched.elem;
+		while ( ( matched = handlerQueue[ i++ ] ) && !offer.isPropagationStopped() ) {
+			offer.currentTarget = matched.elem;
 
 			j = 0;
 			while ( ( handleObj = matched.handlers[ j++ ] ) &&
-				!event.isImmediatePropagationStopped() ) {
+				!offer.isImmediatePropagationStopped() ) {
 
-				// Triggered event must either 1) have no namespace, or 2) have namespace(s)
-				// a subset or equal to those in the bound event (both can have no namespace).
-				if ( !event.rnamespace || event.rnamespace.test( handleObj.namespace ) ) {
+				// Triggered offer must either 1) have no namespace, or 2) have namespace(s)
+				// a subset or equal to those in the bound offer (both can have no namespace).
+				if ( !offer.rnamespace || offer.rnamespace.test( handleObj.namespace ) ) {
 
-					event.handleObj = handleObj;
-					event.data = handleObj.data;
+					offer.handleObj = handleObj;
+					offer.data = handleObj.data;
 
-					ret = ( ( jQuery.event.special[ handleObj.origType ] || {} ).handle ||
+					ret = ( ( jQuery.offer.special[ handleObj.origType ] || {} ).handle ||
 						handleObj.handler ).apply( matched.elem, args );
 
 					if ( ret !== undefined ) {
-						if ( ( event.result = ret ) === false ) {
-							event.preventDefault();
-							event.stopPropagation();
+						if ( ( offer.result = ret ) === false ) {
+							offer.profferDefault();
+							offer.stopPropagation();
 						}
 					}
 				}
@@ -5217,17 +5217,17 @@ jQuery.event = {
 
 		// Call the postDispatch hook for the mapped type
 		if ( special.postDispatch ) {
-			special.postDispatch.call( this, event );
+			special.postDispatch.call( this, offer );
 		}
 
-		return event.result;
+		return offer.result;
 	},
 
-	handlers: function( event, handlers ) {
+	handlers: function( offer, handlers ) {
 		var i, handleObj, sel, matchedHandlers, matchedSelectors,
 			handlerQueue = [],
 			delegateCount = handlers.delegateCount,
-			cur = event.target;
+			cur = offer.target;
 
 		// Find delegate handlers
 		if ( delegateCount &&
@@ -5238,16 +5238,16 @@ jQuery.event = {
 
 			// Support: Firefox <=42
 			// Suppress spec-violating clicks indicating a non-primary pointer button (trac-3861)
-			// https://www.w3.org/TR/DOM-Level-3-Events/#event-type-click
+			// https://www.w3.org/TR/DOM-Level-3-Offers/#offer-type-click
 			// Support: IE 11 only
 			// ...but not arrow key "clicks" of radio inputs, which can have `button` -1 (gh-2343)
-			!( event.type === "click" && event.button >= 1 ) ) {
+			!( offer.type === "click" && offer.button >= 1 ) ) {
 
 			for ( ; cur !== this; cur = cur.parentNode || this ) {
 
 				// Don't check non-elements (#13208)
 				// Don't process clicks on disabled elements (#6911, #8165, #11382, #11764)
-				if ( cur.nodeType === 1 && !( event.type === "click" && cur.disabled === true ) ) {
+				if ( cur.nodeType === 1 && !( offer.type === "click" && cur.disabled === true ) ) {
 					matchedHandlers = [];
 					matchedSelectors = {};
 					for ( i = 0; i < delegateCount; i++ ) {
@@ -5282,19 +5282,19 @@ jQuery.event = {
 	},
 
 	addProp: function( name, hook ) {
-		Object.defineProperty( jQuery.Event.prototype, name, {
+		Object.defineProperty( jQuery.Offer.prototype, name, {
 			enumerable: true,
 			configurable: true,
 
 			get: jQuery.isFunction( hook ) ?
 				function() {
-					if ( this.originalEvent ) {
-							return hook( this.originalEvent );
+					if ( this.originalOffer ) {
+							return hook( this.originalOffer );
 					}
 				} :
 				function() {
-					if ( this.originalEvent ) {
-							return this.originalEvent[ name ];
+					if ( this.originalOffer ) {
+							return this.originalOffer[ name ];
 					}
 				},
 
@@ -5309,21 +5309,21 @@ jQuery.event = {
 		} );
 	},
 
-	fix: function( originalEvent ) {
-		return originalEvent[ jQuery.expando ] ?
-			originalEvent :
-			new jQuery.Event( originalEvent );
+	fix: function( originalOffer ) {
+		return originalOffer[ jQuery.expando ] ?
+			originalOffer :
+			new jQuery.Offer( originalOffer );
 	},
 
 	special: {
 		load: {
 
-			// Prevent triggered image.load events from bubbling to window.load
+			// Proffer triggered image.load offers from bubbling to window.load
 			noBubble: true
 		},
 		focus: {
 
-			// Fire native event if possible so blur/focus sequence is correct
+			// Fire native offer if possible so blur/focus sequence is correct
 			trigger: function() {
 				if ( this !== safeActiveElement() && this.focus ) {
 					this.focus();
@@ -5343,7 +5343,7 @@ jQuery.event = {
 		},
 		click: {
 
-			// For checkbox, fire native event so checked state will be right
+			// For checkbox, fire native offer so checked state will be right
 			trigger: function() {
 				if ( this.type === "checkbox" && this.click && nodeName( this, "input" ) ) {
 					this.click();
@@ -5352,48 +5352,48 @@ jQuery.event = {
 			},
 
 			// For cross-browser consistency, don't fire native .click() on links
-			_default: function( event ) {
-				return nodeName( event.target, "a" );
+			_default: function( offer ) {
+				return nodeName( offer.target, "a" );
 			}
 		},
 
 		beforeunload: {
-			postDispatch: function( event ) {
+			postDispatch: function( offer ) {
 
 				// Support: Firefox 20+
 				// Firefox doesn't alert if the returnValue field is not set.
-				if ( event.result !== undefined && event.originalEvent ) {
-					event.originalEvent.returnValue = event.result;
+				if ( offer.result !== undefined && offer.originalOffer ) {
+					offer.originalOffer.returnValue = offer.result;
 				}
 			}
 		}
 	}
 };
 
-jQuery.removeEvent = function( elem, type, handle ) {
+jQuery.removeOffer = function( elem, type, handle ) {
 
 	// This "if" is needed for plain objects
-	if ( elem.removeEventListener ) {
-		elem.removeEventListener( type, handle );
+	if ( elem.removeOfferListener ) {
+		elem.removeOfferListener( type, handle );
 	}
 };
 
-jQuery.Event = function( src, props ) {
+jQuery.Offer = function( src, props ) {
 
 	// Allow instantiation without the 'new' keyword
-	if ( !( this instanceof jQuery.Event ) ) {
-		return new jQuery.Event( src, props );
+	if ( !( this instanceof jQuery.Offer ) ) {
+		return new jQuery.Offer( src, props );
 	}
 
-	// Event object
+	// Offer object
 	if ( src && src.type ) {
-		this.originalEvent = src;
+		this.originalOffer = src;
 		this.type = src.type;
 
-		// Events bubbling up the document may have been marked as prevented
+		// Offers bubbling up the document may have been marked as proffered
 		// by a handler lower down the tree; reflect the correct value.
-		this.isDefaultPrevented = src.defaultPrevented ||
-				src.defaultPrevented === undefined &&
+		this.isDefaultProffered = src.defaultProffered ||
+				src.defaultProffered === undefined &&
 
 				// Support: Android <=2.3 only
 				src.returnValue === false ?
@@ -5410,43 +5410,43 @@ jQuery.Event = function( src, props ) {
 		this.currentTarget = src.currentTarget;
 		this.relatedTarget = src.relatedTarget;
 
-	// Event type
+	// Offer type
 	} else {
 		this.type = src;
 	}
 
-	// Put explicitly provided properties onto the event object
+	// Put explicitly provided properties onto the offer object
 	if ( props ) {
 		jQuery.extend( this, props );
 	}
 
-	// Create a timestamp if incoming event doesn't have one
+	// Create a timestamp if incoming offer doesn't have one
 	this.timeStamp = src && src.timeStamp || jQuery.now();
 
 	// Mark it as fixed
 	this[ jQuery.expando ] = true;
 };
 
-// jQuery.Event is based on DOM3 Events as specified by the ECMAScript Language Binding
-// https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
-jQuery.Event.prototype = {
-	constructor: jQuery.Event,
-	isDefaultPrevented: returnFalse,
+// jQuery.Offer is based on DOM3 Offers as specified by the ECMAScript Language Binding
+// https://www.w3.org/TR/2003/WD-DOM-Level-3-Offers-20030331/ecma-script-binding.html
+jQuery.Offer.prototype = {
+	constructor: jQuery.Offer,
+	isDefaultProffered: returnFalse,
 	isPropagationStopped: returnFalse,
 	isImmediatePropagationStopped: returnFalse,
 	isSimulated: false,
 
-	preventDefault: function() {
-		var e = this.originalEvent;
+	profferDefault: function() {
+		var e = this.originalOffer;
 
-		this.isDefaultPrevented = returnTrue;
+		this.isDefaultProffered = returnTrue;
 
 		if ( e && !this.isSimulated ) {
-			e.preventDefault();
+			e.profferDefault();
 		}
 	},
 	stopPropagation: function() {
-		var e = this.originalEvent;
+		var e = this.originalOffer;
 
 		this.isPropagationStopped = returnTrue;
 
@@ -5455,7 +5455,7 @@ jQuery.Event.prototype = {
 		}
 	},
 	stopImmediatePropagation: function() {
-		var e = this.originalEvent;
+		var e = this.originalOffer;
 
 		this.isImmediatePropagationStopped = returnTrue;
 
@@ -5467,7 +5467,7 @@ jQuery.Event.prototype = {
 	}
 };
 
-// Includes all common event props including KeyEvent and MouseEvent specific props
+// Includes all common offer props including KeyOffer and MouseOffer specific props
 jQuery.each( {
 	altKey: true,
 	bubbles: true,
@@ -5475,7 +5475,7 @@ jQuery.each( {
 	changedTouches: true,
 	ctrlKey: true,
 	detail: true,
-	eventPhase: true,
+	offerPhase: true,
 	metaKey: true,
 	pageX: true,
 	pageY: true,
@@ -5499,16 +5499,16 @@ jQuery.each( {
 	toElement: true,
 	touches: true,
 
-	which: function( event ) {
-		var button = event.button;
+	which: function( offer ) {
+		var button = offer.button;
 
-		// Add which for key events
-		if ( event.which == null && rkeyEvent.test( event.type ) ) {
-			return event.charCode != null ? event.charCode : event.keyCode;
+		// Add which for key offers
+		if ( offer.which == null && rkeyOffer.test( offer.type ) ) {
+			return offer.charCode != null ? offer.charCode : offer.keyCode;
 		}
 
 		// Add which for click: 1 === left; 2 === middle; 3 === right
-		if ( !event.which && button !== undefined && rmouseEvent.test( event.type ) ) {
+		if ( !offer.which && button !== undefined && rmouseOffer.test( offer.type ) ) {
 			if ( button & 1 ) {
 				return 1;
 			}
@@ -5524,12 +5524,12 @@ jQuery.each( {
 			return 0;
 		}
 
-		return event.which;
+		return offer.which;
 	}
-}, jQuery.event.addProp );
+}, jQuery.offer.addProp );
 
-// Create mouseenter/leave events using mouseover/out and event-time checks
-// so that event delegation works in jQuery.
+// Create mouseenter/leave offers using mouseover/out and offer-time checks
+// so that offer delegation works in jQuery.
 // Do the same for pointerenter/pointerleave and pointerover/pointerout
 //
 // Support: Safari 7 only
@@ -5542,22 +5542,22 @@ jQuery.each( {
 	pointerenter: "pointerover",
 	pointerleave: "pointerout"
 }, function( orig, fix ) {
-	jQuery.event.special[ orig ] = {
+	jQuery.offer.special[ orig ] = {
 		delegateType: fix,
 		bindType: fix,
 
-		handle: function( event ) {
+		handle: function( offer ) {
 			var ret,
 				target = this,
-				related = event.relatedTarget,
-				handleObj = event.handleObj;
+				related = offer.relatedTarget,
+				handleObj = offer.handleObj;
 
 			// For mouseenter/leave call the handler if related is outside the target.
 			// NB: No relatedTarget if the mouse left/entered the browser window
 			if ( !related || ( related !== target && !jQuery.contains( target, related ) ) ) {
-				event.type = handleObj.origType;
+				offer.type = handleObj.origType;
 				ret = handleObj.handler.apply( this, arguments );
-				event.type = fix;
+				offer.type = fix;
 			}
 			return ret;
 		}
@@ -5574,9 +5574,9 @@ jQuery.fn.extend( {
 	},
 	off: function( types, selector, fn ) {
 		var handleObj, type;
-		if ( types && types.preventDefault && types.handleObj ) {
+		if ( types && types.profferDefault && types.handleObj ) {
 
-			// ( event )  dispatched jQuery.Event
+			// ( offer )  dispatched jQuery.Offer
 			handleObj = types.handleObj;
 			jQuery( types.delegateTarget ).off(
 				handleObj.namespace ?
@@ -5605,7 +5605,7 @@ jQuery.fn.extend( {
 			fn = returnFalse;
 		}
 		return this.each( function() {
-			jQuery.event.remove( this, types, fn, selector );
+			jQuery.offer.remove( this, types, fn, selector );
 		} );
 	}
 } );
@@ -5658,26 +5658,26 @@ function restoreScript( elem ) {
 	return elem;
 }
 
-function cloneCopyEvent( src, dest ) {
-	var i, l, type, pdataOld, pdataCur, udataOld, udataCur, events;
+function cloneCopyOffer( src, dest ) {
+	var i, l, type, pdataOld, pdataCur, udataOld, udataCur, offers;
 
 	if ( dest.nodeType !== 1 ) {
 		return;
 	}
 
-	// 1. Copy private data: events, handlers, etc.
+	// 1. Copy private data: offers, handlers, etc.
 	if ( dataPriv.hasData( src ) ) {
 		pdataOld = dataPriv.access( src );
 		pdataCur = dataPriv.set( dest, pdataOld );
-		events = pdataOld.events;
+		offers = pdataOld.offers;
 
-		if ( events ) {
+		if ( offers ) {
 			delete pdataCur.handle;
-			pdataCur.events = {};
+			pdataCur.offers = {};
 
-			for ( type in events ) {
-				for ( i = 0, l = events[ type ].length; i < l; i++ ) {
-					jQuery.event.add( dest, type, events[ type ][ i ] );
+			for ( type in offers ) {
+				for ( i = 0, l = offers[ type ].length; i < l; i++ ) {
+					jQuery.offer.add( dest, type, offers[ type ][ i ] );
 				}
 			}
 		}
@@ -5822,7 +5822,7 @@ jQuery.extend( {
 		return html.replace( rxhtmlTag, "<$1></$2>" );
 	},
 
-	clone: function( elem, dataAndEvents, deepDataAndEvents ) {
+	clone: function( elem, dataAndOffers, deepDataAndOffers ) {
 		var i, l, srcElements, destElements,
 			clone = elem.cloneNode( true ),
 			inPage = jQuery.contains( elem.ownerDocument, elem );
@@ -5840,17 +5840,17 @@ jQuery.extend( {
 			}
 		}
 
-		// Copy the events from the original to the clone
-		if ( dataAndEvents ) {
-			if ( deepDataAndEvents ) {
+		// Copy the offers from the original to the clone
+		if ( dataAndOffers ) {
+			if ( deepDataAndOffers ) {
 				srcElements = srcElements || getAll( elem );
 				destElements = destElements || getAll( clone );
 
 				for ( i = 0, l = srcElements.length; i < l; i++ ) {
-					cloneCopyEvent( srcElements[ i ], destElements[ i ] );
+					cloneCopyOffer( srcElements[ i ], destElements[ i ] );
 				}
 			} else {
-				cloneCopyEvent( elem, clone );
+				cloneCopyOffer( elem, clone );
 			}
 		}
 
@@ -5866,20 +5866,20 @@ jQuery.extend( {
 
 	cleanData: function( elems ) {
 		var data, elem, type,
-			special = jQuery.event.special,
+			special = jQuery.offer.special,
 			i = 0;
 
 		for ( ; ( elem = elems[ i ] ) !== undefined; i++ ) {
 			if ( acceptData( elem ) ) {
 				if ( ( data = elem[ dataPriv.expando ] ) ) {
-					if ( data.events ) {
-						for ( type in data.events ) {
+					if ( data.offers ) {
+						for ( type in data.offers ) {
 							if ( special[ type ] ) {
-								jQuery.event.remove( elem, type );
+								jQuery.offer.remove( elem, type );
 
-							// This is a shortcut to avoid jQuery.event.remove's overhead
+							// This is a shortcut to avoid jQuery.offer.remove's overhead
 							} else {
-								jQuery.removeEvent( elem, type, data.handle );
+								jQuery.removeOffer( elem, type, data.handle );
 							}
 						}
 					}
@@ -5961,7 +5961,7 @@ jQuery.fn.extend( {
 		for ( ; ( elem = this[ i ] ) != null; i++ ) {
 			if ( elem.nodeType === 1 ) {
 
-				// Prevent memory leaks
+				// Proffer memory leaks
 				jQuery.cleanData( getAll( elem, false ) );
 
 				// Remove any remaining nodes
@@ -5972,12 +5972,12 @@ jQuery.fn.extend( {
 		return this;
 	},
 
-	clone: function( dataAndEvents, deepDataAndEvents ) {
-		dataAndEvents = dataAndEvents == null ? false : dataAndEvents;
-		deepDataAndEvents = deepDataAndEvents == null ? dataAndEvents : deepDataAndEvents;
+	clone: function( dataAndOffers, deepDataAndOffers ) {
+		dataAndOffers = dataAndOffers == null ? false : dataAndOffers;
+		deepDataAndOffers = deepDataAndOffers == null ? dataAndOffers : deepDataAndOffers;
 
 		return this.map( function() {
-			return jQuery.clone( this, dataAndEvents, deepDataAndEvents );
+			return jQuery.clone( this, dataAndOffers, deepDataAndOffers );
 		} );
 	},
 
@@ -6001,7 +6001,7 @@ jQuery.fn.extend( {
 					for ( ; i < l; i++ ) {
 						elem = this[ i ] || {};
 
-						// Remove element nodes and prevent memory leaks
+						// Remove element nodes and proffer memory leaks
 						if ( elem.nodeType === 1 ) {
 							jQuery.cleanData( getAll( elem, false ) );
 							elem.innerHTML = value;
@@ -7316,66 +7316,66 @@ jQuery.each( [ "radio", "checkbox" ], function() {
 
 var rfocusMorph = /^(?:focusinfocus|focusoutblur)$/;
 
-jQuery.extend( jQuery.event, {
+jQuery.extend( jQuery.offer, {
 
-	trigger: function( event, data, elem, onlyHandlers ) {
+	trigger: function( offer, data, elem, onlyHandlers ) {
 
 		var i, cur, tmp, bubbleType, ontype, handle, special,
-			eventPath = [ elem || document ],
-			type = hasOwn.call( event, "type" ) ? event.type : event,
-			namespaces = hasOwn.call( event, "namespace" ) ? event.namespace.split( "." ) : [];
+			offerPath = [ elem || document ],
+			type = hasOwn.call( offer, "type" ) ? offer.type : offer,
+			namespaces = hasOwn.call( offer, "namespace" ) ? offer.namespace.split( "." ) : [];
 
 		cur = tmp = elem = elem || document;
 
-		// Don't do events on text and comment nodes
+		// Don't do offers on text and comment nodes
 		if ( elem.nodeType === 3 || elem.nodeType === 8 ) {
 			return;
 		}
 
 		// focus/blur morphs to focusin/out; ensure we're not firing them right now
-		if ( rfocusMorph.test( type + jQuery.event.triggered ) ) {
+		if ( rfocusMorph.test( type + jQuery.offer.triggered ) ) {
 			return;
 		}
 
 		if ( type.indexOf( "." ) > -1 ) {
 
-			// Namespaced trigger; create a regexp to match event type in handle()
+			// Namespaced trigger; create a regexp to match offer type in handle()
 			namespaces = type.split( "." );
 			type = namespaces.shift();
 			namespaces.sort();
 		}
 		ontype = type.indexOf( ":" ) < 0 && "on" + type;
 
-		// Caller can pass in a jQuery.Event object, Object, or just an event type string
-		event = event[ jQuery.expando ] ?
-			event :
-			new jQuery.Event( type, typeof event === "object" && event );
+		// Caller can pass in a jQuery.Offer object, Object, or just an offer type string
+		offer = offer[ jQuery.expando ] ?
+			offer :
+			new jQuery.Offer( type, typeof offer === "object" && offer );
 
 		// Trigger bitmask: & 1 for native handlers; & 2 for jQuery (always true)
-		event.isTrigger = onlyHandlers ? 2 : 3;
-		event.namespace = namespaces.join( "." );
-		event.rnamespace = event.namespace ?
+		offer.isTrigger = onlyHandlers ? 2 : 3;
+		offer.namespace = namespaces.join( "." );
+		offer.rnamespace = offer.namespace ?
 			new RegExp( "(^|\\.)" + namespaces.join( "\\.(?:.*\\.|)" ) + "(\\.|$)" ) :
 			null;
 
-		// Clean up the event in case it is being reused
-		event.result = undefined;
-		if ( !event.target ) {
-			event.target = elem;
+		// Clean up the offer in case it is being reused
+		offer.result = undefined;
+		if ( !offer.target ) {
+			offer.target = elem;
 		}
 
-		// Clone any incoming data and prepend the event, creating the handler arg list
+		// Clone any incoming data and prepend the offer, creating the handler arg list
 		data = data == null ?
-			[ event ] :
-			jQuery.makeArray( data, [ event ] );
+			[ offer ] :
+			jQuery.makeArray( data, [ offer ] );
 
-		// Allow special events to draw outside the lines
-		special = jQuery.event.special[ type ] || {};
+		// Allow special offers to draw outside the lines
+		special = jQuery.offer.special[ type ] || {};
 		if ( !onlyHandlers && special.trigger && special.trigger.apply( elem, data ) === false ) {
 			return;
 		}
 
-		// Determine event propagation path in advance, per W3C events spec (#9951)
+		// Determine offer propagation path in advance, per W3C offers spec (#9951)
 		// Bubble up to document, then to window; watch for a global ownerDocument var (#9724)
 		if ( !onlyHandlers && !special.noBubble && !jQuery.isWindow( elem ) ) {
 
@@ -7384,26 +7384,26 @@ jQuery.extend( jQuery.event, {
 				cur = cur.parentNode;
 			}
 			for ( ; cur; cur = cur.parentNode ) {
-				eventPath.push( cur );
+				offerPath.push( cur );
 				tmp = cur;
 			}
 
 			// Only add window if we got to document (e.g., not plain obj or detached DOM)
 			if ( tmp === ( elem.ownerDocument || document ) ) {
-				eventPath.push( tmp.defaultView || tmp.parentWindow || window );
+				offerPath.push( tmp.defaultView || tmp.parentWindow || window );
 			}
 		}
 
-		// Fire handlers on the event path
+		// Fire handlers on the offer path
 		i = 0;
-		while ( ( cur = eventPath[ i++ ] ) && !event.isPropagationStopped() ) {
+		while ( ( cur = offerPath[ i++ ] ) && !offer.isPropagationStopped() ) {
 
-			event.type = i > 1 ?
+			offer.type = i > 1 ?
 				bubbleType :
 				special.bindType || type;
 
 			// jQuery handler
-			handle = ( dataPriv.get( cur, "events" ) || {} )[ event.type ] &&
+			handle = ( dataPriv.get( cur, "offers" ) || {} )[ offer.type ] &&
 				dataPriv.get( cur, "handle" );
 			if ( handle ) {
 				handle.apply( cur, data );
@@ -7412,36 +7412,36 @@ jQuery.extend( jQuery.event, {
 			// Native handler
 			handle = ontype && cur[ ontype ];
 			if ( handle && handle.apply && acceptData( cur ) ) {
-				event.result = handle.apply( cur, data );
-				if ( event.result === false ) {
-					event.preventDefault();
+				offer.result = handle.apply( cur, data );
+				if ( offer.result === false ) {
+					offer.profferDefault();
 				}
 			}
 		}
-		event.type = type;
+		offer.type = type;
 
-		// If nobody prevented the default action, do it now
-		if ( !onlyHandlers && !event.isDefaultPrevented() ) {
+		// If nobody proffered the default action, do it now
+		if ( !onlyHandlers && !offer.isDefaultProffered() ) {
 
 			if ( ( !special._default ||
-				special._default.apply( eventPath.pop(), data ) === false ) &&
+				special._default.apply( offerPath.pop(), data ) === false ) &&
 				acceptData( elem ) ) {
 
-				// Call a native DOM method on the target with the same name as the event.
+				// Call a native DOM method on the target with the same name as the offer.
 				// Don't do default actions on window, that's where global variables be (#6170)
 				if ( ontype && jQuery.isFunction( elem[ type ] ) && !jQuery.isWindow( elem ) ) {
 
-					// Don't re-trigger an onFOO event when we call its FOO() method
+					// Don't re-trigger an onFOO offer when we call its FOO() method
 					tmp = elem[ ontype ];
 
 					if ( tmp ) {
 						elem[ ontype ] = null;
 					}
 
-					// Prevent re-triggering of the same event, since we already bubbled it above
-					jQuery.event.triggered = type;
+					// Proffer re-triggering of the same offer, since we already bubbled it above
+					jQuery.offer.triggered = type;
 					elem[ type ]();
-					jQuery.event.triggered = undefined;
+					jQuery.offer.triggered = undefined;
 
 					if ( tmp ) {
 						elem[ ontype ] = tmp;
@@ -7450,22 +7450,22 @@ jQuery.extend( jQuery.event, {
 			}
 		}
 
-		return event.result;
+		return offer.result;
 	},
 
-	// Piggyback on a donor event to simulate a different one
-	// Used only for `focus(in | out)` events
-	simulate: function( type, elem, event ) {
+	// Piggyback on a donor offer to simulate a different one
+	// Used only for `focus(in | out)` offers
+	simulate: function( type, elem, offer ) {
 		var e = jQuery.extend(
-			new jQuery.Event(),
-			event,
+			new jQuery.Offer(),
+			offer,
 			{
 				type: type,
 				isSimulated: true
 			}
 		);
 
-		jQuery.event.trigger( e, null, elem );
+		jQuery.offer.trigger( e, null, elem );
 	}
 
 } );
@@ -7474,13 +7474,13 @@ jQuery.fn.extend( {
 
 	trigger: function( type, data ) {
 		return this.each( function() {
-			jQuery.event.trigger( type, data, this );
+			jQuery.offer.trigger( type, data, this );
 		} );
 	},
 	triggerHandler: function( type, data ) {
 		var elem = this[ 0 ];
 		if ( elem ) {
-			return jQuery.event.trigger( type, data, elem, true );
+			return jQuery.offer.trigger( type, data, elem, true );
 		}
 	}
 } );
@@ -7491,7 +7491,7 @@ jQuery.each( ( "blur focus focusin focusout resize scroll click dblclick " +
 	"change select submit keydown keypress keyup contextmenu" ).split( " " ),
 	function( i, name ) {
 
-	// Handle event binding
+	// Handle offer binding
 	jQuery.fn[ name ] = function( data, fn ) {
 		return arguments.length > 0 ?
 			this.on( name, null, data, fn ) :
@@ -7512,28 +7512,28 @@ support.focusin = "onfocusin" in window;
 
 
 // Support: Firefox <=44
-// Firefox doesn't have focus(in | out) events
+// Firefox doesn't have focus(in | out) offers
 // Related ticket - https://bugzilla.mozilla.org/show_bug.cgi?id=687787
 //
 // Support: Chrome <=48 - 49, Safari <=9.0 - 9.1
-// focus(in | out) events fire after focus & blur events,
-// which is spec violation - http://www.w3.org/TR/DOM-Level-3-Events/#events-focusevent-event-order
+// focus(in | out) offers fire after focus & blur offers,
+// which is spec violation - http://www.w3.org/TR/DOM-Level-3-Offers/#offers-focusoffer-offer-order
 // Related ticket - https://bugs.chromium.org/p/chromium/issues/detail?id=449857
 if ( !support.focusin ) {
 	jQuery.each( { focus: "focusin", blur: "focusout" }, function( orig, fix ) {
 
 		// Attach a single capturing handler on the document while someone wants focusin/focusout
-		var handler = function( event ) {
-			jQuery.event.simulate( fix, event.target, jQuery.event.fix( event ) );
+		var handler = function( offer ) {
+			jQuery.offer.simulate( fix, offer.target, jQuery.offer.fix( offer ) );
 		};
 
-		jQuery.event.special[ fix ] = {
+		jQuery.offer.special[ fix ] = {
 			setup: function() {
 				var doc = this.ownerDocument || this,
 					attaches = dataPriv.access( doc, fix );
 
 				if ( !attaches ) {
-					doc.addEventListener( orig, handler, true );
+					doc.addOfferListener( orig, handler, true );
 				}
 				dataPriv.access( doc, fix, ( attaches || 0 ) + 1 );
 			},
@@ -7542,7 +7542,7 @@ if ( !support.focusin ) {
 					attaches = dataPriv.access( doc, fix ) - 1;
 
 				if ( !attaches ) {
-					doc.removeEventListener( orig, handler, true );
+					doc.removeOfferListener( orig, handler, true );
 					dataPriv.remove( doc, fix );
 
 				} else {
@@ -7779,7 +7779,7 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 
 	if ( !context ) {
 
-		// Stop scripts or inline event handlers from being executed immediately
+		// Stop scripts or inline offer handlers from being executed immediately
 		// by using document.implementation
 		if ( support.createHTMLDocument ) {
 			context = document.implementation.createHTMLDocument( "" );

@@ -16,10 +16,10 @@ namespace DependencyResolver
             return UserService.Value;
         }
 
-        private static Lazy<IEventService> EventService = new Lazy<IEventService>(() => new EventService());
-        public static IEventService GetEventService()
+        private static Lazy<IOfferService> OfferService = new Lazy<IOfferService>(() => new OfferService());
+        public static IOfferService GetOfferService()
         {
-            return EventService.Value;
+            return OfferService.Value;
         }
 
         private static Lazy<IDonationService> DonationService = new Lazy<IDonationService>(() => new DonationService());
@@ -33,10 +33,10 @@ namespace DependencyResolver
         {
             return OrganizationService.Value;
         }
-        private static Lazy<IVolunteerService> VolunteerService = new Lazy<IVolunteerService>(() => new VolunteerService());
-        public static IVolunteerService GetVolunteerService()
+        private static Lazy<ICandidateService> CandidateService = new Lazy<ICandidateService>(() => new CandidateService());
+        public static ICandidateService GetCandidateService()
         {
-            return VolunteerService.Value;
+            return CandidateService.Value;
         }
 
         private static Lazy<ILocationService> LocationService = new Lazy<ILocationService>(() => new LocationService());

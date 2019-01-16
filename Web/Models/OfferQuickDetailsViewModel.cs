@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Web.Models
 {
-    public class EventQuickDetailsViewModel
+    public class OfferQuickDetailsViewModel
     {
         public Guid Id { get; set; }
         public Guid OwnerId { get; set; }
@@ -16,7 +16,7 @@ namespace Web.Models
         public List<string> Donations { get; set; }
         public string DateTimeUTC { get; set; }
 
-        public EventQuickDetailsViewModel(EventQuickInfoDTO dto)
+        public OfferQuickDetailsViewModel(OfferQuickInfoDTO dto)
         {
             Id = dto.Id;
             OwnerId = dto.Owner.Id;
